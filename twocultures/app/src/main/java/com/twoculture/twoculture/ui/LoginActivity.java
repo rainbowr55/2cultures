@@ -244,6 +244,8 @@ public class LoginActivity extends AppCompatActivity  {
                         }
                         Log.d(LoginActivity.class.getName(),result.msg + result.status + result.last_update_time + result.token);
                         Toast.makeText(LoginActivity.this,result.msg,Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                        startActivity(intent);
                     }
                 });
     }
