@@ -4,6 +4,10 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.twoculture.twoculture.interfaces.LoginService;
+import com.twoculture.twoculture.interfaces.RegisterService;
+import com.twoculture.twoculture.models.LoginResult;
+import com.twoculture.twoculture.models.SignupResult;
+import com.twoculture.twoculture.tools.MethodConst;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -14,9 +18,10 @@ import rx.Observable;
  * Created by songxingchao on 25/09/2016.
  */
 public class RxClient {
-    private static final String BASE_URL = "";
+    private static final String BASE_URL = MethodConst.URL;
     private static RxClient instance;
     private LoginService loginService;
+    private RegisterService registerService;
     private RxClient() {
         final Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).create();
         final Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
@@ -24,6 +29,7 @@ public class RxClient {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         loginService = retrofit.create(LoginService.class);
+        registerService = retrofit.create(RegisterService.class);
 
     }
 
@@ -35,8 +41,12 @@ public class RxClient {
         return instance;
     }
 
-    public Observable<Boolean> login(String userName, String password){
-      return loginService.login(userName,password);
+    public Observable<LoginResult> login(String email, String password, String locale, String deviceToken){
+      return loginService.login(email,password,locale,deviceToken);
+    }
+
+    public Observable<SignupResult> signup(String email,String password,String locale){
+        return registerService.signup(email,password,locale);
     }
 
 }
