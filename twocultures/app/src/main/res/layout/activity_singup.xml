@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.SignupActivity"
     android:orientation="vertical"
+    android:background="@drawable/ic_full_screen_background"
     android:padding="16dp">
 
     <EditText
@@ -13,26 +14,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="please input your email"
-        android:singleLine="true"
+        android:maxLines="1"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/darker_gray"
         android:inputType="textEmailAddress"/>
     <EditText
         android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="please input your password"
-        android:singleLine="true"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/darker_gray"
+        android:maxLines="1"
         android:inputType="textPassword"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="select your locale:"
-        android:textSize="@dimen/text_medium"/>
-    <Spinner
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="select your locale:"
+            android:textSize="@dimen/text_medium"
+            android:textColor="@android:color/white"
+            android:id="@+id/textView" />
+
+        <Spinner
         android:id="@+id/sp_locale"
         android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
@@ -47,6 +56,7 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_centerHorizontal="true"
+        android:textColor="@android:color/white"
         android:layout_marginTop="50dp"/>
 
 </LinearLayout>
