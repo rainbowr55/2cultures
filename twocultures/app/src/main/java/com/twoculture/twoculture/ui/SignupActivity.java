@@ -1,5 +1,6 @@
 package com.twoculture.twoculture.ui;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,8 +14,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.twoculture.twoculture.R;
+import com.twoculture.twoculture.models.LoginResult;
 import com.twoculture.twoculture.models.SignupResult;
 import com.twoculture.twoculture.network.RxClient;
+import com.twoculture.twoculture.tools.Constants;
 import com.twoculture.twoculture.tools.StringUtils;
 
 import rx.Observer;
@@ -69,20 +72,26 @@ public class SignupActivity extends AppCompatActivity {
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new Observer<SignupResult>() {
-            @Override
             public void onCompleted() {
-
+                Log.d(SignupActivity.class.getName(),"onCompleted");
             }
 
             @Override
             public void onError(Throwable e) {
 
+                Log.d(SignupActivity.class.getName(),e.getMessage());
+                Toast.makeText(SignupActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onNext(SignupResult signupResult) {
-                Log.d(SignupActivity.this.getClass().getName(),signupResult.msg);
-                Toast.makeText(SignupActivity.this,signupResult.msg,Toast.LENGTH_SHORT).show();
+            public void onNext(SignupResult result) {
+                Log.d(LoginActivity.class.getName(),result.msg + result.status  + result.token);
+                Toast.makeText(SignupActivity.this,result.msg,Toast.LENGTH_SHORT).show();
+
+                Constants.TOKEN = result.token;
+                Intent intent = new Intent(SignupActivity.this,MainActivity.class);
+                startActivity(intent);
+                SignupActivity.this.finish();;
             }
         });
     }

@@ -35,6 +35,8 @@ import android.widget.Toast;
 import com.twoculture.twoculture.R;
 import com.twoculture.twoculture.models.LoginResult;
 import com.twoculture.twoculture.network.RxClient;
+import com.twoculture.twoculture.tools.Constants;
+import com.twoculture.twoculture.tools.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,25 +53,9 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends AppCompatActivity  {
 
-    /**
-     * Id to identity READ_CONTACTS permission request.
-     */
-    private static final int REQUEST_READ_CONTACTS = 0;
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
-    private View mLoginFormView;
     private Subscription subscription;
 
     @Override
@@ -77,6 +63,10 @@ public class LoginActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
+        initView();
+    }
+
+    private void initView() {
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
 
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -106,10 +96,8 @@ public class LoginActivity extends AppCompatActivity  {
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
-
 
 
     private void goToSingup(){
@@ -118,13 +106,8 @@ public class LoginActivity extends AppCompatActivity  {
     }
 
 
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
-    private void attemptLogin() {
 
+    private void attemptLogin() {
 
         // Reset errors.
         mEmailView.setError(null);
@@ -138,7 +121,7 @@ public class LoginActivity extends AppCompatActivity  {
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (!TextUtils.isEmpty(password) && !StringUtils.isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -149,54 +132,31 @@ public class LoginActivity extends AppCompatActivity  {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             cancel = true;
-        } else if (!isEmailValid(email)) {
+        } else if (!StringUtils.isEmailValid(email)) {
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
             cancel = true;
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
+
             showProgress(true);
             loginToServer(email,password,"en","default-token");
         }
     }
 
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
-    }
 
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
-    }
+
 
     /**
      * Shows the progress UI and hides the login form.
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mProgressView.animate().setDuration(shortAnimTime).alpha(
                     show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
@@ -206,10 +166,7 @@ public class LoginActivity extends AppCompatActivity  {
                 }
             });
         } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 
@@ -231,21 +188,20 @@ public class LoginActivity extends AppCompatActivity  {
 
                     @Override
                     public void onError(Throwable e) {
-                        if(mProgressView.isShown()){
-                            mProgressView.setVisibility(View.GONE);
-                        }
+                        showProgress(false);
                         Log.d(LoginActivity.class.getName(),e.getMessage());
+                        Toast.makeText(LoginActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onNext(LoginResult result) {
-                        if(mProgressView.isShown()){
-                            mProgressView.setVisibility(View.GONE);
-                        }
+                        showProgress(false);
                         Log.d(LoginActivity.class.getName(),result.msg + result.status + result.last_update_time + result.token);
                         Toast.makeText(LoginActivity.this,result.msg,Toast.LENGTH_SHORT).show();
+                        Constants.TOKEN = result.token;
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                         startActivity(intent);
+                        LoginActivity.this.finish();;
                     }
                 });
     }
