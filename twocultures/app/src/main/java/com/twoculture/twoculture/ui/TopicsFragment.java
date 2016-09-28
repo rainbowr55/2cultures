@@ -34,6 +34,8 @@ public class TopicsFragment extends Fragment implements SwipeRefreshLayout.OnRef
     private SwipeRefreshLayout swipe_refresh_widget;
     private Subscription subscription;
     private TopicAdapter mTopicsAdapter;
+    private boolean mLoading = false;
+    private static final int PAGESIZE = 10;
     public TopicsFragment(){}
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,6 +70,21 @@ public class TopicsFragment extends Fragment implements SwipeRefreshLayout.OnRef
                 Color.YELLOW,
                 Color.RED);
         swipe_refresh_widget.setOnRefreshListener(this);
+        rv_topics.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int totalItemCount = layoutManager.getItemCount();
+                int lastVisibleItem = layoutManager.findLastVisibleItemPosition();
+                if (lastVisibleItem%10 ==0) {
+                    mLoading = true;
+                    //show the footer
+                    //loadmoredata
+                }
+
+            }
+        });
     }
     private void initData(){
         subscription =  RxClient.getInstance().getAllTopics()
