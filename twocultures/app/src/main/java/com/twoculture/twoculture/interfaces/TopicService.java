@@ -14,6 +14,8 @@ import rx.Observable;
 public interface TopicService {
     @GET("mobile/v2/topics")
     Observable<AllTopics> getAllTopics(
-            @Query("token") String token
+            @Query("token") String token,
+            @Query("page") int pageIndex,
+            @Query("page_num") int pageNumber
     );
 }

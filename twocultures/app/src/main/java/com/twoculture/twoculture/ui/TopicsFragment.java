@@ -35,6 +35,7 @@ public class TopicsFragment extends Fragment implements SwipeRefreshLayout.OnRef
     private Subscription subscription;
     private TopicAdapter mTopicsAdapter;
     private boolean mLoading = false;
+    private int mPageIndex = 0;
     private static final int PAGESIZE = 10;
     public TopicsFragment(){}
     @Override
@@ -56,7 +57,7 @@ public class TopicsFragment extends Fragment implements SwipeRefreshLayout.OnRef
     @Override
     public void onStart() {
         super.onStart();
-        initData();
+        getDataFromServer();
     }
 
     private void initView(View rootView){
@@ -81,13 +82,15 @@ public class TopicsFragment extends Fragment implements SwipeRefreshLayout.OnRef
                     mLoading = true;
                     //show the footer
                     //loadmoredata
+                    mPageIndex ++;
+                    getDataFromServer();
                 }
 
             }
         });
     }
-    private void initData(){
-        subscription =  RxClient.getInstance().getAllTopics()
+    private void getDataFromServer(){
+        subscription =  RxClient.getInstance().getAllTopics(mPageIndex,PAGESIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<AllTopics>() {
@@ -105,14 +108,18 @@ public class TopicsFragment extends Fragment implements SwipeRefreshLayout.OnRef
                     public void onNext(AllTopics allTopics) {
                         swipe_refresh_widget.setRefreshing(false);
                         Log.d(TopicsFragment.class.getName(),"onNext");
-                        mTopicsAdapter.setData(allTopics.topics);
+                        if(mPageIndex==0){
+                            mTopicsAdapter.resetData();
+                        }
+                        mTopicsAdapter.addData(allTopics.topics);
                     }
                 });
     }
 
     @Override
     public void onRefresh() {
-        initData();
+        mPageIndex = 0;
+        getDataFromServer();
     }
 
 

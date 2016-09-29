@@ -29,8 +29,13 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ItemViewHold
         this.mContext = context;
     }
 
-    public void setData(List<TopicItem> topics){
-        mTopics = topics;
+    public void addData(List<TopicItem> topics){
+        mTopics.addAll(topics);
+        this.notifyDataSetChanged();
+    }
+
+    public void resetData(){
+        mTopics.clear();
         this.notifyDataSetChanged();
     }
     @Override

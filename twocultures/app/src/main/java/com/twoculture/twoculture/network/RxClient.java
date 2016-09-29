@@ -61,8 +61,8 @@ public class RxClient {
         return registerService.signup(email,password,locale);
     }
 
-    public Observable<AllTopics> getAllTopics(){
-        return topicService.getAllTopics(Constants.TOKEN);
+    public Observable<AllTopics> getAllTopics(int pageIndex,int pageNumber){
+        return topicService.getAllTopics(Constants.TOKEN,pageIndex,pageNumber);
     }
 
 }
