@@ -1,6 +1,7 @@
 package com.twoculture.twoculture.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,10 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 import com.twoculture.twoculture.R;
 import com.twoculture.twoculture.models.TopicContent;
 import com.twoculture.twoculture.models.TopicItem;
+import com.twoculture.twoculture.ui.TopicDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,11 +49,21 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ItemViewHold
 
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
-        TopicItem topicItem = mTopics.get(position);
+        final TopicItem topicItem = mTopics.get(position);
         holder.tv_author_name.setText(topicItem.author.name);
         holder.tv_topic.setText(topicItem.topic.topic_title);
         Picasso.with(mContext).load(topicItem.author.user_header_image).placeholder(R.drawable.default_gravatar).config(Bitmap.Config.RGB_565).into(holder.iv_author_icon);
         Picasso.with(mContext).load(topicItem.topic_photos.get(0).url).config(Bitmap.Config.RGB_565).placeholder(R.drawable.default_image).into(holder.iv_topic_icon);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext,TopicDetailActivity.class);
+                Gson gson  = new Gson();
+                String topicItemString = gson.toJson(topicItem);
+                intent.putExtra(TopicDetailActivity.TOPIC_ITEM,topicItemString);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
