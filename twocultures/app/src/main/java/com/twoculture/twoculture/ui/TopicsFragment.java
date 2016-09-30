@@ -49,7 +49,7 @@ public class TopicsFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
         View rootView = inflater.inflate(R.layout.fragment_topics,container,false);
         initView(rootView);
-
+        getDataFromServer();
         return rootView;
 
     }
@@ -57,7 +57,7 @@ public class TopicsFragment extends Fragment implements SwipeRefreshLayout.OnRef
     @Override
     public void onStart() {
         super.onStart();
-        getDataFromServer();
+
     }
 
     private void initView(View rootView){

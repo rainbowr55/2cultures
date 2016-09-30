@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.twoculture.twoculture.ui.TopicDetailActivity"
+    >
+<LinearLayout
     android:id="@+id/activity_topic_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.twoculture.twoculture.ui.TopicDetailActivity">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -99,4 +105,25 @@
             android:layout_centerInParent="true"/>
 
     </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_pictures"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+    </android.support.v4.view.ViewPager>
+    <TextView
+        android:layout_marginTop="6dp"
+        android:id="@+id/tv_details_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:maxLines="100000"
+        android:layout_marginBottom="12dp"
+        android:textSize="@dimen/text_medium"/>
 </LinearLayout>
+</ScrollView>
