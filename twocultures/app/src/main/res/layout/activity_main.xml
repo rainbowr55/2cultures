@@ -9,11 +9,12 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
     tools:context="com.twoculture.twoculture.ui.MainActivity">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
     <android.support.design.widget.AppBarLayout
+        android:layout_alignParentTop="true"
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,10 +33,46 @@
 
     <android.support.v4.view.ViewPager
         android:id="@+id/container"
+        android:layout_below="@+id/appbar"
+        android:layout_above="@+id/ll_tabs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#eeeeee"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/bg_main_topic"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingTop="5dp"
+                android:text="event"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/bg_main_topic"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingTop="5dp"
+                android:text="topic"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_message_gray"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingTop="5dp"
+                android:text="message"/>
+        </LinearLayout>
+    </RelativeLayout>
+
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
@@ -44,5 +81,8 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_demo"
         app:menu="@menu/activity_demo_drawer" />
+
+
+
 
 </android.support.v4.widget.DrawerLayout>
