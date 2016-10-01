@@ -90,9 +90,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         @Override
         public Fragment getItem(int position) {
+            if(position==0){
+                return new TopicsFragment();
+            }
+            if(position ==1){
+                return new EventsFragment();
+            }
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return new TopicsFragment();
+            if(position ==2){
+                return new MessagesFragment();
+            }
+            return null;
         }
 
         @Override
