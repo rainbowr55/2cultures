@@ -66,10 +66,12 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ItemViewHold
         });
     }
 
+
     @Override
     public int getItemCount() {
         return mTopics.size();
     }
+
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
         private ImageView iv_topic_icon;

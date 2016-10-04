@@ -3,14 +3,18 @@ package com.twoculture.twoculture.network;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.twoculture.twoculture.interfaces.EventService;
 import com.twoculture.twoculture.interfaces.LoginService;
 import com.twoculture.twoculture.interfaces.RegisterService;
 import com.twoculture.twoculture.interfaces.TopicService;
 import com.twoculture.twoculture.models.AllTopics;
+import com.twoculture.twoculture.models.EventItem;
 import com.twoculture.twoculture.models.LoginResult;
 import com.twoculture.twoculture.models.SignupResult;
 import com.twoculture.twoculture.tools.Constants;
 import com.twoculture.twoculture.tools.MethodConst;
+
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -28,6 +32,7 @@ public class RxClient {
     private LoginService loginService;
     private RegisterService registerService;
     private TopicService topicService;
+    private EventService eventService;
     private RxClient() {
         final Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).create();
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
@@ -43,6 +48,7 @@ public class RxClient {
         loginService = retrofit.create(LoginService.class);
         registerService = retrofit.create(RegisterService.class);
         topicService = retrofit.create(TopicService.class);
+        eventService = retrofit.create(EventService.class);
 
     }
 
@@ -63,6 +69,10 @@ public class RxClient {
 
     public Observable<AllTopics> getAllTopics(int pageIndex,int pageNumber){
         return topicService.getAllTopics(Constants.TOKEN,pageIndex,pageNumber);
+    }
+
+    public Observable<List<EventItem>> getAllEvents(int pageIndex, int pageNumber){
+        return eventService.getEvent(Constants.TOKEN,pageIndex,pageNumber);
     }
 
 }
