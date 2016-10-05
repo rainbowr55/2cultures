@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.twoculture.twoculture.R;
 import com.twoculture.twoculture.models.EventItem;
@@ -43,6 +44,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
         EventItem eventItem = mEventsList.get(position);
+        holder.tv_event_detail.setText(eventItem.description);
 
     }
 
@@ -52,9 +54,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
     }
 
     public static class MyViewHolder extends  RecyclerView.ViewHolder{
-
+        TextView tv_event_detail;
         public MyViewHolder(View itemView) {
             super(itemView);
+            tv_event_detail = (TextView) itemView.findViewById(R.id.tv_event_detail);
         }
     }
 }

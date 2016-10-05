@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.twoculture.twoculture.R;
+import com.twoculture.twoculture.adapter.EventAdapter;
 import com.twoculture.twoculture.models.AllTopics;
 import com.twoculture.twoculture.models.EventItem;
 import com.twoculture.twoculture.network.RxClient;
@@ -34,6 +36,7 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
     private Subscription subscription;
     private int mPageIndex = 0;
     private static final int PAGESIZE = 10;
+    private EventAdapter mEventAdapter;
 
 
     @Override
@@ -59,7 +62,9 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
     private void initView(View rootView) {
         rv_events = (RecyclerView) rootView.findViewById(R.id.rv_events);
+        rv_events.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         swipe_refresh_widget = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_widget);
+        rv_events.setAdapter(mEventAdapter);
     }
 
     private void getDataFromServer() {
@@ -80,7 +85,8 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
                     @Override
                     public void onNext(List<EventItem> eventItems) {
-
+                        swipe_refresh_widget.setRefreshing(false);
+                        mEventAdapter.addData(eventItems);
                     }
                 });
     }
