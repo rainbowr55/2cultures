@@ -22,7 +22,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
 
     private Context mContext;
     private List<EventItem> mEventsList = new ArrayList<>();
-
+    public EventAdapter(Context context){
+        this.mContext = context;
+    }
     public void addData(List<EventItem> events){
         mEventsList.addAll(events);
         this.notifyDataSetChanged();

@@ -64,6 +64,7 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
         rv_events = (RecyclerView) rootView.findViewById(R.id.rv_events);
         rv_events.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         swipe_refresh_widget = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_widget);
+        mEventAdapter = new EventAdapter(getActivity());
         rv_events.setAdapter(mEventAdapter);
     }
 
