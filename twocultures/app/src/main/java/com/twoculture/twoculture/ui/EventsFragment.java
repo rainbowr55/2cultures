@@ -6,14 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.twoculture.twoculture.R;
 import com.twoculture.twoculture.adapter.EventAdapter;
-import com.twoculture.twoculture.models.AllTopics;
 import com.twoculture.twoculture.models.EventItem;
 import com.twoculture.twoculture.network.RxClient;
 
@@ -76,12 +74,12 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
                 .subscribe(new Observer<List<EventItem>>() {
                     @Override
                     public void onCompleted() {
-
+                        swipe_refresh_widget.setRefreshing(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        swipe_refresh_widget.setRefreshing(false);
                     }
 
                     @Override
@@ -95,7 +93,8 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
         @Override
         public void onRefresh () {
-
+            mPageIndex = 0;
+            getDataFromServer();
         }
 
 }

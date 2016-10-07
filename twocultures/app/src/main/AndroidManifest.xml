@@ -32,7 +32,8 @@
             android:name=".ui.DemoActivity"
             android:label="@string/title_activity_demo"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.TopicDetailActivity"></activity>
+        <activity android:name=".ui.TopicDetailActivity" />
+        <activity android:name=".ui.EventDetailActivity"></activity>
     </application>
 
 </manifest>
