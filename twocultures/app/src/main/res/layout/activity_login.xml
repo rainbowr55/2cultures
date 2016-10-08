@@ -68,6 +68,13 @@
             android:layout_marginTop="16dp"
             android:text="@string/action_sign_in"
             android:textStyle="bold" />
+        <CheckBox
+            android:id="@+id/cb_save_password"
+            android:layout_marginTop="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save_password_and_auto_login"
+            android:textColor="@color/colorAccent"/>
 
     </LinearLayout>
 
@@ -80,5 +87,6 @@
         android:layout_marginTop="20dp"
         android:text="@string/action_sign_up"
         android:textStyle="bold" />
+
 
 </RelativeLayout>
