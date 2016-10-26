@@ -34,43 +34,16 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/container"
         android:layout_below="@+id/appbar"
-        android:layout_above="@+id/ll_tabs"
+        android:layout_above="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-        <LinearLayout
-            android:id="@+id/ll_tabs"
+        <com.roughike.bottombar.BottomBar
+            android:id="@+id/bottomBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#eeeeee"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
-            android:orientation="horizontal">
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableTop="@drawable/bg_main_topic"
-                android:background="?android:attr/selectableItemBackground"
-                android:paddingTop="5dp"
-                android:text="event"/>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableTop="@drawable/bg_main_topic"
-                android:background="?android:attr/selectableItemBackground"
-                android:paddingTop="5dp"
-                android:text="topic"/>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableTop="@drawable/ic_message_gray"
-                android:background="?android:attr/selectableItemBackground"
-                android:paddingTop="5dp"
-                android:text="message"/>
-        </LinearLayout>
+            app:bb_tabXmlResource="@xml/bottom_tabs" />
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView
