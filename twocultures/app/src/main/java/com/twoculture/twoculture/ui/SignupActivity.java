@@ -17,15 +17,18 @@ import com.twoculture.twoculture.R;
 import com.twoculture.twoculture.models.LoginResult;
 import com.twoculture.twoculture.models.SignupResult;
 import com.twoculture.twoculture.network.RxClient;
+import com.twoculture.twoculture.presenter.ISignupPresenter;
+import com.twoculture.twoculture.presenter.SignupPresenter;
 import com.twoculture.twoculture.tools.Constants;
 import com.twoculture.twoculture.tools.StringUtils;
+import com.twoculture.twoculture.views.ISignupView;
 
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity implements ISignupView{
 
     private EditText et_email;
     private EditText et_password;
@@ -34,11 +37,12 @@ public class SignupActivity extends AppCompatActivity {
     private LinearLayout ll_home;
     private Subscription mSubscription;
 
-
+    private ISignupPresenter mPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_singup);
+        mPresenter = new SignupPresenter(this);
         initView();
     }
 
@@ -51,48 +55,27 @@ public class SignupActivity extends AppCompatActivity {
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signup();
+                String email = et_email.getText().toString().trim();
+                String password = et_password.getText().toString().trim();
+                String locale =  sp_locale.getSelectedItem().toString();
+                mPresenter.signup(email,password,locale);
             }
         });
     }
 
     private void signup(){
-        String email = et_email.getText().toString().trim();
-        String password = et_password.getText().toString().trim();
-       if( !StringUtils.isEmailValid(email)){
-           Toast.makeText(SignupActivity.this,"email address is not valid.",Toast.LENGTH_SHORT).show();
-           return;
-        }
-        if(TextUtils.isEmpty(password)){
-            Toast.makeText(SignupActivity.this,"password conn't be null!",Toast.LENGTH_SHORT).show();
-            return;
-        }
-        String locale =  sp_locale.getSelectedItem().toString();
-        mSubscription = RxClient.getInstance().signup(email,password,locale)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Observer<SignupResult>() {
-            public void onCompleted() {
-                Log.d(SignupActivity.class.getName(),"onCompleted");
-            }
 
-            @Override
-            public void onError(Throwable e) {
+    }
 
-                Log.d(SignupActivity.class.getName(),e.getMessage());
-                Toast.makeText(SignupActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
-            }
+    @Override
+    public void setMessage(String msg) {
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+    }
 
-            @Override
-            public void onNext(SignupResult result) {
-                Log.d(LoginActivity.class.getName(),result.msg + result.status  + result.token);
-                Toast.makeText(SignupActivity.this,result.msg,Toast.LENGTH_SHORT).show();
-
-                Constants.TOKEN = result.token;
-                Intent intent = new Intent(SignupActivity.this,MainActivity.class);
-                startActivity(intent);
-                SignupActivity.this.finish();;
-            }
-        });
+    @Override
+    public void onSignupSuccess() {
+        Intent intent = new Intent(SignupActivity.this,MainActivity.class);
+        startActivity(intent);
+        SignupActivity.this.finish();
     }
 }

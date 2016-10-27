@@ -1,0 +1,14 @@
+<tabs>
+    <tab
+        id="@+id/tab_topic"
+        icon="@drawable/bg_main_topic"
+        title="Favorites" />
+    <tab
+        id="@+id/tab_activity"
+        icon="@drawable/bg_main_topic"
+        title="Nearby" />
+    <tab
+        id="@+id/tab_friends"
+        icon="@drawable/bg_main_topic"
+        title="Friends" />
+</tabs>
