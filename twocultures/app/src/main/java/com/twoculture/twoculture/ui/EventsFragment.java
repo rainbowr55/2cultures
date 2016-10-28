@@ -14,6 +14,10 @@ import com.twoculture.twoculture.R;
 import com.twoculture.twoculture.adapter.EventAdapter;
 import com.twoculture.twoculture.models.EventItem;
 import com.twoculture.twoculture.network.RxClient;
+import com.twoculture.twoculture.presenter.EventsPresenter;
+import com.twoculture.twoculture.presenter.IEventsPresenter;
+import com.twoculture.twoculture.presenter.ITopicPresenter;
+import com.twoculture.twoculture.views.IEventsView;
 
 import java.util.List;
 
@@ -27,7 +31,7 @@ import rx.schedulers.Schedulers;
  * Created by songxingchao on 1/10/2016.
  */
 
-public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, IEventsView {
 
     private SwipeRefreshLayout swipe_refresh_widget;
     private RecyclerView rv_events;
@@ -35,7 +39,7 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
     private int mPageIndex = 0;
     private static final int PAGESIZE = 10;
     private EventAdapter mEventAdapter;
-
+    private IEventsPresenter mEventsPresenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,8 +51,9 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_events, container, false);
+        mEventsPresenter = new EventsPresenter(this);
         initView(rootView);
-        getDataFromServer();
+        mEventsPresenter.getDataFromServer(mPageIndex, PAGESIZE);
         return rootView;
     }
 
@@ -66,35 +71,20 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
         rv_events.setAdapter(mEventAdapter);
     }
 
-    private void getDataFromServer() {
-        subscription = RxClient.getInstance()
-                .getAllEvents(mPageIndex, PAGESIZE)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<EventItem>>() {
-                    @Override
-                    public void onCompleted() {
-                        swipe_refresh_widget.setRefreshing(false);
-                    }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        swipe_refresh_widget.setRefreshing(false);
-                    }
-
-                    @Override
-                    public void onNext(List<EventItem> eventItems) {
-                        swipe_refresh_widget.setRefreshing(false);
-                        mEventAdapter.addData(eventItems);
-                    }
-                });
+    @Override
+    public void onRefresh() {
+        mPageIndex = 0;
+        mEventsPresenter.getDataFromServer(mPageIndex, PAGESIZE);
     }
 
+    @Override
+    public void showRefreshing(boolean refreshing) {
+        swipe_refresh_widget.setRefreshing(refreshing);
+    }
 
-        @Override
-        public void onRefresh () {
-            mPageIndex = 0;
-            getDataFromServer();
-        }
-
+    @Override
+    public void addTopics(List<EventItem> eventItems) {
+        mEventAdapter.addData(eventItems);
+    }
 }
