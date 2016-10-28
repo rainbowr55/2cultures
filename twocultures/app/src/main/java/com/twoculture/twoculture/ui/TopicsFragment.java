@@ -15,7 +15,12 @@ import android.view.ViewGroup;
 import com.twoculture.twoculture.R;
 import com.twoculture.twoculture.adapter.TopicAdapter;
 import com.twoculture.twoculture.models.AllTopics;
+import com.twoculture.twoculture.models.TopicItem;
 import com.twoculture.twoculture.network.RxClient;
+import com.twoculture.twoculture.presenter.TopicsPresenter;
+import com.twoculture.twoculture.views.ITopicsView;
+
+import java.util.List;
 
 import rx.Observer;
 import rx.Scheduler;
@@ -23,11 +28,13 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static com.twoculture.twoculture.R.id.swipe_refresh_widget;
+
 /**
  * Created by songxingchao on 27/09/2016.
  */
 
-public class TopicsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class TopicsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,ITopicsView {
 
 
     private RecyclerView rv_topics;
@@ -37,6 +44,7 @@ public class TopicsFragment extends Fragment implements SwipeRefreshLayout.OnRef
     private boolean mLoading = false;
     private int mPageIndex = 0;
     private static final int PAGESIZE = 10;
+    private TopicsPresenter mTopicsPresenter;
     public TopicsFragment(){}
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,8 +56,9 @@ public class TopicsFragment extends Fragment implements SwipeRefreshLayout.OnRef
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_topics,container,false);
+        mTopicsPresenter = new TopicsPresenter(this);
         initView(rootView);
-        getDataFromServer();
+        mTopicsPresenter.getDataFromServer(mPageIndex,PAGESIZE);
         return rootView;
 
     }
@@ -83,46 +92,31 @@ public class TopicsFragment extends Fragment implements SwipeRefreshLayout.OnRef
                     //show the footer
                     //loadmoredata
                     mPageIndex ++;
-                    getDataFromServer();
+                    mTopicsPresenter.getDataFromServer(mPageIndex,PAGESIZE);
                 }
 
             }
         });
     }
-    private void getDataFromServer(){
-        subscription =  RxClient.getInstance().getAllTopics(mPageIndex,PAGESIZE)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<AllTopics>() {
-                    @Override
-                    public void onCompleted() {
-                        swipe_refresh_widget.setRefreshing(false);
-                    }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        swipe_refresh_widget.setRefreshing(false);
-                    }
-
-                    @Override
-                    public void onNext(AllTopics allTopics) {
-                        swipe_refresh_widget.setRefreshing(false);
-                        Log.d(TopicsFragment.class.getName(),"onNext");
-                        if(mPageIndex==0){
-                            mTopicsAdapter.resetData();
-                        }
-                        mTopicsAdapter.addData(allTopics.topics);
-                    }
-                });
-    }
 
     @Override
     public void onRefresh() {
         mPageIndex = 0;
-        getDataFromServer();
+        mTopicsPresenter.getDataFromServer(mPageIndex,PAGESIZE);
     }
 
 
+    @Override
+    public void showRefreshing(boolean refreshing) {
+        swipe_refresh_widget.setRefreshing(refreshing);
+    }
 
-
+    @Override
+    public void addTopics(List<TopicItem> topics) {
+        if (mPageIndex == 0) {
+            mTopicsAdapter.resetData();
+        }
+        mTopicsAdapter.addData(topics);
+    }
 }

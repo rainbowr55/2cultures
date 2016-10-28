@@ -2,30 +2,23 @@ package com.twoculture.twoculture.ui;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
 
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
+
 
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
+
 import android.text.TextUtils;
-import android.util.Log;
+
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
+
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,10 +26,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.twoculture.twoculture.R;
-import com.twoculture.twoculture.models.LoginResult;
-import com.twoculture.twoculture.network.RxClient;
-import com.twoculture.twoculture.tools.Constants;
+
+import com.twoculture.twoculture.presenter.ILoginPresenter;
+import com.twoculture.twoculture.presenter.LoginPresenter;
+
 import com.twoculture.twoculture.tools.StringUtils;
+import com.twoculture.twoculture.views.ILoginView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,18 +46,20 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity  {
+public class LoginActivity extends AppCompatActivity implements ILoginView {
 
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
     private Subscription subscription;
+    private ILoginPresenter mLoginPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
+        mLoginPresenter = new LoginPresenter(this);
         initView();
     }
 
@@ -100,11 +97,10 @@ public class LoginActivity extends AppCompatActivity  {
     }
 
 
-    private void goToSingup(){
-        Intent intent = new Intent(this,SignupActivity.class);
+    private void goToSingup() {
+        Intent intent = new Intent(this, SignupActivity.class);
         startActivity(intent);
     }
-
 
 
     private void attemptLogin() {
@@ -143,11 +139,9 @@ public class LoginActivity extends AppCompatActivity  {
         } else {
 
             showProgress(true);
-            loginToServer(email,password,"en","default-token");
+            mLoginPresenter.loginToServer(email, password, "en", "default-token");
         }
     }
-
-
 
 
     /**
@@ -170,42 +164,22 @@ public class LoginActivity extends AppCompatActivity  {
         }
     }
 
+    @Override
+    public void customShowProgress(boolean isShow) {
+        showProgress(isShow);
+    }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    private void loginToServer(String userName,String password,String locale,String deviceToken){
-        subscription = RxClient.getInstance().
-                login(userName,password,locale,deviceToken)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<LoginResult>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.d(LoginActivity.class.getName(),"onCompleted");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        showProgress(false);
-                        Log.d(LoginActivity.class.getName(),e.getMessage());
-                        Toast.makeText(LoginActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onNext(LoginResult result) {
-                        showProgress(false);
-                        Log.d(LoginActivity.class.getName(),result.msg + result.status + result.last_update_time + result.token);
-                        Toast.makeText(LoginActivity.this,result.msg,Toast.LENGTH_SHORT).show();
-                        Constants.TOKEN = result.token;
-                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                        startActivity(intent);
-                        LoginActivity.this.finish();;
-                    }
-                });
+    @Override
+    public void onLoginSuccess() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        LoginActivity.this.finish();
     }
 
 
+    @Override
+    public void setMessage(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
 }
 
