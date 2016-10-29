@@ -25,4 +25,17 @@
 
     <string name="translate"><Data><![CDATA[&]]> </Data></string>
     <string name="save_password_and_auto_login">save password and auto login</string>
+
+    <!-- -->
+    <string name="launch_title">2Cultures - link all cultures.</string>
+    <string name="launch_btn_facebook">Login with Facebook</string>
+    <string name="launch_btn_wechat">Login with Wechat</string>
+    <string name="launch_btn_Email">Signup with Email</string>
+    <string name="launch_btn_original">Login</string>
+    <string name="launch_text_introduction">Cultural communication social platform\n\n
+        Exchange of overseas life experience,\n\n
+        Love and marriage,\n\n
+        Migrants and locals,\n\n
+        Relationship,friendship,\n\n
+        Languages,travel,food,hobbies...</string>
 </resources>
