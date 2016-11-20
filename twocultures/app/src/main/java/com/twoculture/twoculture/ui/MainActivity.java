@@ -56,11 +56,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     case R.id.tab_topic:
                         mViewPager.setCurrentItem(0);
                         break;
-                    case R.id.tab_activity:
+                    case R.id.tab_messages:
                         mViewPager.setCurrentItem(1);
                         break;
-                    case R.id.tab_friends:
+                    case R.id.tab_event:
                         mViewPager.setCurrentItem(2);
+                        break;
+                    case R.id.tab_friends:
+                        mViewPager.setCurrentItem(3);
                         break;
                 }
             }
@@ -110,11 +113,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return new TopicsFragment();
             }
             if (position == 1) {
+                return new MessagesFragment();
+            }
+            if (position == 2) {
                 return new EventsFragment();
             }
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            if (position == 2) {
+            if (position == 3) {
                 return new MessagesFragment();
             }
             return null;
@@ -123,17 +127,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 4;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "SECTION 0";
                 case 1:
-                    return "SECTION 2";
+                    return "SECTION 1";
                 case 2:
+                    return "SECTION 2";
+                case 3:
                     return "SECTION 3";
             }
             return null;

@@ -2,11 +2,15 @@
     <tab
         id="@+id/tab_topic"
         icon="@drawable/bg_main_topic"
-        title="Favorites" />
+        title="Topics" />
     <tab
-        id="@+id/tab_activity"
+        id="@+id/tab_messages"
         icon="@drawable/bg_main_topic"
-        title="Nearby" />
+        title="Messages" />
+    <tab
+        id="@+id/tab_event"
+        icon="@drawable/bg_main_topic"
+        title="Events" />
     <tab
         id="@+id/tab_friends"
         icon="@drawable/bg_main_topic"
