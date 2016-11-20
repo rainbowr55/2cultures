@@ -13,7 +13,6 @@ import com.twoculture.twoculture.models.EventItem;
 public class EventDetailActivity extends AppCompatActivity {
     public static final String EVENT_DATA = "event_data";
     private TextView tv_title;
-    private ImageView iv_event_bg;
     private TextView tv_activity_time;
     private TextView tv_registration_deadline;
     private TextView tv_joined_number;
@@ -29,7 +28,6 @@ public class EventDetailActivity extends AppCompatActivity {
 
     private void initView() {
         tv_title = (TextView) this.findViewById(R.id.tv_title);
-        iv_event_bg = (ImageView) this.findViewById(R.id.iv_event_bg);
         tv_activity_time = (TextView) this.findViewById(R.id.tv_activity_time);
         tv_registration_deadline = (TextView) this.findViewById(R.id.tv_registration_deadline);
         tv_joined_number = (TextView) this.findViewById(R.id.tv_joined_number);
@@ -44,7 +42,6 @@ public class EventDetailActivity extends AppCompatActivity {
         tv_activity_time.setText("Event Time: " + event.activity_time);
         tv_registration_deadline.setText("Deadline: " + event.registration_deadline);
         tv_joined_number.setText("Joined number: " + event.join_num);
-        Picasso.with(this).load(event.event_bg).placeholder(R.drawable.default_image).into(iv_event_bg);
         tv_desc.setText(event.description);
     }
 }
