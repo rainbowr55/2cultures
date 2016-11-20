@@ -55,19 +55,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 switch (tabId) {
                     case R.id.tab_topic:
                         mViewPager.setCurrentItem(0);
+
                         break;
                     case R.id.tab_messages:
                         mViewPager.setCurrentItem(1);
+
                         break;
                     case R.id.tab_event:
                         mViewPager.setCurrentItem(2);
+
                         break;
                     case R.id.tab_friends:
                         mViewPager.setCurrentItem(3);
+
                         break;
                 }
             }
         });
+        setTitle("2Cultures");
     }
 
     @Override
