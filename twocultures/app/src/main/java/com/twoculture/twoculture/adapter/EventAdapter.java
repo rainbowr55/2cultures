@@ -76,8 +76,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tv_title;
         ImageView iv_event_bg;
-
-
         TextView tv_joined_number;
 
         public MyViewHolder(View itemView) {
