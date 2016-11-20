@@ -1,27 +1,18 @@
 package com.twoculture.twoculture.ui;
 
+import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-
-import android.widget.TextView;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -34,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private ViewPager mViewPager;
-    private DrawerLayout  drawer_layout;
+    private DrawerLayout drawer_layout;
     private NavigationView nav_view;
 
     @Override
@@ -44,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -61,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
-                switch (tabId){
+                switch (tabId) {
                     case R.id.tab_topic:
                         mViewPager.setCurrentItem(0);
                         break;
@@ -80,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-         if (id == R.id.nav_setting) {
+        if (id == R.id.nav_setting) {
 
         } else if (id == R.id.nav_friends) {
 
@@ -94,8 +85,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-
-
+    @Override
+    public void onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -109,15 +106,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         @Override
         public Fragment getItem(int position) {
-            if(position==0){
+            if (position == 0) {
                 return new TopicsFragment();
             }
-            if(position ==1){
+            if (position == 1) {
                 return new EventsFragment();
             }
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            if(position ==2){
+            if (position == 2) {
                 return new MessagesFragment();
             }
             return null;
@@ -140,16 +137,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     return "SECTION 3";
             }
             return null;
-        }
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
     }
 }

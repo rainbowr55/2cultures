@@ -5,5 +5,5 @@ package com.twoculture.twoculture.presenter;
  */
 
 public interface ISignupPresenter {
-   void signup(String username,String password,String locale);
+    void signup(String username, String password, String locale);
 }

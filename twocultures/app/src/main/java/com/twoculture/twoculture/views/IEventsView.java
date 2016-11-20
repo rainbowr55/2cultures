@@ -1,7 +1,6 @@
 package com.twoculture.twoculture.views;
 
 import com.twoculture.twoculture.models.EventItem;
-import com.twoculture.twoculture.models.TopicItem;
 
 import java.util.List;
 
@@ -11,5 +10,6 @@ import java.util.List;
 
 public interface IEventsView {
     void showRefreshing(boolean refreshing);
+
     void addTopics(List<EventItem> eventItems);
 }

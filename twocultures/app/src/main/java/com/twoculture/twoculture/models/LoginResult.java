@@ -1,7 +1,5 @@
 package com.twoculture.twoculture.models;
 
-import android.media.session.MediaSession;
-
 /**
  * Created by songxingchao on 26/09/2016.
  */

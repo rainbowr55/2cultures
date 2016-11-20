@@ -3,7 +3,6 @@ package com.twoculture.twoculture.interfaces;
 import com.twoculture.twoculture.models.SignupResult;
 
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 

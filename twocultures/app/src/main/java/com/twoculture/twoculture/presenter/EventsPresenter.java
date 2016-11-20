@@ -18,9 +18,10 @@ public class EventsPresenter implements IEventsPresenter {
 
     private IEventsView mEventsView;
 
-    public EventsPresenter(IEventsView eventsView){
+    public EventsPresenter(IEventsView eventsView) {
         mEventsView = eventsView;
     }
+
     @Override
     public void getDataFromServer(int pageIndex, int pageSize) {
         RxClient.getInstance()

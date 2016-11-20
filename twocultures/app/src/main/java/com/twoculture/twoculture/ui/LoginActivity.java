@@ -2,23 +2,16 @@ package com.twoculture.twoculture.ui;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-
 import android.annotation.TargetApi;
 import android.content.Intent;
-
-import android.support.v7.app.AppCompatActivity;
-
-
 import android.os.Build;
 import android.os.Bundle;
-
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,22 +19,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.twoculture.twoculture.R;
-
 import com.twoculture.twoculture.presenter.ILoginPresenter;
 import com.twoculture.twoculture.presenter.LoginPresenter;
-
 import com.twoculture.twoculture.tools.StringUtils;
 import com.twoculture.twoculture.views.ILoginView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import rx.Observer;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-
-import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.

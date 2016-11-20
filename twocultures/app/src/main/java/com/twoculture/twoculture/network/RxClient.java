@@ -33,6 +33,7 @@ public class RxClient {
     private RegisterService registerService;
     private TopicService topicService;
     private EventService eventService;
+
     private RxClient() {
         final Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).create();
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
@@ -59,20 +60,20 @@ public class RxClient {
         return instance;
     }
 
-    public Observable<LoginResult> login(String email, String password, String locale, String deviceToken){
-      return loginService.login(email,password,locale,deviceToken);
+    public Observable<LoginResult> login(String email, String password, String locale, String deviceToken) {
+        return loginService.login(email, password, locale, deviceToken);
     }
 
-    public Observable<SignupResult> signup(String email,String password,String locale){
-        return registerService.signup(email,password,locale);
+    public Observable<SignupResult> signup(String email, String password, String locale) {
+        return registerService.signup(email, password, locale);
     }
 
-    public Observable<AllTopics> getAllTopics(int pageIndex,int pageNumber){
-        return topicService.getAllTopics(Constants.TOKEN,pageIndex,pageNumber);
+    public Observable<AllTopics> getAllTopics(int pageIndex, int pageNumber) {
+        return topicService.getAllTopics(Constants.TOKEN, pageIndex, pageNumber);
     }
 
-    public Observable<List<EventItem>> getAllEvents(int pageIndex, int pageNumber){
-        return eventService.getEvent(Constants.TOKEN,pageIndex,pageNumber);
+    public Observable<List<EventItem>> getAllEvents(int pageIndex, int pageNumber) {
+        return eventService.getEvent(Constants.TOKEN, pageIndex, pageNumber);
     }
 
 }

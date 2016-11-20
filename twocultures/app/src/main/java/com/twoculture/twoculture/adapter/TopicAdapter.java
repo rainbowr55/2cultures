@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 import com.twoculture.twoculture.R;
-import com.twoculture.twoculture.models.TopicContent;
 import com.twoculture.twoculture.models.TopicItem;
 import com.twoculture.twoculture.ui.TopicDetailActivity;
 
@@ -28,19 +27,20 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ItemViewHold
     private Context mContext;
     private List<TopicItem> mTopics = new ArrayList<>();
 
-    public TopicAdapter(Context context){
+    public TopicAdapter(Context context) {
         this.mContext = context;
     }
 
-    public void addData(List<TopicItem> topics){
+    public void addData(List<TopicItem> topics) {
         mTopics.addAll(topics);
         this.notifyDataSetChanged();
     }
 
-    public void resetData(){
+    public void resetData() {
         mTopics.clear();
         this.notifyDataSetChanged();
     }
+
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_main_topic, parent, false);
@@ -53,14 +53,14 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ItemViewHold
         holder.tv_author_name.setText(topicItem.author.name);
         holder.tv_topic.setText(topicItem.topic.topic_title);
         Picasso.with(mContext).load(topicItem.author.user_header_image).placeholder(R.drawable.default_gravatar).config(Bitmap.Config.RGB_565).into(holder.iv_author_icon);
-        Picasso.with(mContext).load(topicItem.topic_photos.get(0).url).config(Bitmap.Config.RGB_565).placeholder(R.drawable.default_image).into(holder.iv_topic_icon);
+        Picasso.with(mContext).load(topicItem.topic_photos.get(0).url).config(Bitmap.Config.RGB_565).placeholder(R.drawable.default_image).fit().centerCrop().into(holder.iv_topic_icon);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext,TopicDetailActivity.class);
-                Gson gson  = new Gson();
+                Intent intent = new Intent(mContext, TopicDetailActivity.class);
+                Gson gson = new Gson();
                 String topicItemString = gson.toJson(topicItem);
-                intent.putExtra(TopicDetailActivity.TOPIC_ITEM,topicItemString);
+                intent.putExtra(TopicDetailActivity.TOPIC_ITEM, topicItemString);
                 mContext.startActivity(intent);
             }
         });

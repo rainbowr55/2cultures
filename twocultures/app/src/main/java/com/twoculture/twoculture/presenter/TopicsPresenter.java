@@ -11,8 +11,6 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-import static com.twoculture.twoculture.R.id.swipe_refresh_widget;
-
 /**
  * Created by songxingchao on 28/10/2016.
  */
@@ -20,7 +18,8 @@ import static com.twoculture.twoculture.R.id.swipe_refresh_widget;
 public class TopicsPresenter implements ITopicPresenter {
 
     private ITopicsView mTopicsView;
-    public TopicsPresenter(ITopicsView topicsView){
+
+    public TopicsPresenter(ITopicsView topicsView) {
         mTopicsView = topicsView;
     }
 

@@ -7,7 +7,7 @@ package com.twoculture.twoculture.tools;
 public class StringUtils {
 
     public static boolean isEmailValid(String email) {
-        return email.contains("@")&&email.contains(".");
+        return email.contains("@") && email.contains(".");
     }
 
     public static boolean isPasswordValid(String password) {

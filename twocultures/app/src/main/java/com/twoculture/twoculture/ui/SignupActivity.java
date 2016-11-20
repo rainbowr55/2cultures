@@ -1,11 +1,8 @@
 package com.twoculture.twoculture.ui;
 
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,30 +11,23 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.twoculture.twoculture.R;
-import com.twoculture.twoculture.models.LoginResult;
-import com.twoculture.twoculture.models.SignupResult;
-import com.twoculture.twoculture.network.RxClient;
 import com.twoculture.twoculture.presenter.ISignupPresenter;
 import com.twoculture.twoculture.presenter.SignupPresenter;
-import com.twoculture.twoculture.tools.Constants;
-import com.twoculture.twoculture.tools.StringUtils;
 import com.twoculture.twoculture.views.ISignupView;
 
-import rx.Observer;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
-public class SignupActivity extends AppCompatActivity implements ISignupView{
+public class SignupActivity extends AppCompatActivity implements ISignupView {
 
     private EditText et_email;
     private EditText et_password;
     private Spinner sp_locale;
-    private Button  btn_signup;
+    private Button btn_signup;
     private LinearLayout ll_home;
     private Subscription mSubscription;
 
     private ISignupPresenter mPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +36,7 @@ public class SignupActivity extends AppCompatActivity implements ISignupView{
         initView();
     }
 
-    public void initView(){
+    public void initView() {
         ll_home = (LinearLayout) this.findViewById(R.id.ll_home);
         et_email = (EditText) this.findViewById(R.id.et_email);
         et_password = (EditText) this.findViewById(R.id.et_password);
@@ -57,24 +47,24 @@ public class SignupActivity extends AppCompatActivity implements ISignupView{
             public void onClick(View v) {
                 String email = et_email.getText().toString().trim();
                 String password = et_password.getText().toString().trim();
-                String locale =  sp_locale.getSelectedItem().toString();
-                mPresenter.signup(email,password,locale);
+                String locale = sp_locale.getSelectedItem().toString();
+                mPresenter.signup(email, password, locale);
             }
         });
     }
 
-    private void signup(){
+    private void signup() {
 
     }
 
     @Override
     public void setMessage(String msg) {
-        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onSignupSuccess() {
-        Intent intent = new Intent(SignupActivity.this,MainActivity.class);
+        Intent intent = new Intent(SignupActivity.this, MainActivity.class);
         startActivity(intent);
         SignupActivity.this.finish();
     }

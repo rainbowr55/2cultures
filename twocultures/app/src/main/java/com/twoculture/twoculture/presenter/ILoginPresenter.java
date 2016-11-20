@@ -5,5 +5,5 @@ package com.twoculture.twoculture.presenter;
  */
 
 public interface ILoginPresenter {
-    void loginToServer(String userName,String password,String locale,String deviceToken);
+    void loginToServer(String userName, String password, String locale, String deviceToken);
 }

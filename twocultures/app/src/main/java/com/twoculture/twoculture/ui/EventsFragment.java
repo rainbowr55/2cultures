@@ -13,19 +13,13 @@ import android.view.ViewGroup;
 import com.twoculture.twoculture.R;
 import com.twoculture.twoculture.adapter.EventAdapter;
 import com.twoculture.twoculture.models.EventItem;
-import com.twoculture.twoculture.network.RxClient;
 import com.twoculture.twoculture.presenter.EventsPresenter;
 import com.twoculture.twoculture.presenter.IEventsPresenter;
-import com.twoculture.twoculture.presenter.ITopicPresenter;
 import com.twoculture.twoculture.views.IEventsView;
 
 import java.util.List;
 
-import rx.Observer;
-import rx.Scheduler;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by songxingchao on 1/10/2016.
@@ -33,11 +27,11 @@ import rx.schedulers.Schedulers;
 
 public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, IEventsView {
 
+    private static final int PAGESIZE = 10;
     private SwipeRefreshLayout swipe_refresh_widget;
     private RecyclerView rv_events;
     private Subscription subscription;
     private int mPageIndex = 0;
-    private static final int PAGESIZE = 10;
     private EventAdapter mEventAdapter;
     private IEventsPresenter mEventsPresenter;
 
