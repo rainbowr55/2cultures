@@ -17,16 +17,18 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/text_large" />
 
-    <Button
+
+
+    <com.facebook.login.widget.LoginButton
         android:id="@+id/btn_login_facebook"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:layout_marginTop="40dp"
-        android:background="#ff70a0d0"
-        android:text="@string/launch_btn_facebook"
-        android:textColor="@android:color/white" />
+        android:layout_marginTop="40dp" />
 
     <Button
         android:id="@+id/btn_login_wechat"
