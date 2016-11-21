@@ -68,14 +68,6 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
                 attemptLogin();
             }
         });
-        Button mBtnSignup = (Button) findViewById(R.id.email_sign_up_button);
-        mBtnSignup.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToSingup();
-            }
-        });
-
         mProgressView = findViewById(R.id.login_progress);
     }
 
