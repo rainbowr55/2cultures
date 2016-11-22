@@ -6,10 +6,11 @@ android {
 
     defaultConfig {
         applicationId "com.twoculture.twoculture"
-        minSdkVersion 19
+        minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -35,4 +36,5 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.roughike:bottom-bar:2.0.2'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    compile project(':easemob')
 }

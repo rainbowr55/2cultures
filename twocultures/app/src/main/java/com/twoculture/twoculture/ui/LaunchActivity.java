@@ -62,6 +62,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
     private void initListenter() {
         btn_login_original.setOnClickListener(this);
         btn_login_email.setOnClickListener(this);
+        findViewById(R.id.btn_test).setOnClickListener(this);
     }
 
     @Override
@@ -75,8 +76,13 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
                 Intent emailIntent = new Intent(this, SignupActivity.class);
                 startActivity(emailIntent);
                 break;
+            case R.id.btn_test:
+                Intent intenttest = new Intent(this, com.twoculture.easemob.ui.SplashActivity.class);
+                startActivity(intenttest);
+                break;
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

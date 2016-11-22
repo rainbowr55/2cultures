@@ -1,1 +1,5 @@
 include ':app'
+include ':easemob'
+include ':easeUI_2cultures'
+//include ':easeUI_CN'
+include ':redpacketlibrary'

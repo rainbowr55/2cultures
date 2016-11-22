@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in </string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="action_sign_up">Sign up </string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_demo">DemoActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+    <string name="translate"><Data><![CDATA[&]]> </Data></string>
+    <string name="save_password_and_auto_login">save password and auto login</string>
+
+    <!-- -->
+    <string name="launch_title">2Cultures - link all cultures.</string>
+    <string name="launch_btn_facebook">Login with Facebook</string>
+    <string name="launch_btn_wechat">Login with Wechat</string>
+    <string name="launch_btn_Email">Signup with Email</string>
+    <string name="launch_btn_original">Login</string>
+    <string name="launch_text_introduction">Cultural communication social platform\n\n
+        Exchange of overseas life experience,\n\n
+        Love and marriage,\n\n
+        Migrants and locals,\n\n
+        Relationship,friendship,\n\n
+        Languages,travel,food,hobbies...</string>
+</resources>
