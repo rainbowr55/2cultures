@@ -31,7 +31,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.easemob.redpacketui.utils.RedPacketUtil;
+//import com.easemob.redpacketui.utils.RedPacketUtil;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
@@ -280,7 +280,7 @@ public class SettingsFragment extends Fragment implements OnClickListener {
 	public void onClick(View v) {
 		int i = v.getId();
 		if (i == R.id.ll_change) {
-			RedPacketUtil.startChangeActivity(getActivity());
+//			RedPacketUtil.startChangeActivity(getActivity());
 
 			//end of red packet code
 		} else if (i == R.id.rl_switch_notification) {

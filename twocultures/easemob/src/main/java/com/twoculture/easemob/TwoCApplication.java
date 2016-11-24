@@ -2,10 +2,12 @@ package com.twoculture.easemob;
 
 import android.app.Application;
 import android.content.Context;
-//import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDex;
 
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
+
+//import android.support.multidex.MultiDex;
 
 /**
  * Created by rainbow on 16/11/20.
@@ -23,7 +25,7 @@ public class TwoCApplication extends Application {
 
     @Override
     public void onCreate() {
-//        MultiDex.install(this);
+        MultiDex.install(this);
         super.onCreate();
 
         applicationContext = this;
@@ -49,6 +51,6 @@ public class TwoCApplication extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-//        MultiDex.install(this);
+        MultiDex.install(this);
     }
 }

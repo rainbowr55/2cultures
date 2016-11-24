@@ -43,4 +43,9 @@
 
     <string name="fb_login_protocol_scheme">fb198451740608389</string>
 
+    <!--  message start -->
+    <string name="message_friend_request">Friend Request</string>
+    <string name="message_events_invitation">2C Events Invitation</string>
+    <string name="message_notification">Notification</string>
+    <string name="message_message_at">\u0040Message</string>
 </resources>

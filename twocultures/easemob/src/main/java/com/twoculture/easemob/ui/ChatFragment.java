@@ -18,11 +18,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
 
-import com.easemob.redpacketsdk.constant.RPConstant;
-import com.easemob.redpacketui.utils.RedPacketUtil;
-import com.easemob.redpacketui.widget.ChatRowRedPacket;
-import com.easemob.redpacketui.widget.ChatRowRedPacketAck;
-import com.easemob.redpacketui.widget.ChatRowTransfer;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMCmdMessageBody;
 import com.hyphenate.chat.EMGroup;
@@ -149,13 +144,13 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         }
         //聊天室暂时不支持红包功能
         //red packet code : 注册红包菜单选项
-        if (chatType != Constant.CHATTYPE_CHATROOM) {
-            inputMenu.registerExtendMenuItem(R.string.attach_red_packet, R.drawable.em_chat_red_packet_selector, ITEM_RED_PACKET, extendMenuItemClickListener);
-        }
-        //red packet code : 注册转账菜单选项
-        if (chatType == Constant.CHATTYPE_SINGLE) {
-            inputMenu.registerExtendMenuItem(R.string.attach_transfer_money, R.drawable.em_chat_transfer_selector, ITEM_TRANSFER_PACKET, extendMenuItemClickListener);
-        }
+//        if (chatType != Constant.CHATTYPE_CHATROOM) {
+//            inputMenu.registerExtendMenuItem(R.string.attach_red_packet, R.drawable.em_chat_red_packet_selector, ITEM_RED_PACKET, extendMenuItemClickListener);
+//        }
+//        //red packet code : 注册转账菜单选项
+//        if (chatType == Constant.CHATTYPE_SINGLE) {
+//            inputMenu.registerExtendMenuItem(R.string.attach_transfer_money, R.drawable.em_chat_transfer_selector, ITEM_TRANSFER_PACKET, extendMenuItemClickListener);
+//        }
         //end of red packet code
     }
     
@@ -217,16 +212,16 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                 }
                 break;
             //red packet code : 发送红包消息到聊天界面
-            case REQUEST_CODE_SEND_RED_PACKET:
-                if (data != null){
-                    sendMessage(RedPacketUtil.createRPMessage(getActivity(), data, toChatUsername));
-                }
-                break;
-            case REQUEST_CODE_SEND_TRANSFER_PACKET://发送转账消息
-                if (data != null) {
-                    sendMessage(RedPacketUtil.createTRMessage(getActivity(), data, toChatUsername));
-                }
-                break;
+//            case REQUEST_CODE_SEND_RED_PACKET:
+//                if (data != null){
+//                    sendMessage(RedPacketUtil.createRPMessage(getActivity(), data, toChatUsername));
+//                }
+//                break;
+//            case REQUEST_CODE_SEND_TRANSFER_PACKET://发送转账消息
+//                if (data != null) {
+//                    sendMessage(RedPacketUtil.createTRMessage(getActivity(), data, toChatUsername));
+//                }
+//                break;
             //end of red packet code
             default:
                 break;
@@ -283,13 +278,13 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
     public boolean onMessageBubbleClick(EMMessage message) {
         //消息框点击事件，demo这里不做覆盖，如需覆盖，return true
         //red packet code : 拆红包页面
-        if (message.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_RED_PACKET_MESSAGE, false)){
-            RedPacketUtil.openRedPacket(getActivity(), chatType, message, toChatUsername, messageList);
-            return true;
-        } else if (message.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_TRANSFER_PACKET_MESSAGE, false)) {
-            RedPacketUtil.openTransferPacket(getActivity(), message);
-            return true;
-        }
+//        if (message.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_RED_PACKET_MESSAGE, false)){
+//            RedPacketUtil.openRedPacket(getActivity(), chatType, message, toChatUsername, messageList);
+//            return true;
+//        } else if (message.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_TRANSFER_PACKET_MESSAGE, false)) {
+//            RedPacketUtil.openTransferPacket(getActivity(), message);
+//            return true;
+//        }
         //end of red packet code
         return false;
     }
@@ -299,10 +294,10 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         for (EMMessage message : messages) {
             EMCmdMessageBody cmdMsgBody = (EMCmdMessageBody) message.getBody();
             String action = cmdMsgBody.action();//获取自定义action
-            if (action.equals(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION)){
-                RedPacketUtil.receiveRedPacketAckMessage(message);
-                messageList.refresh();
-            }
+//            if (action.equals(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION)){
+//                RedPacketUtil.receiveRedPacketAckMessage(message);
+//                messageList.refresh();
+//            }
         }
         //end of red packet code
         super.onCmdMessageReceived(messages);
@@ -333,12 +328,12 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
             startVideoCall();
             break;
         //red packet code : 进入发红包页面
-        case ITEM_RED_PACKET:
-            RedPacketUtil.startRedPacketActivityForResult(this, chatType, toChatUsername, REQUEST_CODE_SEND_RED_PACKET);
-            break;
-        case ITEM_TRANSFER_PACKET://进入转账页面
-            RedPacketUtil.startTransferActivityForResult(this, toChatUsername, REQUEST_CODE_SEND_TRANSFER_PACKET);
-            break;
+//        case ITEM_RED_PACKET:
+//            RedPacketUtil.startRedPacketActivityForResult(this, chatType, toChatUsername, REQUEST_CODE_SEND_RED_PACKET);
+//            break;
+//        case ITEM_TRANSFER_PACKET://进入转账页面
+//            RedPacketUtil.startTransferActivityForResult(this, toChatUsername, REQUEST_CODE_SEND_TRANSFER_PACKET);
+//            break;
         //end of red packet code
         default:
             break;
@@ -414,16 +409,16 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                     return message.direct() == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_VIDEO_CALL : MESSAGE_TYPE_SENT_VIDEO_CALL;
                 }
                 //red packet code : 红包消息、红包回执消息以及转账消息的chatrow type
-                else if (message.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_RED_PACKET_MESSAGE, false)) {
-                    //发送红包消息
-                    return message.direct() == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_RED_PACKET : MESSAGE_TYPE_SEND_RED_PACKET;
-                } else if (message.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_RED_PACKET_ACK_MESSAGE, false)) {
-                    //领取红包消息
-                    return message.direct() == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_RED_PACKET_ACK : MESSAGE_TYPE_SEND_RED_PACKET_ACK;
-                } else if (message.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_TRANSFER_PACKET_MESSAGE, false)) {
-                    //转账消息
-                    return message.direct() == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_TRANSFER_PACKET : MESSAGE_TYPE_SEND_TRANSFER_PACKET;
-                }
+//                else if (message.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_RED_PACKET_MESSAGE, false)) {
+//                    //发送红包消息
+//                    return message.direct() == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_RED_PACKET : MESSAGE_TYPE_SEND_RED_PACKET;
+//                } else if (message.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_RED_PACKET_ACK_MESSAGE, false)) {
+//                    //领取红包消息
+//                    return message.direct() == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_RED_PACKET_ACK : MESSAGE_TYPE_SEND_RED_PACKET_ACK;
+//                } else if (message.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_TRANSFER_PACKET_MESSAGE, false)) {
+//                    //转账消息
+//                    return message.direct() == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_TRANSFER_PACKET : MESSAGE_TYPE_SEND_TRANSFER_PACKET;
+//                }
                 //end of red packet code
             }
             return 0;
@@ -438,13 +433,13 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                     return new ChatRowVoiceCall(getActivity(), message, position, adapter);
                 }
                 //red packet code : 红包消息、红包回执消息以及转账消息的chat row
-                else if (message.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_RED_PACKET_MESSAGE, false)) {//红包消息
-                    return new ChatRowRedPacket(getActivity(), message, position, adapter);
-                } else if (message.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_RED_PACKET_ACK_MESSAGE, false)) {//红包回执消息
-                    return new ChatRowRedPacketAck(getActivity(), message, position, adapter);
-                } else if (message.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_TRANSFER_PACKET_MESSAGE, false)) {//转账消息
-                    return new ChatRowTransfer(getActivity(), message, position, adapter);
-                }
+//                else if (message.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_RED_PACKET_MESSAGE, false)) {//红包消息
+//                    return new ChatRowRedPacket(getActivity(), message, position, adapter);
+//                } else if (message.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_RED_PACKET_ACK_MESSAGE, false)) {//红包回执消息
+//                    return new ChatRowRedPacketAck(getActivity(), message, position, adapter);
+//                } else if (message.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_TRANSFER_PACKET_MESSAGE, false)) {//转账消息
+//                    return new ChatRowTransfer(getActivity(), message, position, adapter);
+//                }
                 //end of red packet code
             }
             return null;
