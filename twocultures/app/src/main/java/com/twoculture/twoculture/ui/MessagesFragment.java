@@ -1,5 +1,6 @@
 package com.twoculture.twoculture.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.ContextMenu;
@@ -23,7 +24,7 @@ import com.twoculture.twoculture.R;
  * Created by songxingchao on 1/10/2016.
  */
 
-public class MessagesFragment extends MessagesBaseFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class MessagesFragment extends MessagesBaseFragment implements SwipeRefreshLayout.OnRefreshListener ,View.OnClickListener{
 
     private TextView errorText;
 
@@ -31,6 +32,8 @@ public class MessagesFragment extends MessagesBaseFragment implements SwipeRefre
     private TextView tvMsgNotification;
     private TextView tvMsgEvents;
     private TextView tvMsgAt;
+
+    private Context mContext;
 
     @Override
     protected void initView() {
@@ -48,6 +51,7 @@ public class MessagesFragment extends MessagesBaseFragment implements SwipeRefre
     @Override
     protected void setUpView() {
         super.setUpView();
+        tvMsgFriendRequest.setOnClickListener(this);
         // register context menu
         registerForContextMenu(conversationListView);
         conversationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -60,7 +64,7 @@ public class MessagesFragment extends MessagesBaseFragment implements SwipeRefre
                     Toast.makeText(getActivity(), com.twoculture.easemob.R.string.Cant_chat_with_yourself, Toast.LENGTH_SHORT).show();
                 else {
                     // start chat acitivity
-                    Intent intent = new Intent(getActivity(), ChatActivity.class);
+                    Intent intent = new Intent(mContext, ChatActivity.class);
                     if(conversation.isGroup()){
                         if(conversation.getType() == EMConversation.EMConversationType.ChatRoom){
                             // it's group chat
@@ -121,8 +125,25 @@ public class MessagesFragment extends MessagesBaseFragment implements SwipeRefre
         refresh();
 
         // update unread count
-        ((com.twoculture.easemob.ui.MainActivity) getActivity()).updateUnreadLabel();
+        ((com.twoculture.easemob.ui.MainActivity) mContext).updateUnreadLabel();
         return true;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.mContext = context;
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+        switch (id){
+            case R.id.tv_msg_friend_request:
+                Intent intent = new Intent();
+                intent.setClass(mContext,FriendRequestActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
 }

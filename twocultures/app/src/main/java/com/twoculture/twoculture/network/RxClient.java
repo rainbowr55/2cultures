@@ -33,24 +33,35 @@ public class RxClient {
     private RegisterService registerService;
     private TopicService topicService;
     private EventService eventService;
+    private Retrofit retrofit;
 
     private RxClient() {
-        final Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).create();
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient okHttpClient = new OkHttpClient().newBuilder().addInterceptor(loggingInterceptor).build();
-
-        final Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(okHttpClient)
-                .build();
-
+        initRetrofit();
         loginService = retrofit.create(LoginService.class);
         registerService = retrofit.create(RegisterService.class);
         topicService = retrofit.create(TopicService.class);
         eventService = retrofit.create(EventService.class);
 
+    }
+
+    public void initRetrofit() {
+        final Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).create();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient okHttpClient = new OkHttpClient().newBuilder().addInterceptor(loggingInterceptor).build();
+        retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(okHttpClient)
+                .build();
+    }
+
+    public <T> T getService(final Class<T> service) {
+
+        if (retrofit == null) {
+            initRetrofit();
+        }
+        return retrofit.create(service);
     }
 
     public static RxClient getInstance() {
