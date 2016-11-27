@@ -2,11 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:baselineAligned="false"
-    android:paddingBottom="10dp"
-    android:paddingLeft="13dp"
-    android:paddingRight="13dp"
-    android:paddingTop="10dp">
+    android:baselineAligned="false">
 
     <TextView
         android:id="@+id/friend_name"
@@ -14,16 +10,28 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="10dp"
         android:text="Rainbow"
         android:textColor="@color/black"
         android:textSize="18sp" />
 
     <ImageView
+        android:id="@+id/friend_agree_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:src="@mipmap/friend_agree"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"
+        android:src="@mipmap/friend_agree" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_below="@id/friend_agree_btn"
+        android:background="@color/divider_color" />
 
 </RelativeLayout>

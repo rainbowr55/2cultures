@@ -4,15 +4,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.twoculture.twoculture.R;
 import com.twoculture.twoculture.models.FriendRequest;
 import com.twoculture.twoculture.ui.FriendRequestActivity;
 
+import java.util.Iterator;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by rainbow on 16/11/25.
@@ -49,6 +52,22 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
 
     public void addDatas(List<FriendRequest> friendRequests) {
         this.friendRequests = friendRequests;
+        notifyDataSetChanged();
+    }
+
+    public void deleteItem(int messageId) {
+        if (friendRequests != null && friendRequests.size() > 0) {
+
+            Iterator it = friendRequests.iterator();
+
+            while (it.hasNext()) {
+                FriendRequest friendRequest = (FriendRequest) it.next();
+                if (messageId == friendRequest.message_id) {
+                    it.remove();
+                }
+            }
+            notifyDataSetChanged();
+        }
     }
 
     public static class FriendRequestViewHolder extends RecyclerView.ViewHolder {
@@ -56,14 +75,23 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
 
         @BindView(R.id.friend_name)
         TextView friendName;
+        @BindView(R.id.friend_agree_btn)
+        ImageView agreeBtn;
+
+        FriendRequest friendRequest;
 
         public FriendRequestViewHolder(View itemView, FriendRequestActivity.FriendRequestClickCallback friendRequestClickCallback) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
+            // 绑定点击事件
+            agreeBtn.setOnClickListener(v ->
+                    friendRequestClickCallback.onItemClicked(friendRequest.message_id));
 
         }
 
-        public void bindTo(FriendRequest friendRequest){
-            friendName.setText(friendRequest.form_user_name);
+        public void bindTo(FriendRequest friendRequest) {
+            this.friendRequest = friendRequest;
+            friendName.setText(friendRequest.from_user_name);
 
         }
     }

@@ -48,4 +48,5 @@
     <string name="message_events_invitation">2C Events Invitation</string>
     <string name="message_notification">Notification</string>
     <string name="message_message_at">\u0040Message</string>
+    <string name="no_data_hint">no data</string>
 </resources>
