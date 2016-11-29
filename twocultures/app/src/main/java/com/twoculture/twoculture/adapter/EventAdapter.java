@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observer;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -77,10 +78,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
         holder.iv_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RxClient.getInstance().favouriteTopic(eventItem.event_id)
-                        .observeOn(AndroidSchedulers.mainThread())
+             if(eventItem.is_favorite){
+                RxClient.getInstance().getTopicService().unfavouriteTopic(eventItem.event_id)
                         .subscribeOn(Schedulers.io())
-                        .subscribe(new Observer<BaseResponse>() {
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Subscriber<BaseResponse>() {
                             @Override
                             public void onCompleted() {
 
@@ -93,10 +95,36 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
 
                             @Override
                             public void onNext(BaseResponse baseResponse) {
-                                holder.tv_joined_number.setText(eventItem.join_num+1+"");
+                                eventItem.join_num -= 1;
+                                holder.tv_joined_number.setText(eventItem.join_num+"");
                                 Toast.makeText(mContext,baseResponse.msg,Toast.LENGTH_SHORT).show();
+                                eventItem.is_favorite = false;
                             }
                         });
+             }else{
+                 RxClient.getInstance().favouriteTopic(eventItem.event_id)
+                         .observeOn(AndroidSchedulers.mainThread())
+                         .subscribeOn(Schedulers.io())
+                         .subscribe(new Observer<BaseResponse>() {
+                             @Override
+                             public void onCompleted() {
+
+                             }
+
+                             @Override
+                             public void onError(Throwable e) {
+
+                             }
+
+                             @Override
+                             public void onNext(BaseResponse baseResponse) {
+                                 eventItem.join_num +=1;
+                                 holder.tv_joined_number.setText(eventItem.join_num+"");
+                                 Toast.makeText(mContext,baseResponse.msg,Toast.LENGTH_SHORT).show();
+                                 eventItem.is_favorite = true;
+                             }
+                         });
+             }
             }
         });
     }

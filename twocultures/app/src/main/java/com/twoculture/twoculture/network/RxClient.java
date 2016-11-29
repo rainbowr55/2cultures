@@ -92,5 +92,9 @@ public class RxClient {
         return topicService.favouriteTopic(topicId);
     }
 
+    public TopicService getTopicService(){
+        return  topicService;
+    }
+
 
 }
