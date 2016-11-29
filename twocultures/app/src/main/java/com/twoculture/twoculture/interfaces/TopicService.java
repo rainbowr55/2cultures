@@ -1,6 +1,7 @@
 package com.twoculture.twoculture.interfaces;
 
 import com.twoculture.twoculture.models.AllTopics;
+import com.twoculture.twoculture.models.BaseResponse;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -18,4 +19,15 @@ public interface TopicService {
             @Query("page") int pageIndex,
             @Query("page_num") int pageNumber
     );
+
+    @GET("mobile/we/events/favorite_the_event")
+    Observable<BaseResponse> favouriteTopic(
+            @Query("event_id") int event_id
+    );
+
+    @GET("mobile/we/events/unfavorite_the_event")
+    Observable<BaseResponse> unfavouriteTopic(
+            @Query("event_id") int event_id
+    );
+
 }

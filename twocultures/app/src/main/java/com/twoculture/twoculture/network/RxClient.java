@@ -8,6 +8,7 @@ import com.twoculture.twoculture.interfaces.LoginService;
 import com.twoculture.twoculture.interfaces.RegisterService;
 import com.twoculture.twoculture.interfaces.TopicService;
 import com.twoculture.twoculture.models.AllTopics;
+import com.twoculture.twoculture.models.BaseResponse;
 import com.twoculture.twoculture.models.EventItem;
 import com.twoculture.twoculture.models.LoginResult;
 import com.twoculture.twoculture.models.SignupResult;
@@ -86,5 +87,10 @@ public class RxClient {
     public Observable<List<EventItem>> getAllEvents(int pageIndex, int pageNumber) {
         return eventService.getEvent(Constants.TOKEN, pageIndex, pageNumber);
     }
+
+    public Observable<BaseResponse> favouriteTopic(int topicId) {
+        return topicService.favouriteTopic(topicId);
+    }
+
 
 }
