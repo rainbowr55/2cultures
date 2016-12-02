@@ -24,7 +24,7 @@
         android:textColor="@color/black" />
 
     <TextView
-        android:id="@+id/tv_msg_notification"
+        android:id="@+id/tv_msg_events"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableLeft="@mipmap/message_notification"
@@ -35,7 +35,7 @@
         android:textColor="@color/black" />
 
     <TextView
-        android:id="@+id/tv_msg_events"
+        android:id="@+id/tv_msg_notification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableLeft="@mipmap/message_events"

@@ -11,7 +11,6 @@ import java.util.List;
 
 public interface IFriendRequestView extends IShowMessage{
 
-    void onLoadingShow();
     void onLoadSuccess(List<FriendRequest> friendRequest);
     void onProcessFriendRequest(int messageId,BaseResponse response);
 

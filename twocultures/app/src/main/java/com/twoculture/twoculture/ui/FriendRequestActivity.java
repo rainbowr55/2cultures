@@ -30,10 +30,10 @@ public class FriendRequestActivity extends BaseActivity implements IFriendReques
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_request);
-        initData();
+        loadData();
     }
 
-    private void initData() {
+    private void loadData() {
         mFriendRequestPresenter = new FriendRequestPresenter(this);
         // 设置Layout管理器
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -48,7 +48,7 @@ public class FriendRequestActivity extends BaseActivity implements IFriendReques
     public void handleFriendRequest(int messageId) {
         //处理好友请求
         Log.e("test", "messageid=" + messageId);
-        mFriendRequestPresenter.processFriendRequest(messageId,FriendRequestPresenter.FRIEND_ACCEPTED);
+        mFriendRequestPresenter.processFriendRequest(messageId, FriendRequestPresenter.FRIEND_ACCEPTED);
     }
 
 
@@ -71,8 +71,8 @@ public class FriendRequestActivity extends BaseActivity implements IFriendReques
     }
 
     @Override
-    public void onProcessFriendRequest(int messageId,BaseResponse response) {
-        if(response.status== FriendRequestPresenter.FRIEND_ACCEPTED){
+    public void onProcessFriendRequest(int messageId, BaseResponse response) {
+        if (response.status == FriendRequestPresenter.FRIEND_ACCEPTED) {
             friendRequestAdapter.deleteItem(messageId);
         }
         showToast(response.msg);

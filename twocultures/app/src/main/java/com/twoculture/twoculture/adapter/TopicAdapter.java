@@ -43,7 +43,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ItemViewHold
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_main_topic, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main_topic, parent, false);
         return new ItemViewHolder(itemView);
     }
 

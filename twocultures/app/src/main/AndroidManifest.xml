@@ -103,7 +103,8 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.FriendRequestActivity"></activity>
+        <activity android:name=".ui.FriendRequestActivity" />
+        <activity android:name=".ui.NotificationActivity" />
     </application>
 
 </manifest>

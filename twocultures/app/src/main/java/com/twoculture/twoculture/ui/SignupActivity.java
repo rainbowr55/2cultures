@@ -58,6 +58,11 @@ public class SignupActivity extends AppCompatActivity implements ISignupView {
     }
 
     @Override
+    public void onLoadingShow() {
+
+    }
+
+    @Override
     public void setMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }

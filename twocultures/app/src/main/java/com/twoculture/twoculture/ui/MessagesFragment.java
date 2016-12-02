@@ -24,7 +24,7 @@ import com.twoculture.twoculture.R;
  * Created by songxingchao on 1/10/2016.
  */
 
-public class MessagesFragment extends MessagesBaseFragment implements SwipeRefreshLayout.OnRefreshListener ,View.OnClickListener{
+public class MessagesFragment extends MessagesBaseFragment implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
 
     private TextView errorText;
 
@@ -52,6 +52,7 @@ public class MessagesFragment extends MessagesBaseFragment implements SwipeRefre
     protected void setUpView() {
         super.setUpView();
         tvMsgFriendRequest.setOnClickListener(this);
+        tvMsgNotification.setOnClickListener(this);
         // register context menu
         registerForContextMenu(conversationListView);
         conversationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -65,11 +66,11 @@ public class MessagesFragment extends MessagesBaseFragment implements SwipeRefre
                 else {
                     // start chat acitivity
                     Intent intent = new Intent(mContext, ChatActivity.class);
-                    if(conversation.isGroup()){
-                        if(conversation.getType() == EMConversation.EMConversationType.ChatRoom){
+                    if (conversation.isGroup()) {
+                        if (conversation.getType() == EMConversation.EMConversationType.ChatRoom) {
                             // it's group chat
                             intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_CHATROOM);
-                        }else{
+                        } else {
                             intent.putExtra(Constant.EXTRA_CHAT_TYPE, Constant.CHATTYPE_GROUP);
                         }
 
@@ -86,7 +87,7 @@ public class MessagesFragment extends MessagesBaseFragment implements SwipeRefre
     @Override
     protected void onConnectionDisconnected() {
         super.onConnectionDisconnected();
-        if (NetUtils.hasNetwork(getActivity())){
+        if (NetUtils.hasNetwork(getActivity())) {
             errorText.setText(com.twoculture.easemob.R.string.can_not_connect_chat_server_connection);
         } else {
             errorText.setText(com.twoculture.easemob.R.string.the_current_network);
@@ -111,7 +112,7 @@ public class MessagesFragment extends MessagesBaseFragment implements SwipeRefre
         if (tobeDeleteCons == null) {
             return true;
         }
-        if(tobeDeleteCons.getType() == EMConversation.EMConversationType.GroupChat){
+        if (tobeDeleteCons.getType() == EMConversation.EMConversationType.GroupChat) {
             EaseAtMessageHelper.get().removeAtMeGroup(tobeDeleteCons.getUserName());
         }
         try {
@@ -138,11 +139,16 @@ public class MessagesFragment extends MessagesBaseFragment implements SwipeRefre
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        switch (id){
+        switch (id) {
             case R.id.tv_msg_friend_request:
                 Intent intent = new Intent();
-                intent.setClass(mContext,FriendRequestActivity.class);
+                intent.setClass(mContext, FriendRequestActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.tv_msg_notification:
+                Intent notifyIntent = new Intent();
+                notifyIntent.setClass(mContext, NotificationActivity.class);
+                startActivity(notifyIntent);
                 break;
         }
     }

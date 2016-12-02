@@ -5,5 +5,6 @@ package com.twoculture.twoculture.views;
  */
 
 public interface IShowMessage {
+    void onLoadingShow();
     void setMessage(String msg);
 }
