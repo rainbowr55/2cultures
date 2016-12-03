@@ -12,7 +12,7 @@ import com.twoculture.twoculture.models.BaseResponse;
 import com.twoculture.twoculture.models.EventItem;
 import com.twoculture.twoculture.models.LoginResult;
 import com.twoculture.twoculture.models.SignupResult;
-import com.twoculture.twoculture.tools.Constants;
+import com.twoculture.twoculture.tools.AppConstants;
 import com.twoculture.twoculture.tools.MethodConst;
 
 import java.util.List;
@@ -81,11 +81,11 @@ public class RxClient {
     }
 
     public Observable<AllTopics> getAllTopics(int pageIndex, int pageNumber) {
-        return topicService.getAllTopics(Constants.TOKEN, pageIndex, pageNumber);
+        return topicService.getAllTopics(AppConstants.TOKEN, pageIndex, pageNumber);
     }
 
     public Observable<List<EventItem>> getAllEvents(int pageIndex, int pageNumber) {
-        return eventService.getEvent(Constants.TOKEN, pageIndex, pageNumber);
+        return eventService.getEvent(AppConstants.TOKEN, pageIndex, pageNumber);
     }
 
     public Observable<BaseResponse> favouriteTopic(int topicId) {

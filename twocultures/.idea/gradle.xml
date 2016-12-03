@@ -9,6 +9,10 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/basecomponent" />
+            <option value="$PROJECT_DIR$/easeUI_2cultures" />
+            <option value="$PROJECT_DIR$/easemob" />
+            <option value="$PROJECT_DIR$/redpacketlibrary" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

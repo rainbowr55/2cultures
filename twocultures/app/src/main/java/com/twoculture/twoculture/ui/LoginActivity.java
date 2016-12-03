@@ -24,6 +24,7 @@ import com.twoculture.twoculture.presenter.LoginPresenter;
 import com.twoculture.twoculture.tools.StringUtils;
 import com.twoculture.twoculture.views.ILoginView;
 
+import butterknife.BindView;
 import rx.Subscription;
 
 /**
@@ -31,9 +32,14 @@ import rx.Subscription;
  */
 public class LoginActivity extends AppCompatActivity implements ILoginView {
 
+    @BindView(R.id.email)
     private AutoCompleteTextView mEmailView;
+    @BindView(R.id.password)
     private EditText mPasswordView;
+    @BindView(R.id.pb_login_progress)
     private View mProgressView;
+
+
     private Subscription subscription;
     private ILoginPresenter mLoginPresenter;
 
@@ -47,9 +53,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     }
 
     private void initView() {
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
 
-        mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -68,7 +72,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
                 attemptLogin();
             }
         });
-        mProgressView = findViewById(R.id.login_progress);
+        mProgressView = findViewById(R.id.pb_login_progress);
     }
 
 

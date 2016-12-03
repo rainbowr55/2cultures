@@ -1,10 +1,14 @@
 package com.twoculture.twoculture.presenter;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.twoculture.easemob.Constant;
+import com.twoculture.easemob.TwoCApplication;
 import com.twoculture.twoculture.models.LoginResult;
 import com.twoculture.twoculture.network.RxClient;
-import com.twoculture.twoculture.tools.Constants;
+import com.twoculture.twoculture.tools.AppConstants;
 import com.twoculture.twoculture.ui.LoginActivity;
 import com.twoculture.twoculture.views.ILoginView;
 
@@ -47,10 +51,13 @@ public class LoginPresenter implements ILoginPresenter {
                     @Override
                     public void onNext(LoginResult result) {
                         mLoginView.customShowProgress(false);
-                        Constants.TOKEN = result.token;
+                        AppConstants.TOKEN = result.token;
                         mLoginView.setMessage(result.msg);
                         mLoginView.onLoginSuccess();
-
+                        SharedPreferences sharedPreferences = TwoCApplication.applicationContext.getSharedPreferences(Constant.TOKEN_FILE_NAME, Context.MODE_PRIVATE);
+                        SharedPreferences.Editor  editor = sharedPreferences.edit();
+                        editor.putString(Constant.TOKEN_FIELD_NAME, result.token);
+                        editor.commit();
                     }
                 });
     }

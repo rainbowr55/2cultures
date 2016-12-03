@@ -15,15 +15,26 @@ import com.twoculture.twoculture.presenter.ISignupPresenter;
 import com.twoculture.twoculture.presenter.SignupPresenter;
 import com.twoculture.twoculture.views.ISignupView;
 
+import butterknife.BindView;
 import rx.Subscription;
 
-public class SignupActivity extends AppCompatActivity implements ISignupView {
+public class SignupActivity extends BaseActivity implements ISignupView {
 
-    private EditText et_email;
-    private EditText et_password;
-    private Spinner sp_locale;
-    private Button btn_signup;
-    private LinearLayout ll_home;
+    @BindView(R.id.et_email)
+    private EditText mEditEmail;
+
+    @BindView(R.id.et_password)
+    private EditText mEditPassword;
+
+    @BindView(R.id.sp_locale)
+    private Spinner mSpinnerLocale;
+
+    @BindView(R.id.btn_signup)
+    private Button mButtonSignup;
+
+    @BindView(R.id.ll_home)
+    private LinearLayout mLinearLayoutHome;
+
     private Subscription mSubscription;
 
     private ISignupPresenter mPresenter;
@@ -31,23 +42,27 @@ public class SignupActivity extends AppCompatActivity implements ISignupView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_singup);
         mPresenter = new SignupPresenter(this);
         initView();
     }
 
+    @Override
+    protected int getLayoutRes() {
+        return R.layout.activity_singup;
+    }
+
     public void initView() {
-        ll_home = (LinearLayout) this.findViewById(R.id.ll_home);
-        et_email = (EditText) this.findViewById(R.id.et_email);
-        et_password = (EditText) this.findViewById(R.id.et_password);
-        sp_locale = (Spinner) this.findViewById(R.id.sp_locale);
-        btn_signup = (Button) this.findViewById(R.id.btn_signup);
-        btn_signup.setOnClickListener(new View.OnClickListener() {
+        mLinearLayoutHome = (LinearLayout) this.findViewById(R.id.ll_home);
+        mEditEmail = (EditText) this.findViewById(R.id.et_email);
+        mEditPassword = (EditText) this.findViewById(R.id.et_password);
+        mSpinnerLocale = (Spinner) this.findViewById(R.id.sp_locale);
+        mButtonSignup = (Button) this.findViewById(R.id.btn_signup);
+        mButtonSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = et_email.getText().toString().trim();
-                String password = et_password.getText().toString().trim();
-                String locale = sp_locale.getSelectedItem().toString();
+                String email = mEditEmail.getText().toString().trim();
+                String password = mEditPassword.getText().toString().trim();
+                String locale = mSpinnerLocale.getSelectedItem().toString();
                 mPresenter.signup(email, password, locale);
             }
         });

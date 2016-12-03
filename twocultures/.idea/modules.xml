@@ -3,6 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/basecomponent/basecomponent.iml" filepath="$PROJECT_DIR$/basecomponent/basecomponent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easeUI_2cultures/easeUI_2cultures.iml" filepath="$PROJECT_DIR$/easeUI_2cultures/easeUI_2cultures.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easemob/easemob.iml" filepath="$PROJECT_DIR$/easemob/easemob.iml" />
+      <module fileurl="file://$PROJECT_DIR$/redpacketlibrary/redpacketlibrary.iml" filepath="$PROJECT_DIR$/redpacketlibrary/redpacketlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/twocultures.iml" filepath="$PROJECT_DIR$/twocultures.iml" />
     </modules>
   </component>

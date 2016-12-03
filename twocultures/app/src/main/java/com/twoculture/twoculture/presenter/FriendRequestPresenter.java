@@ -6,7 +6,7 @@ import com.twoculture.twoculture.interfaces.MessageService;
 import com.twoculture.twoculture.models.BaseResponse;
 import com.twoculture.twoculture.models.FriendRequest;
 import com.twoculture.twoculture.network.RxClient;
-import com.twoculture.twoculture.tools.Constants;
+import com.twoculture.twoculture.tools.AppConstants;
 import com.twoculture.twoculture.views.IFriendRequestView;
 
 import java.util.List;
@@ -47,7 +47,7 @@ public class FriendRequestPresenter implements IFriendRequestPresenter {
     public void getFriendRequestList() {
         mFriendRequestView.onLoadingShow();
 
-        RxClient.getInstance().getService(MessageService.class).getMessageList(Constants.TOKEN)
+        RxClient.getInstance().getService(MessageService.class).getMessageList(AppConstants.TOKEN)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<FriendRequest>>() {
@@ -73,7 +73,7 @@ public class FriendRequestPresenter implements IFriendRequestPresenter {
 
     @Override
     public int processFriendRequest(int messageId, int processCode) {
-        RxClient.getInstance().getService(MessageService.class).processFriendRequest(Constants.TOKEN, messageId, processCode)
+        RxClient.getInstance().getService(MessageService.class).processFriendRequest(AppConstants.TOKEN, messageId, processCode)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BaseResponse>() {

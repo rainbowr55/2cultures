@@ -10,7 +10,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
@@ -18,38 +17,44 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 import com.twoculture.twoculture.R;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import butterknife.BindView;
 
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private SectionsPagerAdapter mSectionsPagerAdapter;
-
-
-    private ViewPager mViewPager;
-    private DrawerLayout drawer_layout;
+    @BindView(R.id.container)
+    ViewPager mViewPager;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
     private NavigationView nav_view;
+    @BindView(R.id.toolbar)
+    Toolbar mToolBar;
+    @BindView(R.id.bottomBar)
+    BottomBar mBottomBar;
+    private SectionsPagerAdapter mSectionsPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         initView();
+    }
+
+    @Override
+    protected int getLayoutRes() {
+        return R.layout.activity_main;
     }
 
     private void initView() {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        drawer_layout = (DrawerLayout) this.findViewById(R.id.drawer_layout);
+        setSupportActionBar(mToolBar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer_layout.addDrawerListener(toggle);
+                this, mDrawerLayout, mToolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+
+        mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
                 switch (tabId) {
@@ -89,14 +94,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
-        drawer_layout.closeDrawer(GravityCompat.START);
+        mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
     @Override
     public void onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START);
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }

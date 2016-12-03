@@ -10,30 +10,28 @@ import com.twoculture.base.widget.ToastUtil;
 
 import butterknife.ButterKnife;
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     protected Dialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
-    public void setContentView(@LayoutRes int layoutResID) {
-        super.setContentView(layoutResID);
+        setContentView(getLayoutRes());
         ButterKnife.bind(this);
 
     }
 
-    protected void dismissLoadding(){
-        if(loadingDialog!=null){
+    @LayoutRes
+    protected abstract int getLayoutRes();
+
+    protected void dismissLoadding() {
+        if (loadingDialog != null) {
             loadingDialog.dismiss();
         }
     }
 
-    protected void showToast(String msg){
+    protected void showToast(String msg) {
         if (!TextUtils.isEmpty(msg)) {
             ToastUtil.showMiddleToast(this, msg);
         }

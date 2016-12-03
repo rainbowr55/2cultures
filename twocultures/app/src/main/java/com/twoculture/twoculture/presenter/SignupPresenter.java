@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.twoculture.twoculture.models.SignupResult;
 import com.twoculture.twoculture.network.RxClient;
-import com.twoculture.twoculture.tools.Constants;
+import com.twoculture.twoculture.tools.AppConstants;
 import com.twoculture.twoculture.tools.StringUtils;
 import com.twoculture.twoculture.ui.LoginActivity;
 import com.twoculture.twoculture.ui.SignupActivity;
@@ -57,7 +57,7 @@ public class SignupPresenter implements ISignupPresenter {
                     public void onNext(SignupResult result) {
                         Log.d(LoginActivity.class.getName(), result.msg + result.status + result.token);
                         mSignupView.setMessage(result.msg);
-                        Constants.TOKEN = result.token;
+                        AppConstants.TOKEN = result.token;
                         mSignupView.onSignupSuccess();
                     }
                 });

@@ -1,8 +1,10 @@
 package com.twoculture.twoculture.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,21 +16,26 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.twoculture.easemob.Constant;
+import com.twoculture.easemob.TwoCApplication;
 import com.twoculture.twoculture.R;
+import com.twoculture.twoculture.tools.AppConstants;
 
-public class LaunchActivity extends AppCompatActivity implements View.OnClickListener {
+import butterknife.BindView;
 
-    Button btn_login_original;
-    Button btn_login_email;
-    CallbackManager callbackManager;
+public class LaunchActivity extends BaseActivity implements View.OnClickListener {
+    @BindView(R.id.btn_login_original)
+    Button mButtonLoginEmail;
+    @BindView(R.id.btn_sign_up)
+    Button mButtonSignUp;
+
+    private CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
-        setContentView(R.layout.activity_launch);
-        initView();
         initListenter();
         callbackManager = CallbackManager.Factory.create();
         LoginButton loginButton = (LoginButton) this.findViewById(R.id.btn_login_facebook);
@@ -52,16 +59,17 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
                 Log.d("facebook","onError");
             }
         });
+        checkToken();
     }
 
-    private void initView() {
-        btn_login_original = (Button) this.findViewById(R.id.btn_login_original);
-        btn_login_email = (Button) this.findViewById(R.id.btn_login_email);
+    @Override
+    protected int getLayoutRes() {
+        return R.layout.activity_launch;
     }
 
     private void initListenter() {
-        btn_login_original.setOnClickListener(this);
-        btn_login_email.setOnClickListener(this);
+        mButtonLoginEmail.setOnClickListener(this);
+        mButtonSignUp.setOnClickListener(this);
         findViewById(R.id.btn_test).setOnClickListener(this);
     }
 
@@ -87,5 +95,17 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void checkToken(){
+        SharedPreferences sharedPreferences = TwoCApplication.applicationContext.getSharedPreferences(Constant.TOKEN_FILE_NAME, Context.MODE_PRIVATE);
+        String token = sharedPreferences.getString(Constant.TOKEN_FIELD_NAME,"");
+        if(!TextUtils.isEmpty(token)){
+            AppConstants.TOKEN = token;
+            Intent intent = new Intent(this,MainActivity.class);
+            startActivity(intent);
+            this.finish();
+        }
+
     }
 }

@@ -29,11 +29,15 @@ public class FriendRequestActivity extends BaseActivity implements IFriendReques
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friend_request);
-        loadData();
+        initData();
     }
 
-    private void loadData() {
+    @Override
+    protected int getLayoutRes() {
+        return R.layout.activity_friend_request;
+    }
+
+    private void initData() {
         mFriendRequestPresenter = new FriendRequestPresenter(this);
         // 设置Layout管理器
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
