@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -27,20 +28,34 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initView();
-        initData();
+
     }
 
     private void initView() {
         AlphaAnimation animation = new AlphaAnimation(0.3f, 1.0f);
-        animation.setDuration(1500);
+        animation.setDuration(3000);
         activitySplash.startAnimation(animation);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                initData();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
     }
 
     private void initData() {
-        try {
-            Thread.sleep(sleepTime);
-        } catch (InterruptedException e) {
-        }
+
         checkToken();
     }
 
