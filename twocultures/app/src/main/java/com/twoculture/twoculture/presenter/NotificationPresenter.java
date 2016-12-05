@@ -5,7 +5,7 @@ import android.util.Log;
 import com.twoculture.twoculture.interfaces.NotificationService;
 import com.twoculture.twoculture.models.SystemMessage;
 import com.twoculture.twoculture.network.RxClient;
-import com.twoculture.twoculture.tools.Constants;
+import com.twoculture.twoculture.tools.AppConstants;
 import com.twoculture.twoculture.views.INotificationView;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public class NotificationPresenter implements INotificationPresenter {
     @Override
     public void getNotificationList() {
         mNotificationView.onLoadingShow();
-        RxClient.getInstance().getService(NotificationService.class).getNotificationList(Constants.TOKEN)
+        RxClient.getInstance().getService(NotificationService.class).getNotificationList(AppConstants.TOKEN)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<SystemMessage>>() {

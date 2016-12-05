@@ -15,29 +15,30 @@ import butterknife.BindView;
 
 public class TopicDetailActivity extends BaseActivity {
     public static final String TOPIC_ITEM = "topicitem";
+
     @BindView(R.id.tv_details_user_name)
-    private TextView mTextUserName;
+    TextView mTextUserName;
 
     @BindView(R.id.tv_details_create_at)
-    private TextView mTextCreateDate;
+    TextView mTextCreateDate;
 
     @BindView(R.id.iv_details_user_gravatar)
-    private ImageView mImageGravatar;
+    ImageView mImageGravatar;
 
     @BindView(R.id.tv_details_title)
-    private TextView mTextTitle;
+    TextView mTextTitle;
 
 
     @BindView(R.id.tv_details_translate_number)
-    private TextView mTextNumber;
+    TextView mTextNumber;
 
     @BindView(R.id.tv_details_content)
-    private TextView mTextContent;
+    TextView mTextContent;
 
     @BindView(R.id.vp_pictures)
-    private ViewPager mViewPagerPictures;
+    ViewPager mViewPagerPictures;
 
-    private TopicItem mTopicItem;
+    TopicItem mTopicItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

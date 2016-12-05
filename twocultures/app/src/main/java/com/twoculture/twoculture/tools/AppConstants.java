@@ -7,4 +7,5 @@ package com.twoculture.twoculture.tools;
 public class AppConstants {
 
     public static String TOKEN = "";
+    public static int UID = -1;
 }

@@ -14,13 +14,13 @@ public class EventDetailActivity extends BaseActivity {
     @BindView(R.id.tv_title)
     TextView mTextTitle;
     @BindView(R.id.tv_activity_time)
-    private TextView mTextTime;
+    TextView mTextTime;
     @BindView(R.id.tv_registration_deadline)
-    private TextView mTextDeadline;
-    @BindView(R.id.tv_joined_number)
-    private TextView mTextJoinedNumber;
+    TextView mTextDeadline;
+    @BindView(R.id.tv_even_detail_joined_number)
+    TextView mTextJoinedNumber;
     @BindView(R.id.tv_desc)
-    private TextView mTextDesc;
+    TextView mTextDesc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

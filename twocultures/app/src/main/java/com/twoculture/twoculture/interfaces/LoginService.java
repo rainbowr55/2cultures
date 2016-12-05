@@ -1,6 +1,7 @@
 package com.twoculture.twoculture.interfaces;
 
 import com.twoculture.twoculture.models.LoginResult;
+import com.twoculture.twoculture.models.UserProfile;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -17,4 +18,7 @@ public interface LoginService {
             @Query("locale") String locale,
             @Query("device_token") String token
     );
+
+    @GET("mobile/my/my_profile")
+    Observable<UserProfile> getUserProfile(@Query("token") String token);
 }

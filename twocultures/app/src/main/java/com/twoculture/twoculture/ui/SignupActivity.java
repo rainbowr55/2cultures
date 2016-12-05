@@ -2,7 +2,6 @@ package com.twoculture.twoculture.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,19 +20,19 @@ import rx.Subscription;
 public class SignupActivity extends BaseActivity implements ISignupView {
 
     @BindView(R.id.et_email)
-    private EditText mEditEmail;
+    EditText mEditEmail;
 
     @BindView(R.id.et_password)
-    private EditText mEditPassword;
+    EditText mEditPassword;
 
     @BindView(R.id.sp_locale)
-    private Spinner mSpinnerLocale;
+    Spinner mSpinnerLocale;
 
     @BindView(R.id.btn_signup)
-    private Button mButtonSignup;
+    Button mButtonSignup;
 
     @BindView(R.id.ll_home)
-    private LinearLayout mLinearLayoutHome;
+    LinearLayout mLinearLayoutHome;
 
     private Subscription mSubscription;
 

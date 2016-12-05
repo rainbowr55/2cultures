@@ -24,7 +24,7 @@ import com.twoculture.twoculture.tools.AppConstants;
 import butterknife.BindView;
 
 public class LaunchActivity extends BaseActivity implements View.OnClickListener {
-    @BindView(R.id.btn_login_original)
+    @BindView(R.id.btn_login_email)
     Button mButtonLoginEmail;
     @BindView(R.id.btn_sign_up)
     Button mButtonSignUp;
@@ -76,11 +76,11 @@ public class LaunchActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_login_original:
+            case R.id.btn_login_email:
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.btn_login_email:
+            case R.id.btn_sign_up:
                 Intent emailIntent = new Intent(this, SignupActivity.class);
                 startActivity(emailIntent);
                 break;
@@ -98,6 +98,8 @@ public class LaunchActivity extends BaseActivity implements View.OnClickListener
     }
 
     public void checkToken(){
+        // Restore preferences
+
         SharedPreferences sharedPreferences = TwoCApplication.applicationContext.getSharedPreferences(Constant.TOKEN_FILE_NAME, Context.MODE_PRIVATE);
         String token = sharedPreferences.getString(Constant.TOKEN_FIELD_NAME,"");
         if(!TextUtils.isEmpty(token)){

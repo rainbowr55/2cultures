@@ -28,8 +28,12 @@ public class NotificationActivity extends BaseActivity implements INotificationV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notification);
         loadData();
+    }
+
+    @Override
+    protected int getLayoutRes() {
+        return R.layout.activity_notification;
     }
 
     private void loadData() {

@@ -33,11 +33,11 @@ import rx.Subscription;
 public class LoginActivity extends AppCompatActivity implements ILoginView {
 
     @BindView(R.id.email)
-    private AutoCompleteTextView mEmailView;
-    @BindView(R.id.password)
-    private EditText mPasswordView;
+    AutoCompleteTextView mEmailView;
+    @BindView(R.id.et_password)
+    EditText mPasswordView;
     @BindView(R.id.pb_login_progress)
-    private View mProgressView;
+    View mProgressView;
 
 
     private Subscription subscription;
