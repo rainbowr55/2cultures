@@ -26,6 +26,8 @@ import butterknife.BindView;
 public class LaunchActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.btn_login_email)
     Button mButtonLoginEmail;
+
+
     @BindView(R.id.btn_sign_up)
     Button mButtonSignUp;
 
@@ -33,8 +35,8 @@ public class LaunchActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
+        super.onCreate(savedInstanceState);
         AppEventsLogger.activateApp(this);
         initListenter();
         callbackManager = CallbackManager.Factory.create();

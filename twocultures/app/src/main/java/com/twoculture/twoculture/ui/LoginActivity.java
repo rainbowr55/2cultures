@@ -30,12 +30,14 @@ import rx.Subscription;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements ILoginView {
+public class LoginActivity extends BaseActivity implements ILoginView {
 
     @BindView(R.id.email)
     AutoCompleteTextView mEmailView;
+
     @BindView(R.id.et_password)
     EditText mPasswordView;
+
     @BindView(R.id.pb_login_progress)
     View mProgressView;
 
@@ -46,10 +48,14 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
         // Set up the login form.
         mLoginPresenter = new LoginPresenter(this);
         initView();
+    }
+
+    @Override
+    protected int getLayoutRes() {
+        return R.layout.activity_login;
     }
 
     private void initView() {
