@@ -41,6 +41,7 @@ public class UserProfilePresenter implements IUserProfilePresenter {
                         e.printStackTrace();
                         Log.e("test", e.getMessage());
                         userProfileView.setMessage(e.getMessage());
+                        userProfileView.onLoadFailed();
                     }
 
                     @Override

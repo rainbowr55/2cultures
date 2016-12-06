@@ -3,10 +3,9 @@
     android:id="@+id/rl_top_title"
     android:layout_width="match_parent"
     android:layout_height="50dp"
+    android:background="@color/white"
     android:orientation="vertical"
-    android:visibility="gone"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp">
+    android:visibility="gone">
 
     <TextView
         android:id="@+id/tv_top_middle"
@@ -25,8 +24,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerInParent="true"
+        android:layout_marginRight="20dp"
         android:maxLines="1"
         android:text="save"
         android:textColor="@color/text_orange"
         android:textSize="16sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/divider_color" />
 </RelativeLayout>

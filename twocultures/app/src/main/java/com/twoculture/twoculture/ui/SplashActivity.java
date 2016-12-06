@@ -59,9 +59,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     public void checkToken() {
-//        SharedPreferences sharedPreferences = TwoCApplication.applicationContext.getSharedPreferences(Constant.TOKEN_FILE_NAME, Context.MODE_PRIVATE);
-//        String token = sharedPreferences.getString(Constant.TOKEN_FIELD_NAME, "");
-//        boolean isInit = sharedPreferences.getBoolean(Constant.USER_INIT_STATE, false);
+
         SecureSharedPreferences settings = new SecureSharedPreferences(this);
         boolean isInit = settings.getBoolean(AppConstants.USER_INIT_STATE, false);
         String token = settings.getString(AppConstants.TOKEN_FIELD_NAME, "");

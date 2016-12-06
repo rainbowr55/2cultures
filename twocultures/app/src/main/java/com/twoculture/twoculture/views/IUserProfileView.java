@@ -8,4 +8,6 @@ import com.twoculture.twoculture.models.UserProfile;
 
 public interface IUserProfileView extends IShowMessage {
     void onLoadSuccess(UserProfile userProfile);
+
+    void onLoadFailed();
 }

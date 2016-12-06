@@ -177,6 +177,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
     }
 
+    @Override
+    public void onLoadFailed() {
+        //token过期需要重新登录
+        Intent intent = new Intent(MainActivity.this, LaunchActivity.class);
+        startActivity(intent);
+        this.finish();
+    }
+
     private boolean progressShow;
 
     /**

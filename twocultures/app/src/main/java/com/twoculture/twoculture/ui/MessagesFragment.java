@@ -7,7 +7,6 @@ import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +37,7 @@ public class MessagesFragment extends MessagesBaseFragment implements SwipeRefre
     @Override
     protected void initView() {
         super.initView();
-        View errorView = (LinearLayout) View.inflate(getActivity(), com.twoculture.easemob.R.layout.em_chat_neterror_item, null);
+        View errorView = View.inflate(getActivity(), com.twoculture.easemob.R.layout.em_chat_neterror_item, null);
         errorItemContainer.addView(errorView);
         errorText = (TextView) errorView.findViewById(com.twoculture.easemob.R.id.tv_connect_errormsg);
 

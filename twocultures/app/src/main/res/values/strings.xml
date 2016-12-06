@@ -53,4 +53,15 @@
     <!-- my profile start -->
     <string name="my_profile_title">My Profile</string>
     <string name="my_profile_right_title">Save</string>
+    <string name="profile_name">Name</string>
+    <string name="profile_gender">Gender</string>
+    <string name="profile_from">From</string>
+    <string name="profile_live_in">Living In</string>
+    <string name="profile_migrate">Migrate To</string>
+    <string name="profile_speak">I Speak</string>
+    <string name="profile_language">2nd Language</string>
+    <string name="profile_learning_language">I\'m Learning language</string>
+    <string name="profile_relationship_status">Relationship Status</string>
+    <string name="profile_fill_hint">is where you must fill</string>
+    <string name="profile_tip">If above basic profile is not filled completely, you may not receive some of notification and invitation, or, be found by other members. </string>
 </resources>
