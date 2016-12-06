@@ -9,7 +9,7 @@ import com.twoculture.twoculture.tools.RoundedImageView;
 
 import butterknife.BindView;
 
-public class MyProfileActivity extends BaseActivity implements View.OnClickListener{
+public class MyProfileActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.iv_add_head_image)
     RoundedImageView ivAddHeadImage;
     @BindView(R.id.rl_profile_name)
@@ -40,6 +40,15 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
 
     private void initView() {
         tvTopRight.setOnClickListener(this);
+        rlProfileName.setOnClickListener(this);
+        rlProfileGender.setOnClickListener(this);
+        rlProfileFrom.setOnClickListener(this);
+        rlProfileLivingIn.setOnClickListener(this);
+        rlProfileMigrateTo.setOnClickListener(this);
+        rlProfileSpeak.setOnClickListener(this);
+        rlProfileLanguage.setOnClickListener(this);
+        rlProfileLearningLanguage.setOnClickListener(this);
+        rlProfileRelationship.setOnClickListener(this);
     }
 
     @Override
@@ -59,9 +68,27 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.tv_top_right://save
 
+                break;
+            case R.id.rl_profile_name://name
+                break;
+            case R.id.rl_profile_gender:
+                break;
+            case R.id.rl_profile_from:
+                break;
+            case R.id.rl_profile_living_in:
+                break;
+            case R.id.rl_profile_migrate_to:
+                break;
+            case R.id.rl_profile_speak:
+                break;
+            case R.id.rl_profile_language:
+                break;
+            case R.id.rl_profile_learning_language:
+                break;
+            case R.id.rl_profile_relationship:
                 break;
             default:
                 break;
