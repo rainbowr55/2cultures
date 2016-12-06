@@ -14,7 +14,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -32,6 +31,7 @@ import com.twoculture.twoculture.R;
 import com.twoculture.twoculture.models.UserProfile;
 import com.twoculture.twoculture.presenter.UserProfilePresenter;
 import com.twoculture.twoculture.tools.AppConstants;
+import com.twoculture.twoculture.tools.CLog;
 import com.twoculture.twoculture.views.IUserProfileView;
 
 import butterknife.BindView;
@@ -119,7 +119,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
             @Override
             public void onCancel(DialogInterface dialog) {
-                Log.d(TAG, "EMClient.getInstance().onCancel");
+                CLog.d(TAG, "EMClient.getInstance().onCancel");
                 progressShow = false;
             }
         });
@@ -188,7 +188,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             return;
         }
         if (userProfile.id < 0) {
-            Log.d(TAG, "userProfile id error");
+            CLog.d(TAG, "userProfile id error");
             return;
         }
         // After logout，the DemoDB may still be accessed due to async callback, so the DemoDB will be re-opened again.
@@ -200,12 +200,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         final long start = System.currentTimeMillis();
         // call login method
-        Log.d(TAG, "EMClient.getInstance().login");
+        CLog.d(TAG, "EMClient.getInstance().login");
         EMClient.getInstance().login(userProfile.id + "", userProfile.id + "", new EMCallBack() {
 
             @Override
             public void onSuccess() {
-                Log.d(TAG, "login: onSuccess");
+                CLog.d(TAG, "login: onSuccess");
 
 
                 // ** manually load all local groups and conversation
@@ -216,7 +216,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 boolean updatenick = EMClient.getInstance().updateCurrentUserNick(
                         TwoCApplication.currentUserNick.trim());
                 if (!updatenick) {
-                    Log.e("LoginActivity", "update current user nick fail");
+                    CLog.e("LoginActivity", "update current user nick fail");
                 }
 
                 if (!MainActivity.this.isFinishing() && progressDialog.isShowing()) {
@@ -233,13 +233,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
             @Override
             public void onProgress(int progress, String status) {
-                Log.d(TAG, "login: onProgress");
+                CLog.d(TAG, "login: onProgress");
             }
 
             @Override
             public void onError(final int code, final String message) {
-                Log.d(TAG, "login: onError: " + code);
-                Log.d(TAG, "login failed reason:" + message);
+                CLog.d(TAG, "login: onError: " + code);
+                CLog.d(TAG, "login failed reason:" + message);
                 if (code == 204) {
                     registerEasemob(userProfile);
                 }
@@ -259,7 +259,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
 
     private void registerEasemob(UserProfile userProfile) {
-        Log.d(TAG, "register start");
+        CLog.d(TAG, "register start");
         new Thread(new Runnable() {
             public void run() {
                 try {
@@ -271,7 +271,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                                 progressDialog.dismiss();
                             // save current user
                             DemoHelper.getInstance().setCurrentUserName(userProfile.id + "");
-                            Log.d(TAG, "register sucess");
+                            CLog.d(TAG, "register sucess");
                             //Toast.makeText(getApplicationContext(), getResources().getString(R.string.Registered_successfully), Toast.LENGTH_SHORT).show();
 
                         }
@@ -282,7 +282,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                             if (MainActivity.this.isFinishing())
                                 progressDialog.dismiss();
                             int errorCode = e.getErrorCode();
-                            Log.d(TAG, "register failed reason:" + errorCode);
+                            CLog.d(TAG, "register failed reason:" + errorCode);
                         }
                     });
                 }
