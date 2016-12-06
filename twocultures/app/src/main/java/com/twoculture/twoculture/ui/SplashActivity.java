@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.twoculture.base.utils.SecureSharedPreferences;
-import com.twoculture.easemob.Constant;
 import com.twoculture.twoculture.R;
 import com.twoculture.twoculture.tools.AppConstants;
 
@@ -32,7 +31,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void initView() {
-        AlphaAnimation animation = new AlphaAnimation(0.3f, 1.0f);
+        AlphaAnimation animation = new AlphaAnimation(0.6f, 1.0f);
         animation.setDuration(3000);
         activitySplash.startAnimation(animation);
         animation.setAnimationListener(new Animation.AnimationListener() {
@@ -64,8 +63,8 @@ public class SplashActivity extends BaseActivity {
 //        String token = sharedPreferences.getString(Constant.TOKEN_FIELD_NAME, "");
 //        boolean isInit = sharedPreferences.getBoolean(Constant.USER_INIT_STATE, false);
         SecureSharedPreferences settings = new SecureSharedPreferences(this);
-        boolean isInit = settings.getBoolean(Constant.USER_INIT_STATE, false);
-        String token = settings.getString(Constant.TOKEN_FIELD_NAME, "");
+        boolean isInit = settings.getBoolean(AppConstants.USER_INIT_STATE, false);
+        String token = settings.getString(AppConstants.TOKEN_FIELD_NAME, "");
         if (!TextUtils.isEmpty(token)) {
             AppConstants.TOKEN = token;
             if (isInit) {

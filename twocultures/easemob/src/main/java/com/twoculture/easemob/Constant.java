@@ -27,10 +27,6 @@ public class Constant extends EaseConstant {
     public static final String ACTION_GROUP_CHANAGED = "action_group_changed";
     public static final String ACTION_CONTACT_CHANAGED = "action_contact_changed";
 
-    //for sharedpreference
-    public static final String TOKEN_FILE_NAME = "tokenname";
-    public static final String TOKEN_FIELD_NAME = "token";
-    public static final String USER_ID = "uerid";
-    public static final String USER_INIT_STATE = "user_init_state";
+
 
 }

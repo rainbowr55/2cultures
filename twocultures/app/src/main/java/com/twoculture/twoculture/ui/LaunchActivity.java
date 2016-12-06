@@ -16,7 +16,6 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.twoculture.easemob.Constant;
 import com.twoculture.easemob.TwoCApplication;
 import com.twoculture.twoculture.R;
 import com.twoculture.twoculture.tools.AppConstants;
@@ -102,8 +101,8 @@ public class LaunchActivity extends BaseActivity implements View.OnClickListener
     public void checkToken(){
         // Restore preferences
 
-        SharedPreferences sharedPreferences = TwoCApplication.applicationContext.getSharedPreferences(Constant.TOKEN_FILE_NAME, Context.MODE_PRIVATE);
-        String token = sharedPreferences.getString(Constant.TOKEN_FIELD_NAME,"");
+        SharedPreferences sharedPreferences = TwoCApplication.applicationContext.getSharedPreferences(AppConstants.TOKEN_FILE_NAME, Context.MODE_PRIVATE);
+        String token = sharedPreferences.getString(AppConstants.TOKEN_FIELD_NAME,"");
         if(!TextUtils.isEmpty(token)){
             AppConstants.TOKEN = token;
             Intent intent = new Intent(this,MainActivity.class);

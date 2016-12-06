@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.twoculture.easemob.Constant;
 import com.twoculture.easemob.TwoCApplication;
 import com.twoculture.twoculture.models.LoginResult;
 import com.twoculture.twoculture.network.RxClient;
@@ -54,9 +53,9 @@ public class LoginPresenter implements ILoginPresenter {
                         AppConstants.TOKEN = result.token;
                         mLoginView.setMessage(result.msg);
                         mLoginView.onLoginSuccess();
-                        SharedPreferences sharedPreferences = TwoCApplication.applicationContext.getSharedPreferences(Constant.TOKEN_FILE_NAME, Context.MODE_PRIVATE);
+                        SharedPreferences sharedPreferences = TwoCApplication.applicationContext.getSharedPreferences(AppConstants.TOKEN_FILE_NAME, Context.MODE_PRIVATE);
                         SharedPreferences.Editor  editor = sharedPreferences.edit();
-                        editor.putString(Constant.TOKEN_FIELD_NAME, result.token);
+                        editor.putString(AppConstants.TOKEN_FIELD_NAME, result.token);
                         editor.commit();
                     }
                 });

@@ -12,7 +12,7 @@ public class UserProfile {
 
     public int gender;
 
-    public int id;
+    public int id = -1;
 
     public boolean is_vip;
 

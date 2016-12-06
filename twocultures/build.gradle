@@ -21,6 +21,12 @@ allprojects {
     repositories {
         mavenCentral()
     }
+    ext {
+        compileSdkVersion = getProperty("COMPILE_SDK_VERSION") as Integer
+        buildToolsVersion = getProperty("BUILD_TOOLS_VERSION")
+        targetSdkVersion = getProperty("TARGET_SDK_VERSION") as Integer
+        minSdkVersion = getProperty("MIN_SDK_VERSION") as Integer
+    }
 }
 
 task clean(type: Delete) {

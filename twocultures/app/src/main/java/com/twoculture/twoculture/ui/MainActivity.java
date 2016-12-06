@@ -1,5 +1,8 @@
 package com.twoculture.twoculture.ui;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
@@ -11,15 +14,31 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.utils.EaseCommonUtils;
+import com.hyphenate.exceptions.HyphenateException;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
+import com.twoculture.base.utils.SecureSharedPreferences;
+import com.twoculture.easemob.DemoHelper;
+import com.twoculture.easemob.TwoCApplication;
+import com.twoculture.easemob.db.DemoDBManager;
 import com.twoculture.twoculture.R;
+import com.twoculture.twoculture.models.UserProfile;
+import com.twoculture.twoculture.presenter.UserProfilePresenter;
+import com.twoculture.twoculture.tools.AppConstants;
+import com.twoculture.twoculture.views.IUserProfileView;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, IUserProfileView {
+    private static final String TAG = "MainActivity";
+    private UserProfilePresenter userProfilePresenter;
 
     @BindView(R.id.container)
     ViewPager mViewPager;
@@ -31,11 +50,26 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @BindView(R.id.bottomBar)
     BottomBar mBottomBar;
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initData();
         initView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (progressDialog != null && !MainActivity.this.isFinishing() && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+    }
+
+    private void initData() {
+        userProfilePresenter = new UserProfilePresenter(this);
+        userProfilePresenter.getUserProfile();
     }
 
     @Override
@@ -78,6 +112,17 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             }
         });
         setTitle("2Cultures");
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                Log.d(TAG, "EMClient.getInstance().onCancel");
+                progressShow = false;
+            }
+        });
     }
 
     @Override
@@ -105,6 +150,154 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public void onLoadSuccess(UserProfile userProfile) {
+        progressDialog.setMessage(getString(com.twoculture.easemob.R.string.Is_landing));
+        progressDialog.show();
+        SecureSharedPreferences secureSharedPreferences = new SecureSharedPreferences(this);
+        if (userProfile != null) {
+            //保存profile
+            secureSharedPreferences.edit().putBoolean(AppConstants.USER_INIT_STATE, userProfile.is_init_profile);
+            //处理环信
+            if (DemoHelper.getInstance().isLoggedIn()) {
+                EMClient.getInstance().groupManager().loadAllGroups();
+                EMClient.getInstance().chatManager().loadAllConversations();
+                progressDialog.dismiss();
+            } else {
+                loginEasemob(userProfile);
+            }
+            if (!userProfile.is_init_profile) {
+                Intent intent = new Intent(this, MyProfileActivity.class);
+                startActivity(intent);
+            }
+        } else {
+            progressDialog.dismiss();
+        }
+    }
+
+    private boolean progressShow;
+
+    /**
+     * login
+     */
+    public void loginEasemob(UserProfile userProfile) {
+        if (!EaseCommonUtils.isNetWorkConnected(this)) {
+            Toast.makeText(this, com.twoculture.easemob.R.string.network_isnot_available, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (userProfile.id < 0) {
+            Log.d(TAG, "userProfile id error");
+            return;
+        }
+        // After logout，the DemoDB may still be accessed due to async callback, so the DemoDB will be re-opened again.
+        // close it before login to make sure DemoDB not overlap
+        DemoDBManager.getInstance().closeDB();
+
+        // reset current user name before login
+        DemoHelper.getInstance().setCurrentUserName(userProfile.id + "");
+
+        final long start = System.currentTimeMillis();
+        // call login method
+        Log.d(TAG, "EMClient.getInstance().login");
+        EMClient.getInstance().login(userProfile.id + "", userProfile.id + "", new EMCallBack() {
+
+            @Override
+            public void onSuccess() {
+                Log.d(TAG, "login: onSuccess");
+
+
+                // ** manually load all local groups and conversation
+                EMClient.getInstance().groupManager().loadAllGroups();
+                EMClient.getInstance().chatManager().loadAllConversations();
+
+                // update current user's display name for APNs
+                boolean updatenick = EMClient.getInstance().updateCurrentUserNick(
+                        TwoCApplication.currentUserNick.trim());
+                if (!updatenick) {
+                    Log.e("LoginActivity", "update current user nick fail");
+                }
+
+                if (!MainActivity.this.isFinishing() && progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                }
+                // get user's info (this should be get from App's server or 3rd party service)
+                DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
+
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent);
+
+                finish();
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+                Log.d(TAG, "login: onProgress");
+            }
+
+            @Override
+            public void onError(final int code, final String message) {
+                Log.d(TAG, "login: onError: " + code);
+                Log.d(TAG, "login failed reason:" + message);
+                if (code == 204) {
+                    registerEasemob(userProfile);
+                }
+                if (!progressShow) {
+                    return;
+                }
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        progressDialog.dismiss();
+//                        Toast.makeText(getApplicationContext(), getString(com.twoculture.easemob.R.string.Login_failed) + message,
+//                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
+
+    private void registerEasemob(UserProfile userProfile) {
+        Log.d(TAG, "register start");
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    // call method in SDK
+                    EMClient.getInstance().createAccount(userProfile.id + "", userProfile.id + "");
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            if (MainActivity.this.isFinishing())
+                                progressDialog.dismiss();
+                            // save current user
+                            DemoHelper.getInstance().setCurrentUserName(userProfile.id + "");
+                            Log.d(TAG, "register sucess");
+                            //Toast.makeText(getApplicationContext(), getResources().getString(R.string.Registered_successfully), Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                } catch (final HyphenateException e) {
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            if (MainActivity.this.isFinishing())
+                                progressDialog.dismiss();
+                            int errorCode = e.getErrorCode();
+                            Log.d(TAG, "register failed reason:" + errorCode);
+                        }
+                    });
+                }
+            }
+        }).start();
+    }
+
+    @Override
+    public void onLoadingShow() {
+
+    }
+
+    @Override
+    public void setMessage(String msg) {
+
     }
 
     /**

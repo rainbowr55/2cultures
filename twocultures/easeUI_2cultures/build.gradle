@@ -1,24 +1,8 @@
 apply plugin: 'com.android.library'
-
-android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.0"
-
-    defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 23
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-        }
-    }
-}
+apply from: project.rootProject.uri('module.gradle')
 
 dependencies {
-    compile 'com.android.support:support-v4:25.0.1'
+    compile project(':basecomponent')
     compile files('libs/BaiduLBS_Android.jar')
     compile files('libs/HwPush_SDK_V2705_nomap.jar')
     compile files('libs/MiPush_SDK_Client_2_2_19.jar')
