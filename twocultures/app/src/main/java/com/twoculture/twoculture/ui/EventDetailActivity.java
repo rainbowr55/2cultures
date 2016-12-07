@@ -1,5 +1,6 @@
 package com.twoculture.twoculture.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -23,6 +24,8 @@ public class EventDetailActivity extends BaseActivity implements View.OnClickLis
     @BindView(R.id.tv_desc)
     TextView mTextDesc;
 
+
+    private int mEventId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +42,7 @@ public class EventDetailActivity extends BaseActivity implements View.OnClickLis
         String eventString = getIntent().getStringExtra(EVENT_DATA);
         Gson gson = new Gson();
         EventItem event = gson.fromJson(eventString, EventItem.class);
+        mEventId = event.event_id;
         mTextTitle.setText(event.title);
         mTextTime.setText("Event Time: " + event.activity_time);
         mTextDeadline.setText("Deadline: " + event.registration_deadline);
@@ -54,7 +58,9 @@ public class EventDetailActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_joined_number:
-                
+                Intent intent = new Intent(this,JoinedUserActivity.class);
+                intent.putExtra(JoinedUserActivity.EVENT_ID,mEventId);
+                startActivity(intent);
                 break;
         }
     }
