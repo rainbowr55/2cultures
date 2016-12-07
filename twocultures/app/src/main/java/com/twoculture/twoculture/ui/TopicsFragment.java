@@ -3,6 +3,7 @@ package com.twoculture.twoculture.ui;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.twoculture.twoculture.R;
 import com.twoculture.twoculture.adapter.TopicAdapter;
@@ -19,23 +21,33 @@ import com.twoculture.twoculture.views.ITopicsView;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import rx.Subscription;
 
 /**
  * Created by songxingchao on 27/09/2016.
  */
 
-public class TopicsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, ITopicsView {
+public class TopicsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, ITopicsView, View.OnClickListener {
 
 
     private static final int PAGESIZE = 10;
-    private RecyclerView rv_topics;
-    private SwipeRefreshLayout swipe_refresh_widget;
+    @BindView(R.id.rv_topics)
+    RecyclerView rv_topics;
+
+    @BindView(R.id.swipe_refresh_widget)
+    SwipeRefreshLayout swipe_refresh_widget;
+
+    @BindView(R.id.fab_add_event)
+    FloatingActionButton mFabAdd;
+
     private Subscription subscription;
     private TopicAdapter mTopicsAdapter;
     private boolean mLoading = false;
     private int mPageIndex = 0;
     private TopicsPresenter mTopicsPresenter;
+
 
     public TopicsFragment() {
     }
@@ -50,6 +62,7 @@ public class TopicsFragment extends Fragment implements SwipeRefreshLayout.OnRef
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_topics, container, false);
+        ButterKnife.bind(this,rootView);
         mTopicsPresenter = new TopicsPresenter(this);
         initView(rootView);
         mTopicsPresenter.getDataFromServer(mPageIndex, PAGESIZE);
@@ -64,8 +77,6 @@ public class TopicsFragment extends Fragment implements SwipeRefreshLayout.OnRef
     }
 
     private void initView(View rootView) {
-        rv_topics = (RecyclerView) rootView.findViewById(R.id.rv_topics);
-        swipe_refresh_widget = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_widget);
         mTopicsAdapter = new TopicAdapter(getActivity());
         rv_topics.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_topics.setAdapter(mTopicsAdapter);
@@ -73,6 +84,7 @@ public class TopicsFragment extends Fragment implements SwipeRefreshLayout.OnRef
                 Color.GREEN,
                 Color.YELLOW,
                 Color.RED);
+        mFabAdd.setOnClickListener(this);
         swipe_refresh_widget.setOnRefreshListener(this);
         rv_topics.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -112,5 +124,14 @@ public class TopicsFragment extends Fragment implements SwipeRefreshLayout.OnRef
             mTopicsAdapter.resetData();
         }
         mTopicsAdapter.addData(topics);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.fab_add_event:
+                Toast.makeText(getActivity(),"test",Toast.LENGTH_LONG).show();
+                break;
+        }
     }
 }
