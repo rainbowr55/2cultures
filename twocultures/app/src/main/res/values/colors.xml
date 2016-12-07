@@ -10,4 +10,5 @@
     <color name="white">#ffffffff</color>
     <color name="text_orange">#f7a93c</color>
     <color name="deep_gray">#eaeaea</color>
+    <color name="darkerGray">#d5d5d5</color>
 </resources>

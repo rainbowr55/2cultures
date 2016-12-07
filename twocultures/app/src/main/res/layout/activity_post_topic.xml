@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_post_topic"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.twoculture.twoculture.ui.PostTopicActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/btn_add_picture"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_camera" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_pictures"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_toRightOf="@+id/btn_add_picture"
+            android:orientation="horizontal"
+            android:visibility="gone"></android.support.v7.widget.RecyclerView>
+
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray"/>
+    <EditText
+        android:id="@+id/et_text_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="3"
+        android:hint="@string/input_header"
+        android:background="@drawable/light_gray_border"
+        android:textSize="@dimen/text_medium"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray"/>
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="top"
+        android:hint="@string/input_content"
+        android:background="@drawable/light_gray_border"/>
+</LinearLayout>

@@ -38,8 +38,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:overrideLibrary="com.twoculture.easemob">
-
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -90,7 +88,8 @@
         <activity
             android:name=".ui.MyProfileActivity"
             android:theme="@style/TwoCulture.Theme.GrayNoTitleBar" />
-        <activity android:name=".ui.JoinedUserActivity"></activity>
+        <activity android:name=".ui.JoinedUserActivity" />
+        <activity android:name=".ui.PostTopicActivity"></activity>
     </application>
 
 </manifest>

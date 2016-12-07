@@ -1,5 +1,6 @@
 package com.twoculture.twoculture.ui;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -130,7 +131,8 @@ public class TopicsFragment extends Fragment implements SwipeRefreshLayout.OnRef
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.fab_add_event:
-                Toast.makeText(getActivity(),"test",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(),PostTopicActivity.class);
+                getActivity().startActivity(intent);
                 break;
         }
     }
