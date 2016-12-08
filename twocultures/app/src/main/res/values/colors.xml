@@ -12,4 +12,9 @@
     <color name="deep_gray">#eaeaea</color>
     <color name="darkerGray">#d5d5d5</color>
     <color name="transparent">#00000000</color>
+    <color name="light_gray_22">#FF222222</color>
+    <color name="light_gray_99">#FF999999</color>
+    <color name="light_gray_DD">#FFDDDDDD</color>
+    <color name="light_icon_blue">#FF535a6b</color>
+    <color name="light_icon_blue_light">#FF32384b</color>
 </resources>

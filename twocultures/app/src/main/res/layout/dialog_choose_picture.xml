@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_change_gravtar_photos"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/input_height"
+        android:background="@drawable/white_gray_selector"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="@dimen/action_bar_padding"
+        android:text="Choose picture from gallery"
+        android:textColor="@color/light_gray_22"
+        android:textSize="@dimen/text_small" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@color/light_gray_DD" />
+
+    <TextView
+        android:id="@+id/tv_change_gravtar_camera"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/input_height"
+        android:background="@drawable/white_gray_selector"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="@dimen/action_bar_padding"
+        android:text="Take picture with camera"
+        android:textColor="@color/light_gray_22"
+        android:textSize="@dimen/text_small" />
+
+</LinearLayout>

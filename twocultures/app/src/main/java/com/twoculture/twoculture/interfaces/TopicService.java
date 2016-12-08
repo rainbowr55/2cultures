@@ -3,8 +3,14 @@ package com.twoculture.twoculture.interfaces;
 import com.twoculture.twoculture.models.AllTopics;
 import com.twoculture.twoculture.models.BaseResponse;
 import com.twoculture.twoculture.models.EventUsersListResponse;
+import com.twoculture.twoculture.models.UploadImageResponse;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -38,5 +44,9 @@ public interface TopicService {
             @Query("page") int pageIndex,
             @Query("page_num") int pageNumber
     );
+
+    @Multipart
+    @POST("mobile/we/topics/create_topic_photo")
+    Observable<UploadImageResponse> uploadAttachment(@Query("token") String token, @Part MultipartBody.Part filePart);
 
 }

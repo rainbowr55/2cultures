@@ -37,4 +37,5 @@
         Migrants and locals,\n\n
         Relationship,friendship,\n\n
         Languages,travel,food,hobbies...</string>
+    <string name="warning_after_garllery_permission_denied">you have to agree the permission to access photo gallery</string>
 </resources>
