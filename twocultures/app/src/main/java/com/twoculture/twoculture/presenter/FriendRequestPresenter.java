@@ -3,7 +3,7 @@ package com.twoculture.twoculture.presenter;
 import android.util.Log;
 
 import com.twoculture.twoculture.interfaces.MessageService;
-import com.twoculture.twoculture.models.BaseResponse;
+import com.twoculture.twoculture.models.response.BaseResponse;
 import com.twoculture.twoculture.models.FriendRequest;
 import com.twoculture.twoculture.network.RxClient;
 import com.twoculture.twoculture.tools.AppConstants;

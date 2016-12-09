@@ -7,7 +7,7 @@ import android.util.Log;
 
 import com.twoculture.twoculture.R;
 import com.twoculture.twoculture.adapter.FriendRequestAdapter;
-import com.twoculture.twoculture.models.BaseResponse;
+import com.twoculture.twoculture.models.response.BaseResponse;
 import com.twoculture.twoculture.models.FriendRequest;
 import com.twoculture.twoculture.presenter.FriendRequestPresenter;
 import com.twoculture.twoculture.presenter.IFriendRequestPresenter;

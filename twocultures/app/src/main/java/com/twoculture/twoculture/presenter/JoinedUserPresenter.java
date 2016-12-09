@@ -2,13 +2,12 @@ package com.twoculture.twoculture.presenter;
 
 import android.util.Log;
 
-import com.twoculture.twoculture.models.EventUsersListResponse;
+import com.twoculture.twoculture.models.response.EventUsersListResponse;
 import com.twoculture.twoculture.network.RxClient;
 import com.twoculture.twoculture.tools.AppConstants;
 import com.twoculture.twoculture.views.IJoinedUserView;
 
 import rx.Observer;
-import rx.Scheduler;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;

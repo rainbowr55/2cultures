@@ -1,4 +1,4 @@
-package com.twoculture.twoculture.models;
+package com.twoculture.twoculture.models.response;
 
 /**
  * Created by rainbow on 16/11/27.

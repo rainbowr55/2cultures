@@ -1,6 +1,6 @@
 package com.twoculture.twoculture.interfaces;
 
-import com.twoculture.twoculture.models.BaseResponse;
+import com.twoculture.twoculture.models.response.BaseResponse;
 import com.twoculture.twoculture.models.FriendRequest;
 
 import java.util.List;

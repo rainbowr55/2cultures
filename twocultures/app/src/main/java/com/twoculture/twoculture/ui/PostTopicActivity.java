@@ -16,6 +16,8 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -23,10 +25,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
 import com.twoculture.twoculture.R;
-import com.twoculture.twoculture.models.UploadImageResponse;
+import com.twoculture.twoculture.models.response.UploadImageResponse;
 import com.twoculture.twoculture.network.RxClient;
+import com.twoculture.twoculture.presenter.IPostTopicPresenter;
+import com.twoculture.twoculture.presenter.PostTopicPresenter;
 import com.twoculture.twoculture.tools.AppConstants;
 import com.twoculture.twoculture.tools.FileUtils;
 
@@ -37,9 +40,7 @@ import butterknife.BindView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import rx.Observable;
 import rx.Observer;
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -66,10 +67,13 @@ public class PostTopicActivity extends BaseActivity implements View.OnClickListe
     private AlertDialog mDialog;
     private String mImagePath;
 
+    private IPostTopicPresenter mPostTopicPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initView();
+        mPostTopicPresenter = new PostTopicPresenter();
     }
 
     @Override
@@ -87,9 +91,38 @@ public class PostTopicActivity extends BaseActivity implements View.OnClickListe
             case R.id.btn_add_picture:
                 choosePictrueSource();
                 break;
+
         }
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_post_topic, menu);
+        return true;
+    }
 
+    @Override
+    protected void onDestroy() {
+        mPostTopicPresenter.stopPresenter();
+        super.onDestroy();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_publish:
+                if(TextUtils.isEmpty(mEditHeader.getText().toString().trim())){
+                    Toast.makeText(this,"Header can't be empty",Toast.LENGTH_LONG).show();
+                    return true;
+                }
+                mPostTopicPresenter.postTopic(mEditHeader.getText().toString().trim(),mEditContent.getText().toString().trim(),"");
+                break;
+
+            default:
+                break;
+        }
+        return true;
+    }
 
     public void choosePictrueSource() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

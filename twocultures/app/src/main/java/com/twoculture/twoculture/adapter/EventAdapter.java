@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 import com.twoculture.twoculture.R;
-import com.twoculture.twoculture.models.BaseResponse;
+import com.twoculture.twoculture.models.response.BaseResponse;
 import com.twoculture.twoculture.models.EventItem;
 import com.twoculture.twoculture.network.RxClient;
 import com.twoculture.twoculture.ui.EventDetailActivity;
@@ -24,7 +24,6 @@ import java.util.List;
 import rx.Observer;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**

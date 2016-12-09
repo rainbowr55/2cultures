@@ -12,8 +12,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.twoculture.twoculture.R;
-import com.twoculture.twoculture.models.EventUsersListResponse;
-import com.twoculture.twoculture.models.TopicItem;
+import com.twoculture.twoculture.models.response.EventUsersListResponse;
 import com.twoculture.twoculture.ui.MyProfileActivity;
 
 import java.util.ArrayList;
