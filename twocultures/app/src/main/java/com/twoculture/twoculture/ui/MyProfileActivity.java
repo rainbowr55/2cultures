@@ -5,11 +5,15 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.twoculture.twoculture.R;
+import com.twoculture.twoculture.models.Country;
 import com.twoculture.twoculture.tools.RoundedImageView;
+import com.twoculture.twoculture.ui.fragment.CityDialogFragment;
+import com.twoculture.twoculture.ui.fragment.CountryDialogFragment;
+import com.twoculture.twoculture.ui.interfaces.CountryClickListener;
 
 import butterknife.BindView;
 
-public class MyProfileActivity extends BaseActivity implements View.OnClickListener {
+public class MyProfileActivity extends BaseActivity implements View.OnClickListener, CountryClickListener {
     @BindView(R.id.iv_add_head_image)
     RoundedImageView ivAddHeadImage;
     @BindView(R.id.rl_profile_name)
@@ -31,11 +35,18 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
     @BindView(R.id.rl_profile_relationship)
     RelativeLayout rlProfileRelationship;
 
+    CountryDialogFragment countryFragment;
+    CityDialogFragment cityDialogFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         initView();
+        initData();
+    }
+
+    private void initData() {
+
     }
 
     private void initView() {
@@ -49,6 +60,8 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
         rlProfileLanguage.setOnClickListener(this);
         rlProfileLearningLanguage.setOnClickListener(this);
         rlProfileRelationship.setOnClickListener(this);
+        countryFragment = new CountryDialogFragment();
+        cityDialogFragment = new CityDialogFragment();
     }
 
     @Override
@@ -79,6 +92,10 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
             case R.id.rl_profile_from:
                 break;
             case R.id.rl_profile_living_in:
+                if (countryFragment != null) {
+                    countryFragment.show(getSupportFragmentManager(), "country");
+                    countryFragment.setCountryClickListener(this);
+                }
                 break;
             case R.id.rl_profile_migrate_to:
                 break;
@@ -92,6 +109,17 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
                 break;
             default:
                 break;
+        }
+    }
+
+
+    @Override
+    public void onCountryClick(Country country) {
+
+        if (countryFragment != null) {
+            countryFragment.dismiss();
+            cityDialogFragment.setCityList(country.cities);
+            cityDialogFragment.show(getSupportFragmentManager(), "city");
         }
     }
 }

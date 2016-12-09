@@ -151,6 +151,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             super.onBackPressed();
         }
     }
+ 
 
     @Override
     public void onLoadSuccess(UserProfile userProfile) {
