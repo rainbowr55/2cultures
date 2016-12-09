@@ -1,6 +1,6 @@
 package com.twoculture.twoculture.views;
 
-import com.twoculture.twoculture.models.EventUsersListResponse;
+import com.twoculture.twoculture.models.response.EventUsersListResponse;
 
 import java.util.List;
 

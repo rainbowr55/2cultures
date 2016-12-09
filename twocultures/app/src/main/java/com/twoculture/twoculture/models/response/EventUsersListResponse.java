@@ -1,4 +1,6 @@
-package com.twoculture.twoculture.models;
+package com.twoculture.twoculture.models.response;
+
+import com.twoculture.twoculture.models.response.BaseResponse;
 
 import java.util.List;
 

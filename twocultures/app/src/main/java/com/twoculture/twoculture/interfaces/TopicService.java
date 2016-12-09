@@ -1,12 +1,12 @@
 package com.twoculture.twoculture.interfaces;
 
 import com.twoculture.twoculture.models.AllTopics;
-import com.twoculture.twoculture.models.BaseResponse;
-import com.twoculture.twoculture.models.EventUsersListResponse;
-import com.twoculture.twoculture.models.UploadImageResponse;
+import com.twoculture.twoculture.models.response.BaseResponse;
+import com.twoculture.twoculture.models.response.EventUsersListResponse;
+import com.twoculture.twoculture.models.response.PostTopicResponse;
+import com.twoculture.twoculture.models.response.UploadImageResponse;
 
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -48,5 +48,9 @@ public interface TopicService {
     @Multipart
     @POST("mobile/we/topics/create_topic_photo")
     Observable<UploadImageResponse> uploadAttachment(@Query("token") String token, @Part MultipartBody.Part filePart);
+
+    @POST("mobile/we/topics/topics")
+    Observable<PostTopicResponse> postTopic(@Query("token") String token, @Query("title") String title, @Query("text") String text, @Query("topic_category_id") int categoryId, @Query("is_gsg")boolean isGsg);
+
 
 }
