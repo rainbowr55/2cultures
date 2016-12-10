@@ -57,7 +57,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.TopicDetailActivity" />
         <activity android:name=".ui.EventDetailActivity" />
-        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.EmailLoginActivity" />
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"

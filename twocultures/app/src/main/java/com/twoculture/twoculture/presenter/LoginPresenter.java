@@ -8,7 +8,7 @@ import com.twoculture.easemob.TwoCApplication;
 import com.twoculture.twoculture.models.LoginResult;
 import com.twoculture.twoculture.network.RxClient;
 import com.twoculture.twoculture.tools.AppConstants;
-import com.twoculture.twoculture.ui.LoginActivity;
+import com.twoculture.twoculture.ui.EmailLoginActivity;
 import com.twoculture.twoculture.views.ILoginView;
 
 import rx.Observer;
@@ -36,7 +36,7 @@ public class LoginPresenter implements ILoginPresenter {
                 .subscribe(new Observer<LoginResult>() {
                     @Override
                     public void onCompleted() {
-                        Log.d(LoginActivity.class.getName(), "onCompleted");
+                        Log.d(EmailLoginActivity.class.getName(), "onCompleted");
                     }
 
                     @Override
@@ -50,6 +50,10 @@ public class LoginPresenter implements ILoginPresenter {
                     @Override
                     public void onNext(LoginResult result) {
                         mLoginView.customShowProgress(false);
+                        if(result.status!=200){
+                            mLoginView.onLoginFailed(result.msg);
+                            return;
+                        }
                         AppConstants.TOKEN = result.token;
                         mLoginView.setMessage(result.msg);
                         mLoginView.onLoginSuccess();

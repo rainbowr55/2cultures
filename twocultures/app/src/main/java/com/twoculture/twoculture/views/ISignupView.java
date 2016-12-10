@@ -7,4 +7,5 @@ package com.twoculture.twoculture.views;
 public interface ISignupView extends IShowMessage {
 
     void onSignupSuccess();
+    void onSingupFailed(String message);
 }

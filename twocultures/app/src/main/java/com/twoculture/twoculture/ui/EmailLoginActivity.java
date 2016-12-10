@@ -6,7 +6,6 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -30,7 +29,7 @@ import rx.Subscription;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends BaseActivity implements ILoginView {
+public class EmailLoginActivity extends BaseActivity implements ILoginView {
 
     @BindView(R.id.email)
     AutoCompleteTextView mEmailView;
@@ -157,9 +156,14 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Override
     public void onLoginSuccess() {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent intent = new Intent(EmailLoginActivity.this, MainActivity.class);
         startActivity(intent);
-        LoginActivity.this.finish();
+        EmailLoginActivity.this.finish();
+    }
+
+    @Override
+    public void onLoginFailed(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
 

@@ -8,4 +8,6 @@ public interface ILoginView extends IShowMessage {
     void customShowProgress(boolean isShow);
 
     void onLoginSuccess();
+
+    void onLoginFailed(String message);
 }

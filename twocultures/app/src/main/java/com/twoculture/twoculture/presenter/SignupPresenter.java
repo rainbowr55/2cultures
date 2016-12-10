@@ -1,13 +1,16 @@
 package com.twoculture.twoculture.presenter;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.twoculture.easemob.TwoCApplication;
 import com.twoculture.twoculture.models.SignupResult;
 import com.twoculture.twoculture.network.RxClient;
 import com.twoculture.twoculture.tools.AppConstants;
 import com.twoculture.twoculture.tools.StringUtils;
-import com.twoculture.twoculture.ui.LoginActivity;
+import com.twoculture.twoculture.ui.EmailLoginActivity;
 import com.twoculture.twoculture.ui.SignupActivity;
 import com.twoculture.twoculture.views.ISignupView;
 
@@ -55,10 +58,18 @@ public class SignupPresenter implements ISignupPresenter {
 
                     @Override
                     public void onNext(SignupResult result) {
-                        Log.d(LoginActivity.class.getName(), result.msg + result.status + result.token);
+                        Log.d(EmailLoginActivity.class.getName(), result.msg + result.status + result.token);
+                        if(result.status!=200){
+                            mSignupView.onSingupFailed(result.msg);
+                            return;
+                        }
                         mSignupView.setMessage(result.msg);
                         AppConstants.TOKEN = result.token;
                         mSignupView.onSignupSuccess();
+                        SharedPreferences sharedPreferences = TwoCApplication.applicationContext.getSharedPreferences(AppConstants.TOKEN_FILE_NAME, Context.MODE_PRIVATE);
+                        SharedPreferences.Editor  editor = sharedPreferences.edit();
+                        editor.putString(AppConstants.TOKEN_FIELD_NAME, result.token);
+                        editor.commit();
                     }
                 });
     }

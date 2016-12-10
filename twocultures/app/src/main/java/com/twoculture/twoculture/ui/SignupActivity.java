@@ -87,4 +87,9 @@ public class SignupActivity extends BaseActivity implements ISignupView {
         startActivity(intent);
         SignupActivity.this.finish();
     }
+
+    @Override
+    public void onSingupFailed(String message) {
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+    }
 }

@@ -226,7 +226,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 boolean updatenick = EMClient.getInstance().updateCurrentUserNick(
                         TwoCApplication.currentUserNick.trim());
                 if (!updatenick) {
-                    CLog.e("LoginActivity", "update current user nick fail");
+                    CLog.e("EmailLoginActivity", "update current user nick fail");
                 }
 
                 if (!MainActivity.this.isFinishing() && progressDialog.isShowing()) {
