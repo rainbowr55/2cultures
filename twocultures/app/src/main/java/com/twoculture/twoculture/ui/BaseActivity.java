@@ -6,6 +6,7 @@ import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected Dialog loadingDialog;
 
+    ImageView ivTopBack;
     RelativeLayout rlTopTitle;
     TextView tvTopMiddle;
     TextView tvTopRight;
@@ -31,6 +33,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     private void initTitle() {
+        ivTopBack = (ImageView) findViewById(R.id.iv_page_back);
         rlTopTitle = (RelativeLayout) findViewById(R.id.rl_top_title);
         tvTopMiddle = (TextView) findViewById(R.id.tv_top_middle);
         tvTopRight = (TextView) findViewById(R.id.tv_top_right);
@@ -43,7 +46,23 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (rlTopTitle != null) {
             rlTopTitle.setVisibility(View.VISIBLE);
         }
+        if (ivTopBack != null) {
+            ivTopBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    back();
+                }
+            });
+        }
+
+
     }
+
+    protected void back() {
+        this.finish();
+    }
+
+
 
     protected String getTitleName() {
         return "";
@@ -59,6 +78,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void dismissLoadding() {
         if (loadingDialog != null) {
             loadingDialog.dismiss();
+        }
+    }
+
+    protected void showLoading() {
+        if (loadingDialog != null) {
+            loadingDialog.show();
         }
     }
 

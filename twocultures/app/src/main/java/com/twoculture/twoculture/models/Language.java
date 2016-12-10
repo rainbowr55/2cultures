@@ -5,8 +5,8 @@ package com.twoculture.twoculture.models;
  */
 
 public class Language {
-    private int id;
+    public int id;
 
-    private String name;
+    public String name;
 
 }

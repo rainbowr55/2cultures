@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:scrollbars="none"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -58,7 +59,7 @@
                 android:ellipsize="middle"
                 android:gravity="right"
                 android:maxLines="1"
-                android:textColor="@color/deep_gray" />
+                android:textColor="@color/light_gray_99" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -101,7 +102,7 @@
                 android:ellipsize="middle"
                 android:gravity="right"
                 android:maxLines="1"
-                android:textColor="@color/deep_gray" />
+                android:textColor="@color/light_gray_99" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -144,7 +145,7 @@
                 android:ellipsize="middle"
                 android:gravity="right"
                 android:maxLines="1"
-                android:textColor="@color/deep_gray" />
+                android:textColor="@color/light_gray_99" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -187,7 +188,7 @@
                 android:ellipsize="middle"
                 android:gravity="right"
                 android:maxLines="1"
-                android:textColor="@color/deep_gray" />
+                android:textColor="@color/light_gray_99" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -230,7 +231,7 @@
                 android:ellipsize="middle"
                 android:gravity="right"
                 android:maxLines="1"
-                android:textColor="@color/deep_gray" />
+                android:textColor="@color/light_gray_99" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -273,7 +274,7 @@
                 android:ellipsize="middle"
                 android:gravity="right"
                 android:maxLines="1"
-                android:textColor="@color/deep_gray" />
+                android:textColor="@color/light_gray_99" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -316,7 +317,7 @@
                 android:ellipsize="middle"
                 android:gravity="right"
                 android:maxLines="1"
-                android:textColor="@color/deep_gray" />
+                android:textColor="@color/light_gray_99" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -358,7 +359,7 @@
                 android:ellipsize="middle"
                 android:gravity="right"
                 android:maxLines="1"
-                android:textColor="@color/deep_gray" />
+                android:textColor="@color/light_gray_99" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -402,7 +403,7 @@
                 android:ellipsize="middle"
                 android:gravity="right"
                 android:maxLines="1"
-                android:textColor="@color/deep_gray" />
+                android:textColor="@color/light_gray_99" />
 
             <ImageView
                 android:layout_width="wrap_content"

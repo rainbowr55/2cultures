@@ -66,4 +66,9 @@
     <string name="profile_tip">If above basic profile is not filled completely, you may not receive some of notification and invitation, or, be found by other members. </string>
     <string name="input_header">input header</string>
     <string name="input_content">input content</string>
+    <string name="district">district</string>
+    <string name="gender_male">male</string>
+    <string name="gender_female">female</string>
+    <string name="profile_input_name_hint">please input name</string>
+    <string name="profile_input_valid_hint"> basic profile is not filled completely !</string>
 </resources>

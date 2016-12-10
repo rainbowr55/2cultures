@@ -89,7 +89,8 @@
             android:name=".ui.MyProfileActivity"
             android:theme="@style/TwoCulture.Theme.GrayNoTitleBar" />
         <activity android:name=".ui.JoinedUserActivity" />
-        <activity android:name=".ui.PostTopicActivity"></activity>
+        <activity android:name=".ui.PostTopicActivity" />
+        <activity android:name=".ui.CountryListActivity"></activity>
     </application>
 
 </manifest>

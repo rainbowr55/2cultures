@@ -151,7 +151,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             super.onBackPressed();
         }
     }
- 
+
 
     @Override
     public void onLoadSuccess(UserProfile userProfile) {
@@ -171,6 +171,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             }
             if (!userProfile.is_init_profile) {
                 Intent intent = new Intent(this, MyProfileActivity.class);
+                intent.putExtra(MyProfileActivity.IS_INIT_KEY, true);
                 startActivity(intent);
             }
         } else {

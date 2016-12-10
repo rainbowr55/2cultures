@@ -1,5 +1,6 @@
 package com.twoculture.twoculture.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,7 +26,18 @@ import butterknife.ButterKnife;
 public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHolder> {
 
     private List<Country> countries;
+
     private CountryClickListener countryClickListener;
+
+
+    public CountryAdapter(Context countryClickListener) {
+        if (countryClickListener instanceof CountryClickListener) {
+            this.countryClickListener = (CountryClickListener) countryClickListener;
+        }
+
+
+    }
+
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

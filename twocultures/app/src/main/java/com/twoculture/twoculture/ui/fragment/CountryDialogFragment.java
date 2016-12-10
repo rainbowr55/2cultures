@@ -14,7 +14,6 @@ import com.twoculture.twoculture.models.Configure;
 import com.twoculture.twoculture.presenter.ConfigurePresenter;
 import com.twoculture.twoculture.tools.CLog;
 import com.twoculture.twoculture.tools.ViewHelper;
-import com.twoculture.twoculture.ui.interfaces.CountryClickListener;
 import com.twoculture.twoculture.views.IConfigureView;
 
 /**
@@ -29,8 +28,6 @@ public class CountryDialogFragment extends BottomSheetDialogFragment implements 
     protected Dialog loadingDialog;
     private Context mContext;
 
-
-    private CountryClickListener countryClickListener;
 
     @Override
     public void onAttach(Context context) {
@@ -52,7 +49,7 @@ public class CountryDialogFragment extends BottomSheetDialogFragment implements 
 
         recyclerView = (RecyclerView) view.findViewById(R.id.my_profile_countries_list);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
-        countryAdapter = new CountryAdapter();
+        countryAdapter = new CountryAdapter(mContext);
         recyclerView.setAdapter(countryAdapter);
         initData();
         dialog.setContentView(view);
@@ -87,10 +84,5 @@ public class CountryDialogFragment extends BottomSheetDialogFragment implements 
         }
     }
 
-    public void setCountryClickListener(CountryClickListener countryClickListener) {
-        this.countryClickListener = countryClickListener;
-        if (countryAdapter != null) {
-            countryAdapter.setCountryClickListener(countryClickListener);
-        }
-    }
+
 }

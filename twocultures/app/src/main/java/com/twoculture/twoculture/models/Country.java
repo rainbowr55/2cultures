@@ -1,15 +1,16 @@
 package com.twoculture.twoculture.models;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by liangcaihong on 2016/12/9.
  */
 
-public class Country {
+public class Country implements Serializable{
     public String name;
 
     public int id;
 
-    public List<City> cities;
+    public ArrayList<City> cities;
 }

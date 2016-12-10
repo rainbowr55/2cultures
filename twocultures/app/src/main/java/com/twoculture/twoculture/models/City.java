@@ -1,10 +1,12 @@
 package com.twoculture.twoculture.models;
 
+import java.io.Serializable;
+
 /**
- * Created by liangcaihong on 2016/12/9.
+ * Created by rainbow on 2016/12/9.
  */
 
-public class City extends Country {
+public class City extends Country implements Serializable {
 
     public boolean is_custom;
 }

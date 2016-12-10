@@ -1,6 +1,6 @@
 package com.twoculture.twoculture.models;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by liangcaihong on 2016/12/9.
@@ -8,9 +8,9 @@ import java.util.List;
 
 public class Configure {
 
-    public List<Country> countries;
+    public ArrayList<Country> countries;
 
-    public List<UserStatu> user_status;
+    public ArrayList<UserStatu> user_status;
 
-    public List<Language> languages;
+    public ArrayList<Language> languages;
 }

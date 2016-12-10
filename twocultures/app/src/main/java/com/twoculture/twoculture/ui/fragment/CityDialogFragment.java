@@ -39,7 +39,7 @@ public class CityDialogFragment extends BottomSheetDialogFragment {
         View view = getActivity().getLayoutInflater().inflate(R.layout.my_profile_countries, null);
         recyclerView = (RecyclerView) view.findViewById(R.id.my_profile_countries_list);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
-        countryAdapter = new CountryAdapter();
+        countryAdapter = new CountryAdapter(mContext);
         recyclerView.setAdapter(countryAdapter);
         dialog.setContentView(view);
     }

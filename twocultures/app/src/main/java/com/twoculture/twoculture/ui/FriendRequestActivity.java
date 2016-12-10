@@ -7,11 +7,10 @@ import android.util.Log;
 
 import com.twoculture.twoculture.R;
 import com.twoculture.twoculture.adapter.FriendRequestAdapter;
-import com.twoculture.twoculture.models.response.BaseResponse;
 import com.twoculture.twoculture.models.FriendRequest;
+import com.twoculture.twoculture.models.response.BaseResponse;
 import com.twoculture.twoculture.presenter.FriendRequestPresenter;
 import com.twoculture.twoculture.presenter.IFriendRequestPresenter;
-import com.twoculture.twoculture.tools.ViewHelper;
 import com.twoculture.twoculture.views.IFriendRequestView;
 
 import java.util.List;
@@ -58,9 +57,7 @@ public class FriendRequestActivity extends BaseActivity implements IFriendReques
 
     @Override
     public void onLoadingShow() {
-        if (loadingDialog == null) {
-            loadingDialog = ViewHelper.show(this);
-        }
+        showLoading();
     }
 
     @Override
