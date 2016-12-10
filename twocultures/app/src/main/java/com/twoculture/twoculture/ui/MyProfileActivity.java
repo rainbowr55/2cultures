@@ -12,6 +12,7 @@ import com.twoculture.twoculture.R;
 import com.twoculture.twoculture.models.Configure;
 import com.twoculture.twoculture.models.District;
 import com.twoculture.twoculture.models.Language;
+import com.twoculture.twoculture.models.UserStatu;
 import com.twoculture.twoculture.presenter.ConfigurePresenter;
 import com.twoculture.twoculture.tools.RoundedImageView;
 import com.twoculture.twoculture.ui.fragment.CityDialogFragment;
@@ -19,14 +20,16 @@ import com.twoculture.twoculture.ui.fragment.CountryDialogFragment;
 import com.twoculture.twoculture.ui.fragment.EditNameDialogFragment;
 import com.twoculture.twoculture.ui.fragment.GenderDialogFragment;
 import com.twoculture.twoculture.ui.fragment.LanguageDialogFragment;
+import com.twoculture.twoculture.ui.fragment.UserStatusDialogFragment;
 import com.twoculture.twoculture.ui.interfaces.GenderClickListener;
 import com.twoculture.twoculture.ui.interfaces.LanguageClickListener;
 import com.twoculture.twoculture.ui.interfaces.UserNameInputListener;
+import com.twoculture.twoculture.ui.interfaces.UserStatusClickListener;
 import com.twoculture.twoculture.views.IConfigureView;
 
 import butterknife.BindView;
 
-public class MyProfileActivity extends BaseActivity implements View.OnClickListener, IConfigureView, LanguageClickListener, GenderClickListener, UserNameInputListener {
+public class MyProfileActivity extends BaseActivity implements View.OnClickListener, IConfigureView, LanguageClickListener, GenderClickListener, UserNameInputListener, UserStatusClickListener {
 
     public static final String IS_INIT_KEY = "isInit";
     private static final int DISTRICT_REQUEST_CODE = 100;
@@ -83,6 +86,7 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
     LanguageDialogFragment languageDialogFragment;
     GenderDialogFragment genderDialogFragment;
     EditNameDialogFragment editNameDialogFragment;
+    UserStatusDialogFragment userStatusDialogFragment;
 
     private ConfigurePresenter configurePresenter;
     Configure configure;
@@ -96,6 +100,8 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
     private Language speakLanguage;
     private Language secondLanguage;
     private Language learningLanguage;
+
+    private UserStatu userStatu;
 
     private boolean isInit;
 
@@ -128,6 +134,7 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
         languageDialogFragment = new LanguageDialogFragment();
         genderDialogFragment = new GenderDialogFragment();
         editNameDialogFragment = new EditNameDialogFragment();
+        userStatusDialogFragment = new UserStatusDialogFragment();
         isInit = getIntent().getBooleanExtra(IS_INIT_KEY, false);
     }
 
@@ -181,6 +188,12 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
                 goLanguage(LANGUAGE_LEARN);
                 break;
             case R.id.rl_profile_relationship:
+                if (userStatusDialogFragment != null && configure != null && configure.user_status != null) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("status", configure.user_status);
+                    userStatusDialogFragment.setArguments(bundle);
+                    userStatusDialogFragment.show(getSupportFragmentManager(), "status");
+                }
                 break;
             default:
                 break;
@@ -286,8 +299,8 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
             return false;
         } else if (speakLanguage == null) {
             return false;
-        } else {
-
+        } else if (userStatu == null) {
+            return false;
         }
         return true;
     }
@@ -324,5 +337,14 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void setUserName(String userName) {
         tvProfileName.setText(userName);
+    }
+
+    @Override
+    public void onUserStatusClick(UserStatu userStatu) {
+        userStatusDialogFragment.dismiss();
+        if (userStatu != null) {
+            this.userStatu = userStatu;
+            tvProfileRelationship.setText(userStatu.name);
+        }
     }
 }
