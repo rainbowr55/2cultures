@@ -2,8 +2,10 @@ package com.twoculture.twoculture.presenter;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.twoculture.twoculture.interfaces.LoginService;
 import com.twoculture.twoculture.models.UserProfile;
+import com.twoculture.twoculture.models.response.BaseResponse;
 import com.twoculture.twoculture.network.RxClient;
 import com.twoculture.twoculture.tools.AppConstants;
 import com.twoculture.twoculture.views.IUserProfileView;
@@ -47,6 +49,36 @@ public class UserProfilePresenter implements IUserProfilePresenter {
                     @Override
                     public void onNext(UserProfile userProfile) {
                         userProfileView.onLoadSuccess(userProfile);
+
+                    }
+                });
+    }
+
+    @Override
+    public void updateUserProfile(String name, int status, UserProfile uploadProfile) {
+        userProfileView.onLoadingShow();
+        Gson gson = new Gson();
+        String userProfile = gson.toJson(uploadProfile);
+        RxClient.getInstance().getService(LoginService.class).updateUserProfile(AppConstants.TOKEN, name, status, userProfile)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<BaseResponse>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        Log.e("test", e.getMessage());
+                        userProfileView.setMessage(e.getMessage());
+                        userProfileView.onLoadFailed();
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse baseResponse) {
+                        userProfileView.setMessage(baseResponse.msg);
 
                     }
                 });

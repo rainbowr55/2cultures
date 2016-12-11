@@ -5,12 +5,12 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.twoculture.easemob.TwoCApplication;
 import com.twoculture.twoculture.models.SignupResult;
 import com.twoculture.twoculture.network.RxClient;
 import com.twoculture.twoculture.tools.AppConstants;
 import com.twoculture.twoculture.tools.StringUtils;
 import com.twoculture.twoculture.ui.EmailLoginActivity;
+import com.twoculture.twoculture.ui.GlobalApplication;
 import com.twoculture.twoculture.ui.SignupActivity;
 import com.twoculture.twoculture.views.ISignupView;
 
@@ -66,7 +66,7 @@ public class SignupPresenter implements ISignupPresenter {
                         mSignupView.setMessage(result.msg);
                         AppConstants.TOKEN = result.token;
                         mSignupView.onSignupSuccess();
-                        SharedPreferences sharedPreferences = TwoCApplication.applicationContext.getSharedPreferences(AppConstants.TOKEN_FILE_NAME, Context.MODE_PRIVATE);
+                        SharedPreferences sharedPreferences = GlobalApplication.applicationContext.getSharedPreferences(AppConstants.TOKEN_FILE_NAME, Context.MODE_PRIVATE);
                         SharedPreferences.Editor  editor = sharedPreferences.edit();
                         editor.putString(AppConstants.TOKEN_FIELD_NAME, result.token);
                         editor.commit();

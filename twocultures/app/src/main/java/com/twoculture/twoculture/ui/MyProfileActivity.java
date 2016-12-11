@@ -12,8 +12,10 @@ import com.twoculture.twoculture.R;
 import com.twoculture.twoculture.models.Configure;
 import com.twoculture.twoculture.models.District;
 import com.twoculture.twoculture.models.Language;
+import com.twoculture.twoculture.models.UserProfile;
 import com.twoculture.twoculture.models.UserStatu;
 import com.twoculture.twoculture.presenter.ConfigurePresenter;
+import com.twoculture.twoculture.presenter.UserProfilePresenter;
 import com.twoculture.twoculture.tools.RoundedImageView;
 import com.twoculture.twoculture.ui.fragment.CityDialogFragment;
 import com.twoculture.twoculture.ui.fragment.CountryDialogFragment;
@@ -26,10 +28,11 @@ import com.twoculture.twoculture.ui.interfaces.LanguageClickListener;
 import com.twoculture.twoculture.ui.interfaces.UserNameInputListener;
 import com.twoculture.twoculture.ui.interfaces.UserStatusClickListener;
 import com.twoculture.twoculture.views.IConfigureView;
+import com.twoculture.twoculture.views.IUserProfileView;
 
 import butterknife.BindView;
 
-public class MyProfileActivity extends BaseActivity implements View.OnClickListener, IConfigureView, LanguageClickListener, GenderClickListener, UserNameInputListener, UserStatusClickListener {
+public class MyProfileActivity extends BaseActivity implements View.OnClickListener, IConfigureView, IUserProfileView, LanguageClickListener, GenderClickListener, UserNameInputListener, UserStatusClickListener {
 
     public static final String IS_INIT_KEY = "isInit";
     private static final int DISTRICT_REQUEST_CODE = 100;
@@ -101,9 +104,12 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
     private Language secondLanguage;
     private Language learningLanguage;
 
-    private UserStatu userStatu;
+    private int userStatu = -1;
+    private UserProfile userProfile = new UserProfile();
 
     private boolean isInit;
+
+    private UserProfilePresenter userProfilePresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +119,7 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
     }
 
     private void initData() {
+        userProfilePresenter = new UserProfilePresenter(this);
         configurePresenter = new ConfigurePresenter(this);
         configurePresenter.getConfigure();
     }
@@ -128,7 +135,6 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
         rlProfileLanguage.setOnClickListener(this);
         rlProfileLearningLanguage.setOnClickListener(this);
         rlProfileRelationship.setOnClickListener(this);
-        tvTopRight.setOnClickListener(this);
         countryFragment = new CountryDialogFragment();
         cityDialogFragment = new CityDialogFragment();
         languageDialogFragment = new LanguageDialogFragment();
@@ -227,6 +233,29 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
         if (configure != null) {
             this.configure = configure;
         }
+        if (!isInit) {
+            if (userProfile != null) {
+                initProfile(userProfile);
+            }
+        }
+    }
+
+    private void initProfile(UserProfile userProfile) {
+
+        tvProfileName.setText(userProfile.name);
+        if (userProfile.gender == 0) {
+            tvProfileGender.setText(getString(R.string.gender_female));
+        } else {
+            tvProfileGender.setText(getString(R.string.gender_male));
+        }
+        tvProfileSpeak.setText(userProfile.speak);
+        tvProfileLivingIn.setText(userProfile.living_city_str);
+        tvProfileFrom.setText(userProfile.from_city_str);
+        tvProfileMigrateTo.setText(userProfile.migrate_to_city_str);
+        tvProfileRelationship.setText(userProfile.status);
+        this.userProfile = userProfile;
+        userStatu = userProfile.status_id;
+
     }
 
     @Override
@@ -252,12 +281,18 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
                     if (districtType == DISTRICT_LIVE_IN) {
                         liveDistrict = district;
                         tvProfileLivingIn.setText(districtName);
+                        userProfile.living_country_id = liveDistrict.countryId;
+                        userProfile.living_city_id = liveDistrict.cityId;
                     } else if (districtType == DISTRICT_MIGRATE) {
                         migrateDistrict = district;
                         tvProfileMigrateTo.setText(districtName);
+                        userProfile.migrate_to_country_id = migrateDistrict.countryId;
+                        userProfile.migrate_to_city_id = migrateDistrict.cityId;
                     } else if (districtType == DISTRICT_FROM) {
                         fromDistrict = district;
                         tvProfileFrom.setText(districtName);
+                        userProfile.from_country_id = fromDistrict.countryId;
+                        userProfile.from_city_id = fromDistrict.cityId;
                     }
 
                 }
@@ -280,7 +315,11 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
     }
 
     private void saveProfile() {
-
+        //获取表单内容
+        String inputName = tvProfileName.getText().toString();
+        String name = TextUtils.isEmpty(inputName) ? userProfile.name : inputName;
+        userStatu = userStatu == -1 ? userProfile.status_id : userStatu;
+        userProfilePresenter.updateUserProfile(name, userStatu, this.userProfile);
     }
 
     /**
@@ -299,7 +338,7 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
             return false;
         } else if (speakLanguage == null) {
             return false;
-        } else if (userStatu == null) {
+        } else if (userStatu == -1) {
             return false;
         }
         return true;
@@ -311,12 +350,15 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
             if (languageType == LANGUAGE_SPEAK) {
                 speakLanguage = language;
                 tvProfileSpeak.setText(language.name);
+                userProfile.speak_id = speakLanguage.id;
             } else if (languageType == LANGUAGE_SECOND) {
                 secondLanguage = language;
                 tvProfileLanguage.setText(language.name);
+                userProfile.second_language_id = secondLanguage.id;
             } else if (languageType == LANGUAGE_LEARN) {
                 learningLanguage = language;
                 tvProfileLearningLanguage.setText(language.name);
+                userProfile.learning_language_id = learningLanguage.id;
             }
         }
         if (languageDialogFragment != null) {
@@ -332,6 +374,7 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
         } else {
             tvProfileGender.setText(getString(R.string.gender_male));
         }
+        userProfile.gender = gender;
     }
 
     @Override
@@ -343,8 +386,18 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
     public void onUserStatusClick(UserStatu userStatu) {
         userStatusDialogFragment.dismiss();
         if (userStatu != null) {
-            this.userStatu = userStatu;
+            this.userStatu = userStatu.id;
             tvProfileRelationship.setText(userStatu.name);
         }
+    }
+
+    @Override
+    public void onLoadSuccess(UserProfile userProfile) {
+
+    }
+
+    @Override
+    public void onLoadFailed() {
+
     }
 }

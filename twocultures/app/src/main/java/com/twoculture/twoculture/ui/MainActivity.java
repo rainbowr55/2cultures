@@ -25,7 +25,6 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 import com.twoculture.base.utils.SecureSharedPreferences;
 import com.twoculture.easemob.DemoHelper;
-import com.twoculture.easemob.TwoCApplication;
 import com.twoculture.easemob.db.DemoDBManager;
 import com.twoculture.twoculture.R;
 import com.twoculture.twoculture.models.UserProfile;
@@ -136,7 +135,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } else if (id == R.id.nav_invitation) {
 
         } else if (id == R.id.nav_me) {
-
+            SecureSharedPreferences secureSharedPreferences = new SecureSharedPreferences(this);
+            boolean is_init = secureSharedPreferences.getBoolean(AppConstants.USER_INIT_STATE, false);
+            Intent intent = new Intent(this, MyProfileActivity.class);
+            intent.putExtra(MyProfileActivity.IS_INIT_KEY, is_init);
+            startActivity(intent);
         }
 
         mDrawerLayout.closeDrawer(GravityCompat.START);
@@ -159,6 +162,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         progressDialog.show();
         SecureSharedPreferences secureSharedPreferences = new SecureSharedPreferences(this);
         if (userProfile != null) {
+            GlobalApplication.userProfile = userProfile;
             //保存profile
             secureSharedPreferences.edit().putBoolean(AppConstants.USER_INIT_STATE, userProfile.is_init_profile);
             //处理环信
@@ -224,7 +228,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
                 // update current user's display name for APNs
                 boolean updatenick = EMClient.getInstance().updateCurrentUserNick(
-                        TwoCApplication.currentUserNick.trim());
+                        GlobalApplication.currentUserNick.trim());
                 if (!updatenick) {
                     CLog.e("EmailLoginActivity", "update current user nick fail");
                 }

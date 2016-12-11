@@ -46,8 +46,13 @@ public class UserProfile {
 
     public int speak_id;
 
+    public String second_language;//string 当前用户的第二语言,不同语言版本展示不同文字
+    public int second_language_id;// int 当前用户的第二语言id,对应README.md中的get_configure_json方法中的language的Id
+    public String learning_language;// stirng 学习语言
+    public int learning_language_id;//int 当期学习语言
+
     public int status_id;
 
-    private String status;
+    public String status;
 
 }

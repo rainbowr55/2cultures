@@ -13,6 +13,7 @@ import com.hyphenate.chat.EMOptions;
  * Created by rainbow on 16/11/20.
  */
 public class TwoCApplication extends Application {
+
     public static Context applicationContext;
     private static TwoCApplication instance;
     // login user name

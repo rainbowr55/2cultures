@@ -113,7 +113,7 @@ public class LaunchActivity extends BaseActivity implements View.OnClickListener
     public void checkToken(){
         // Restore preferences
 
-        SharedPreferences sharedPreferences = TwoCApplication.applicationContext.getSharedPreferences(AppConstants.TOKEN_FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = GlobalApplication.applicationContext.getSharedPreferences(AppConstants.TOKEN_FILE_NAME, Context.MODE_PRIVATE);
         String token = sharedPreferences.getString(AppConstants.TOKEN_FIELD_NAME,"");
         if(!TextUtils.isEmpty(token)){
             AppConstants.TOKEN = token;
