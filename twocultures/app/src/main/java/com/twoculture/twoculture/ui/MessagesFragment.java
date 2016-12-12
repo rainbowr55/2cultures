@@ -52,6 +52,8 @@ public class MessagesFragment extends MessagesBaseFragment implements SwipeRefre
         super.setUpView();
         tvMsgFriendRequest.setOnClickListener(this);
         tvMsgNotification.setOnClickListener(this);
+        tvMsgEvents.setOnClickListener(this);
+        tvMsgAt.setOnClickListener(this);
         // register context menu
         registerForContextMenu(conversationListView);
         conversationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -148,6 +150,14 @@ public class MessagesFragment extends MessagesBaseFragment implements SwipeRefre
                 Intent notifyIntent = new Intent();
                 notifyIntent.setClass(mContext, NotificationActivity.class);
                 startActivity(notifyIntent);
+                break;
+            case R.id.tv_msg_events:
+                Intent eventInvitationIntent = new Intent();
+                eventInvitationIntent.setClass(mContext, EventInvitationActivity.class);
+                startActivity(eventInvitationIntent);
+                break;
+            case R.id.tv_msg_at:
+
                 break;
         }
     }

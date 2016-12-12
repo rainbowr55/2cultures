@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.twoculture.base.widget.LoadingDialog;
 import com.twoculture.base.widget.ToastUtil;
 import com.twoculture.twoculture.R;
 
@@ -63,7 +64,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-
     protected String getTitleName() {
         return "";
     }
@@ -84,6 +84,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void showLoading() {
         if (loadingDialog != null) {
             loadingDialog.show();
+        } else {
+            loadingDialog = LoadingDialog.show(this, "", false, null);
         }
     }
 
