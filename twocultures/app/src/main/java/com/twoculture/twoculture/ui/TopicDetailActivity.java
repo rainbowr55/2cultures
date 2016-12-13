@@ -54,6 +54,7 @@ public class TopicDetailActivity extends BaseActivity implements View.OnClickLis
     ImageView iv_favourite;
 
     TopicItem mTopicItem;
+    private int mTopicId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,7 @@ public class TopicDetailActivity extends BaseActivity implements View.OnClickLis
         String topicString = getIntent().getStringExtra(TOPIC_ITEM);
         Gson gson = new Gson();
         mTopicItem = gson.fromJson(topicString, TopicItem.class);
+        mTopicId = mTopicItem.topic.topic_id;
         mTextUserName.setText(mTopicItem.author.name);
         mTextCreateDate.setText(mTopicItem.topic.create_at);
         Picasso.with(this).load(mTopicItem.author.user_header_image).placeholder(R.drawable.default_gravatar).into(mImageGravatar);
@@ -100,6 +102,7 @@ public class TopicDetailActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.ll_comment:
                 Intent intent = new Intent(this,TopicCommentsActivity.class);
+                intent.putExtra(TopicCommentsActivity.TOPICID,mTopicId);
                 startActivity(intent);
                 break;
             case R.id.iv_like:

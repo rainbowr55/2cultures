@@ -11,6 +11,7 @@ public class Comment {
     public String created_at;
     public boolean is_self;
     public String text;
+    public User user;
     public static class User{
         public int user_id;
         public String user_name;

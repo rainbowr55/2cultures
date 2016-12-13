@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -78,10 +79,11 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ItemViewHold
             }
         });
 
-        holder.tv_comment.setOnClickListener(new View.OnClickListener() {
+        holder.ll_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, TopicCommentsActivity.class);
+                intent.putExtra(TopicCommentsActivity.TOPICID,topicItem.topic.topic_id);
                 mContext.startActivity(intent);
             }
         });
@@ -119,6 +121,9 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ItemViewHold
         TextView tv_topic;
         @BindView(R.id.iv_author_icon)
         ImageView iv_author_icon;
+
+        @BindView(R.id.ll_comment)
+        LinearLayout ll_comment;
 
         @BindView(R.id.tv_comment)
         TextView tv_comment;
