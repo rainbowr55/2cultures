@@ -336,7 +336,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 return new EventsFragment();
             }
             if (position == 3) {
-                return new MessagesFragment();
+                return new DiscoverFragment();
             }
             return null;
         }
