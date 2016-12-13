@@ -125,5 +125,80 @@
         android:maxLines="100000"
         android:layout_marginBottom="12dp"
         android:textSize="@dimen/text_medium"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:orientation="horizontal"
+        android:paddingBottom="2dp"
+        android:paddingTop="4dp"
+        android:layout_marginBottom="12dp">
+
+
+        <ImageView
+            android:id="@+id/iv_favourite"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="3dp"
+            android:src="@drawable/icon_favourite"
+            android:elevation="8dp"/>
+
+        <ImageView
+            android:id="@+id/iv_share"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="3dp"
+            android:src="@drawable/ic_menu_share"
+            android:elevation="8dp"/>
+
+        <LinearLayout
+            android:id="@+id/ll_like"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:elevation="8dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:src="@drawable/ic_topic_like" />
+
+            <TextView
+                android:id="@+id/tv_like"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_comment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:elevation="8dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:src="@drawable/icon_comment" />
+
+            <TextView
+                android:id="@+id/tv_comment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="0" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
 </ScrollView>

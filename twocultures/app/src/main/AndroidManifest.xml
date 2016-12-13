@@ -92,6 +92,7 @@
         <activity android:name=".ui.PostTopicActivity" />
         <activity android:name=".ui.CountryListActivity" />
         <activity android:name=".ui.EventInvitationActivity"></activity>
+        <activity android:name=".ui.TopicCommentsActivity"></activity>
     </application>
 
 </manifest>

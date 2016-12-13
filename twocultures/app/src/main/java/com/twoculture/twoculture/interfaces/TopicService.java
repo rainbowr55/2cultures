@@ -57,4 +57,5 @@ public interface TopicService {
 
     @POST("mobile/we/topics/topic_comments")
     Observable<List<Comment>> getComments(@Query("token") String token, @Query("topic_id") int topicId, @Query("page") int pageIndex, @Query("per_num") int pageNumber);
+
 }

@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 import com.twoculture.twoculture.R;
 import com.twoculture.twoculture.models.TopicItem;
+import com.twoculture.twoculture.ui.TopicCommentsActivity;
 import com.twoculture.twoculture.ui.TopicDetailActivity;
 
 import java.util.ArrayList;
@@ -70,6 +71,35 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ItemViewHold
             }
         });
 
+        holder.tv_like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        holder.tv_comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, TopicCommentsActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
+
+        holder.iv_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        holder.iv_favourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
     }
 
 
@@ -95,6 +125,12 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ItemViewHold
 
         @BindView(R.id.tv_like)
         TextView tv_like;
+
+        @BindView(R.id.iv_share)
+        ImageView iv_share;
+
+        @BindView(R.id.iv_favourite)
+        ImageView iv_favourite;
 
 
 
