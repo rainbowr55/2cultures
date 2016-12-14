@@ -9,4 +9,8 @@ public interface ITopicDetailView {
     void setLikeResult(boolean bResult, String msg);
 
     void setUnikeResult(boolean bResult, String msg);
+
+    void setFavouriteResult(boolean bResult, String msg);
+
+    void setUnfavouriteResult(boolean bResult, String msg);
 }

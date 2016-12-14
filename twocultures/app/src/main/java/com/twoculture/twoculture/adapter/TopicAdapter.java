@@ -59,6 +59,12 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ItemViewHold
         holder.tv_topic.setText(topicItem.topic.topic_title);
         holder.tv_comment.setText(topicItem.topic.comment_num+"");
         holder.tv_like.setText(topicItem.topic.like_num+"");
+        if(topicItem.topic.is_favorite){
+            holder.iv_favourite.setSelected(true);
+        }
+        if(topicItem.topic.is_like){
+            holder.iv_like.setSelected(true);
+        }
         Picasso.with(mContext).load(topicItem.author.user_header_image).placeholder(R.drawable.default_gravatar).config(Bitmap.Config.RGB_565).into(holder.iv_author_icon);
         Picasso.with(mContext).load(topicItem.topic_photos.get(0).url).config(Bitmap.Config.RGB_565).placeholder(R.drawable.default_image).fit().centerCrop().into(holder.iv_topic_icon);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +145,9 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ItemViewHold
 
         @BindView(R.id.ll_like)
         LinearLayout ll_like;
+
+        @BindView(R.id.iv_like)
+        ImageView iv_like;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
