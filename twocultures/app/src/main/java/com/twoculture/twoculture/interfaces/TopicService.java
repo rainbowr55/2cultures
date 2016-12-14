@@ -68,5 +68,11 @@ public interface TopicService {
     @GET("mobile/we/topics/topic_likes/unlike_the_topic")
     Observable<BaseResponse> unlikeTopic(@Query("token") String token, @Query("topic_id") int topicId);
 
+    @GET("mobile/we/topics/favorite_the_topic")
+    Observable<BaseResponse> favouriteTopic(@Query("token") String token, @Query("topic_id") int topicId);
 
+    @GET("mobile/we/topics/unfavorite_the_topic")
+    Observable<BaseResponse> unfavouriteTopic(@Query("token") String token, @Query("topic_id") int topicId);
 }
+
+

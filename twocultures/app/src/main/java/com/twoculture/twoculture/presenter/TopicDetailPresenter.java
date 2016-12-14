@@ -20,7 +20,8 @@ public class TopicDetailPresenter implements BasePresenter {
 
     private CompositeSubscription mSubscriptions;
     private ITopicDetailView mView;
-    public TopicDetailPresenter(ITopicDetailView view){
+
+    public TopicDetailPresenter(ITopicDetailView view) {
         mSubscriptions = new CompositeSubscription();
         mView = view;
     }
@@ -37,7 +38,7 @@ public class TopicDetailPresenter implements BasePresenter {
     }
 
     public void likeTopic(int topicId) {
-        Subscription subscription = RxClient.getInstance().getTopicService().likeTopic(AppConstants.TOKEN,topicId)
+        Subscription subscription = RxClient.getInstance().getTopicService().likeTopic(AppConstants.TOKEN, topicId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseResponse>() {
@@ -48,15 +49,15 @@ public class TopicDetailPresenter implements BasePresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        mView.setLikeResult(false,e.getMessage());
+                        mView.setLikeResult(false, e.getMessage());
                     }
 
                     @Override
                     public void onNext(BaseResponse baseResponse) {
-                        if(baseResponse.status == 0){
-                            mView.setLikeResult(true,baseResponse.msg);
-                        }else{
-                            mView.setLikeResult(false,baseResponse.msg);
+                        if (baseResponse.status == 0) {
+                            mView.setLikeResult(true, baseResponse.msg);
+                        } else {
+                            mView.setLikeResult(false, baseResponse.msg);
                         }
                     }
                 });
@@ -64,7 +65,7 @@ public class TopicDetailPresenter implements BasePresenter {
     }
 
     public void unlikeTopic(int topicId) {
-        Subscription subscription = RxClient.getInstance().getTopicService().unlikeTopic(AppConstants.TOKEN,topicId)
+        Subscription subscription = RxClient.getInstance().getTopicService().unlikeTopic(AppConstants.TOKEN, topicId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BaseResponse>() {
@@ -75,18 +76,75 @@ public class TopicDetailPresenter implements BasePresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        mView.setUnikeResult(false,e.getMessage());
+                        mView.setUnikeResult(false, e.getMessage());
                     }
 
                     @Override
                     public void onNext(BaseResponse baseResponse) {
-                        if(baseResponse.status == 2){
-                            mView.setUnikeResult(true,baseResponse.msg);
-                        }else{
-                            mView.setUnikeResult(false,baseResponse.msg);
+                        if (baseResponse.status == 2) {
+                            mView.setUnikeResult(true, baseResponse.msg);
+                        } else {
+                            mView.setUnikeResult(false, baseResponse.msg);
                         }
                     }
                 });
         mSubscriptions.add(subscription);
     }
+
+
+    public void favouriteTopic(int topicId) {
+        Subscription subscription = RxClient.getInstance().getTopicService().favouriteTopic(AppConstants.TOKEN, topicId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BaseResponse>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mView.setFavouriteResult(false, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse baseResponse) {
+                        if (baseResponse.status == 0) {
+                            mView.setFavouriteResult(true, baseResponse.msg);
+                        } else {
+                            mView.setFavouriteResult(false, baseResponse.msg);
+                        }
+                    }
+                });
+        mSubscriptions.add(subscription);
+    }
+
+    public void unfavouriteTopic(int topicId) {
+        Subscription subscription = RxClient.getInstance().getTopicService().unfavouriteTopic(AppConstants.TOKEN, topicId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BaseResponse>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mView.setUnfavouriteResult(false, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse baseResponse) {
+                        if (baseResponse.status == 2) {
+                            mView.setUnfavouriteResult(true, baseResponse.msg);
+                        } else {
+                            mView.setUnfavouriteResult(false, baseResponse.msg);
+                        }
+                    }
+                });
+        mSubscriptions.add(subscription);
+    }
+
+
 }

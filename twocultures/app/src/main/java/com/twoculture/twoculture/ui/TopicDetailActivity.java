@@ -154,4 +154,18 @@ public class TopicDetailActivity extends BaseActivity implements View.OnClickLis
            // Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    public void setFavouriteResult(boolean bResult, String msg) {
+        if(bResult){
+
+        }
+    }
+
+    @Override
+    public void setUnfavouriteResult(boolean bResult, String msg) {
+        if(bResult){
+
+        }
+    }
 }
