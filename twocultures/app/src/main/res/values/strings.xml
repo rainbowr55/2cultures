@@ -55,6 +55,8 @@
     <string name="user_search_input_empty_hint">Please input search key word</string>
 
     <!-- my profile start -->
+    <string name="profile_single">Single Profile</string>
+    <string name="profile_topic">Topic</string>
     <string name="my_profile_title">My Profile</string>
     <string name="my_profile_right_title">Save</string>
     <string name="profile_name">Name</string>
