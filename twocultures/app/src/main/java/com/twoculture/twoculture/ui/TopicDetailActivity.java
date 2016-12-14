@@ -66,6 +66,9 @@ public class TopicDetailActivity extends BaseActivity implements View.OnClickLis
     @BindView(R.id.ll_like)
     LinearLayout ll_like;
 
+    @BindView(R.id.iv_like)
+    ImageView iv_like;
+
     private TopicDetailPresenter mTopicDetailPresenter;
 
     @Override
@@ -103,14 +106,23 @@ public class TopicDetailActivity extends BaseActivity implements View.OnClickLis
         tv_like.setText(mTopicItem.topic.like_num + "");
         PicturesViewpagerAdapter adapter = new PicturesViewpagerAdapter(this, mTopicItem.topic_photos);
         mViewPagerPictures.setAdapter(adapter);
-
+        if(mTopicItem.topic.is_favorite){
+            iv_favourite.setSelected(true);
+        }
+        if(mTopicItem.topic.is_like){
+            iv_like.setSelected(true);
+        }
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_favourite:
-
+                if(mTopicItem.topic.is_favorite){
+                    mTopicDetailPresenter.favouriteTopic(mTopicId);
+                }else{
+                    mTopicDetailPresenter.unfavouriteTopic(mTopicId);
+                }
                 break;
             case R.id.iv_share:
                 break;
@@ -138,6 +150,7 @@ public class TopicDetailActivity extends BaseActivity implements View.OnClickLis
             tv_like.setText(mTopicItem.topic.like_num + "");
            // Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             mTopicItem.topic.is_like = true;
+            iv_like.setSelected(true);
         } else {
            // Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         }
@@ -149,6 +162,7 @@ public class TopicDetailActivity extends BaseActivity implements View.OnClickLis
             mTopicItem.topic.like_num = mTopicItem.topic.like_num - 1;
             tv_like.setText(mTopicItem.topic.like_num + "");
             mTopicItem.topic.is_like = false;
+            iv_like.setSelected(false);
            // Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         } else {
            // Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
@@ -158,14 +172,16 @@ public class TopicDetailActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void setFavouriteResult(boolean bResult, String msg) {
         if(bResult){
-
+            iv_favourite.setSelected(true);
+            mTopicItem.topic.is_favorite = true;
         }
     }
 
     @Override
     public void setUnfavouriteResult(boolean bResult, String msg) {
         if(bResult){
-
+            iv_favourite.setSelected(false);
+            mTopicItem.topic.is_favorite = false;
         }
     }
 }

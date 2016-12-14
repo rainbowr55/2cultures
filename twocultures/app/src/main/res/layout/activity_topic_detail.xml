@@ -165,11 +165,12 @@
             android:elevation="8dp">
 
             <ImageView
+                android:id="@+id/iv_like"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="3dp"
-                android:src="@drawable/ic_topic_like" />
+                android:src="@drawable/topic_like_selector" />
 
             <TextView
                 android:id="@+id/tv_like"
