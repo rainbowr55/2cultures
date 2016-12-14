@@ -72,7 +72,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ItemViewHold
             }
         });
 
-        holder.tv_like.setOnClickListener(new View.OnClickListener() {
+        holder.ll_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -137,7 +137,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ItemViewHold
         @BindView(R.id.iv_favourite)
         ImageView iv_favourite;
 
-
+        @BindView(R.id.ll_like)
+        LinearLayout ll_like;
 
         public ItemViewHolder(View itemView) {
             super(itemView);

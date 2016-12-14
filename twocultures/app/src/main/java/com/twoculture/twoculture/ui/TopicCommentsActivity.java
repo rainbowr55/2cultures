@@ -87,4 +87,10 @@ public class TopicCommentsActivity extends BaseActivity implements ITopicComment
                 break;
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        mCommentsPresenter.stopPresenter();
+        super.onDestroy();
+    }
 }

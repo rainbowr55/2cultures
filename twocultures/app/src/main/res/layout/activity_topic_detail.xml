@@ -125,6 +125,10 @@
         android:maxLines="100000"
         android:layout_marginBottom="12dp"
         android:textSize="@dimen/text_medium"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="36dp"

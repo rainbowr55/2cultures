@@ -62,4 +62,11 @@ public interface TopicService {
     @POST("mobile/we/topics/topic_comments")
     Observable<PostCommentResponse> postComment(@Query("token") String token, @Query("topic_id") int topicId, @Query("text") String text);
 
+    @GET("mobile/we/topics/topic_likes/like_the_topic")
+    Observable<BaseResponse> likeTopic(@Query("token") String token, @Query("topic_id") int topicId);
+
+    @GET("mobile/we/topics/topic_likes/unlike_the_topic")
+    Observable<BaseResponse> unlikeTopic(@Query("token") String token, @Query("topic_id") int topicId);
+
+
 }
