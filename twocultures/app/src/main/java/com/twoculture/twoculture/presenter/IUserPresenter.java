@@ -7,4 +7,6 @@ package com.twoculture.twoculture.presenter;
 public interface IUserPresenter {
 
     void searchUser(String searchName);
+
+    void getMyFriend();
 }

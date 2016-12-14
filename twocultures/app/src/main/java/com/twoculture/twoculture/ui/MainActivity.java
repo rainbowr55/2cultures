@@ -131,7 +131,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         if (id == R.id.nav_setting) {
 
         } else if (id == R.id.nav_friends) {
-
+            Intent intent = new Intent();
+            intent.setClass(this, FriendListActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_invitation) {
 
         } else if (id == R.id.nav_me) {
