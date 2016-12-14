@@ -6,10 +6,48 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:id="@+id/rr_search_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/divider_color"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/et_search_user"
+            style="@style/Widget.AppCompat.AutoCompleteTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/white_search_input_bg"
+            android:hint="@string/user_search_hint"
+            android:imeOptions="actionSearch"
+            android:paddingBottom="2dip"
+            android:paddingLeft="15dip"
+            android:paddingRight="2dip"
+            android:paddingTop="2dip"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:padding="5dp" />
+
+        <ImageView
+            android:id="@+id/iv_search"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:src="@mipmap/search" />
+    </RelativeLayout>
+
     <android.support.v7.widget.RecyclerView xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/rv_users"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/fragment_user" />
 </LinearLayout>

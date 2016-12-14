@@ -16,4 +16,9 @@ public class User {
     public boolean is_vip;
 
     public boolean is_buddy;
+
+    public boolean is_read;
+
+    public String created_at;
+
 }

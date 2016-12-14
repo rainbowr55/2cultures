@@ -3,6 +3,7 @@ package com.twoculture.twoculture.presenter;
 import android.util.Log;
 
 import com.twoculture.twoculture.interfaces.UserService;
+import com.twoculture.twoculture.models.Friends;
 import com.twoculture.twoculture.models.User;
 import com.twoculture.twoculture.network.RxClient;
 import com.twoculture.twoculture.tools.AppConstants;
@@ -50,6 +51,35 @@ public class UserPresenter implements IUserPresenter {
                     public void onNext(List<User> users) {
                         userView.onLoadSuccess(users);
 
+                    }
+                });
+    }
+
+    @Override
+    public void getMyFriend() {
+        userView.onLoadingShow();
+        RxClient.getInstance().getService(UserService.class).getFriends(AppConstants.TOKEN)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Friends>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        Log.e("test", e.getMessage());
+                        userView.setMessage(e.getMessage());
+                        userView.onLoadFailed();
+                    }
+
+                    @Override
+                    public void onNext(Friends friends) {
+                        if (friends != null) {
+                            userView.onLoadSuccess(friends.friends);
+                        }
                     }
                 });
     }

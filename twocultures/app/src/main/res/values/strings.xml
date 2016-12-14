@@ -50,6 +50,9 @@
     <string name="message_message_at">\u0040Message</string>
     <string name="no_data_hint">no data</string>
     <string name="view_invitation_detail">view more</string>
+    <string name="message_conversation">Message</string>
+    <string name="user_search_hint">Search by name or email</string>
+    <string name="user_search_input_empty_hint">Please input search key word</string>
 
     <!-- my profile start -->
     <string name="my_profile_title">My Profile</string>
