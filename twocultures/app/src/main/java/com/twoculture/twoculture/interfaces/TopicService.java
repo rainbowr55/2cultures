@@ -4,6 +4,7 @@ import com.twoculture.twoculture.models.AllTopics;
 import com.twoculture.twoculture.models.Comment;
 import com.twoculture.twoculture.models.response.BaseResponse;
 import com.twoculture.twoculture.models.response.EventUsersListResponse;
+import com.twoculture.twoculture.models.response.PostCommentResponse;
 import com.twoculture.twoculture.models.response.PostTopicResponse;
 import com.twoculture.twoculture.models.response.UploadImageResponse;
 
@@ -57,5 +58,8 @@ public interface TopicService {
 
     @GET("mobile/we/topics/topic_comments")
     Observable<List<Comment>> getComments(@Query("token") String token, @Query("topic_id") int topicId, @Query("page") int pageIndex, @Query("per_num") int pageNumber);
+
+    @POST("mobile/we/topics/topic_comments")
+    Observable<PostCommentResponse> postComment(@Query("token") String token, @Query("topic_id") int topicId, @Query("text") String text);
 
 }

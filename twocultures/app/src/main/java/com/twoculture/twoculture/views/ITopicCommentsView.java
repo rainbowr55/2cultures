@@ -11,4 +11,5 @@ import java.util.List;
 
 public interface ITopicCommentsView {
     void refreshData(List<Comment> comments);
+    void postResult(boolean bResult,String msg);
 }

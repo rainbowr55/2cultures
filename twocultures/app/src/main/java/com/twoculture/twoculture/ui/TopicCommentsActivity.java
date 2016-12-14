@@ -3,6 +3,11 @@ package com.twoculture.twoculture.ui;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.twoculture.twoculture.R;
 import com.twoculture.twoculture.adapter.TopicCommentAdapter;
@@ -14,7 +19,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class TopicCommentsActivity extends BaseActivity implements ITopicCommentsView {
+public class TopicCommentsActivity extends BaseActivity implements ITopicCommentsView, View.OnClickListener {
 
     public static final String TOPICID = "topicid";
 
@@ -26,15 +31,26 @@ public class TopicCommentsActivity extends BaseActivity implements ITopicComment
 
     @BindView(R.id.rv_topic_comment)
     RecyclerView mRecyclerComments;
+    @BindView(R.id.btn_post)
+    Button mButtonPost;
+
+    @BindView(R.id.et_content)
+    EditText mEditContent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mTopicId = getIntent().getIntExtra(TOPICID,0);
+        mTopicId = getIntent().getIntExtra(TOPICID, 0);
         mCommentsAdapter = new TopicCommentAdapter(this);
+        initView();
+        mCommentsPresenter = new TopicCommentsPresenter(this);
+        mCommentsPresenter.loadComments(mTopicId, 1, PAGE_SIZE);
+    }
+
+    private void initView() {
         mRecyclerComments.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerComments.setAdapter(mCommentsAdapter);
-        mCommentsPresenter = new TopicCommentsPresenter(this);
-        mCommentsPresenter.loadComments(mTopicId,1,PAGE_SIZE);
+        mButtonPost.setOnClickListener(this);
     }
 
     @Override
@@ -46,5 +62,29 @@ public class TopicCommentsActivity extends BaseActivity implements ITopicComment
     public void refreshData(List<Comment> comments) {
         mCommentsAdapter.setData(comments);
         mCommentsAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void postResult(boolean bResult, String msg) {
+        if(bResult){
+            mEditContent.setText("");
+            mCommentsPresenter.loadComments(mTopicId, 1, PAGE_SIZE);
+        }else{
+            Toast.makeText(this,msg, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_post:
+                String text = mEditContent.getText().toString().trim();
+                if (TextUtils.isEmpty(text)) {
+                    Toast.makeText(this, R.string.post_error_hint, Toast.LENGTH_SHORT).show();
+                } else {
+                    mCommentsPresenter.postComment(mTopicId, text);
+                }
+                break;
+        }
     }
 }

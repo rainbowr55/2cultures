@@ -17,5 +17,6 @@
     <color name="light_gray_DD">#FFDDDDDD</color>
     <color name="light_icon_blue">#FF535a6b</color>
     <color name="light_icon_blue_light">#FF32384b</color>
+    <color name="brown">#ffde832e</color>
     <color name="light_user_info_blue">#8851add3</color>
 </resources>

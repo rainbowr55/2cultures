@@ -72,4 +72,6 @@
     <string name="gender_female">female</string>
     <string name="profile_input_name_hint">please input name</string>
     <string name="profile_input_valid_hint"> basic profile is not filled completely !</string>
+    <string name="write_a_post_here">write a post here</string>
+    <string name="post_error_hint">post content can\'t be null</string>
 </resources>

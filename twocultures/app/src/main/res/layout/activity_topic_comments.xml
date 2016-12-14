@@ -4,15 +4,44 @@
     android:id="@+id/activity_events"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+
     tools:context="com.twoculture.twoculture.ui.TopicCommentsActivity">
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_topic_comment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_post"/>
 
-    </android.support.v7.widget.RecyclerView>
+    <LinearLayout
+        android:id="@+id/ll_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@color/darkerGray"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
+
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:hint="@string/write_a_post_here"
+            android:background="@drawable/white_gray_selector"
+            android:layout_marginLeft="4dp"/>
+
+        <Button
+            android:id="@+id/btn_post"
+            android:layout_marginLeft="8dp"
+            android:padding="4dp"
+            android:layout_marginRight="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:background="@color/brown"
+            android:text="Post"
+            android:textColor="@color/white"/>
+    </LinearLayout>
 </RelativeLayout>
