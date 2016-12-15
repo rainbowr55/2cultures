@@ -59,6 +59,25 @@
     <string name="profile_topic">Topic</string>
     <string name="my_profile_title">My Profile</string>
     <string name="my_profile_right_title">Save</string>
+    <string name="profile_smoking_habits">Smoking Habits</string>
+    <string name="profile_drinking_habits">Drinking Habits</string>
+    <string name="profile_diet">Diet</string>
+    <string name="profile_height">Height</string>
+    <string name="profile_body_type">Body Type</string>
+    <string name="profile_eye_colour">Eye Colour</string>
+    <string name="profile_hair_colour">Hair Colour</string>
+    <string name="profile_current_status">Current Status</string>
+    <string name="profile_ethnic_background">Ethnic Background</string>
+    <string name="profile_star_sign">Start Sign</string>
+    <string name="profile_education_level">Education Level</string>
+    <string name="profile_career_fields">Career fields</string>
+    <string name="profile_have_children">Have Children</string>
+    <string name="profile_my_children">My Children</string>
+    <string name="profile_want_children">Want(more) Children</string>
+    <string name="profile_religion">Religion</string>
+    <string name="profile_intention">Intention</string>
+
+    <string name="profile_age">Age</string>
     <string name="profile_name">Name</string>
     <string name="profile_gender">Gender</string>
     <string name="profile_from">From</string>

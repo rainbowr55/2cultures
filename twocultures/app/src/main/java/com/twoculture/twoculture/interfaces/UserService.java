@@ -26,5 +26,5 @@ public interface UserService {
 
 
     @GET("mobile/browse/browse_user_profile")
-    Observable<UserDetail> getUserDetail(@Query("token") String token);
+    Observable<UserDetail> getUserDetail(@Query("token") String token, @Query("user_id") String userId);
 }

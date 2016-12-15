@@ -28,28 +28,13 @@
                 android:background="@color/light_user_info_blue"
                 android:orientation="vertical">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <com.twoculture.base.widget.RoundedImageView
+                    android:id="@+id/iv_user_head"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerInParent="true"
                     android:layout_marginBottom="20dp"
-                    android:layout_marginTop="30dp">
-
-
-                    <com.twoculture.base.widget.RoundedImageView
-                        android:id="@+id/iv_user_head"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_centerInParent="true" />
-
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/iv_user_head"
-                        android:src="@mipmap/ic_crown_love" />
-                </RelativeLayout>
+                    android:layout_marginTop="30dp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -63,12 +48,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="@string/profile_name"
+                        android:text="@string/profile_age"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/tv_user_name"
+                        android:id="@+id/tv_user_age"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -89,12 +74,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="@string/profile_gender"
+                        android:text="@string/profile_smoking_habits"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/tv_user_gender"
+                        android:id="@+id/tv_user_smoking_habits"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -115,12 +100,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="@string/profile_from"
+                        android:text="@string/profile_drinking_habits"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/tv_user_from"
+                        android:id="@+id/tv_user_drinking_habits"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -141,12 +126,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="@string/profile_live_in"
+                        android:text="@string/profile_diet"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/tv_user_live_in"
+                        android:id="@+id/tv_user_diet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -167,12 +152,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="@string/profile_migrate"
+                        android:text="@string/profile_height"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/tv_user_migrate"
+                        android:id="@+id/tv_user_height"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -193,12 +178,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="@string/profile_speak"
+                        android:text="@string/profile_body_type"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/tv_user_speak"
+                        android:id="@+id/tv_user_body_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -219,12 +204,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="@string/profile_language"
+                        android:text="@string/profile_eye_colour"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/tv_user_language"
+                        android:id="@+id/tv_user_eye_colour"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -245,12 +230,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="@string/profile_learning_language"
+                        android:text="@string/profile_hair_colour"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/tv_user_learn_language"
+                        android:id="@+id/tv_user_hair_colour"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -271,12 +256,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="@string/profile_relationship_status"
+                        android:text="@string/profile_current_status"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/tv_user_relationship_status"
+                        android:id="@+id/tv_user_current_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -285,13 +270,7 @@
 
                 </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:background="@color/divider_color" />
-
                 <RelativeLayout
-                    android:id="@+id/rl_single_profile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="10dp"
@@ -303,25 +282,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="@string/profile_single"
+                        android:text="@string/profile_ethnic_background"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/tv_user_ethnic_background"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:background="@mipmap/ic_white_right_arrow" />
-
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
                 </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:background="@color/divider_color" />
-
                 <RelativeLayout
-                    android:id="@+id/rl_topic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="10dp"
@@ -333,38 +307,197 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="@string/profile_topic"
+                        android:text="@string/profile_star_sign"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/tv_user_star_sign"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:background="@mipmap/ic_white_right_arrow" />
-
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
                 </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/tv_message"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="15dp"
-                    android:background="@color/yellow"
-                    android:drawableLeft="@mipmap/ic_message"
-                    android:drawablePadding="5dp"
-                    android:gravity="center"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:paddingTop="5dp"
-                    android:text="@string/message_conversation"
-                    android:textSize="18sp" />
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="@string/profile_education_level"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
 
+                    <TextView
+                        android:id="@+id/tv_user_education_level"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="@string/profile_career_fields"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_user_career_fiels"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="@string/profile_have_children"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_user_have_children"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="@string/profile_my_children"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_user_my_children"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="@string/profile_want_children"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_user_want_children"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="@string/profile_religion"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_user_religion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="@string/profile_intention"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_user_intention"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </RelativeLayout>
             </LinearLayout>
 
         </RelativeLayout>
+
     </ScrollView>
+
 </LinearLayout>

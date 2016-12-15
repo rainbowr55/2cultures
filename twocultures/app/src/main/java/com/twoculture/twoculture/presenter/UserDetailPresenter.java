@@ -17,12 +17,17 @@ import rx.schedulers.Schedulers;
  */
 
 public class UserDetailPresenter implements IUserDetailPresenter {
+
     private IUserDetail userDetailView;
 
+    public UserDetailPresenter(IUserDetail userDetailView) {
+        this.userDetailView = userDetailView;
+    }
+
     @Override
-    public void getUserDetail(int userId) {
+    public void getUserDetail(String userId) {
         userDetailView.onLoadingShow();
-        RxClient.getInstance().getService(UserService.class).getUserDetail(AppConstants.TOKEN)
+        RxClient.getInstance().getService(UserService.class).getUserDetail(AppConstants.TOKEN,userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<UserDetail>() {

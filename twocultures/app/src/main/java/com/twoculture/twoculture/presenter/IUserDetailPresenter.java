@@ -5,5 +5,5 @@ package com.twoculture.twoculture.presenter;
  */
 
 public interface IUserDetailPresenter {
-    void getUserDetail(int userId);
+    void getUserDetail(String userId);
 }

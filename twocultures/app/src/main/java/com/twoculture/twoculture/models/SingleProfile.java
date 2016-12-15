@@ -1,32 +1,36 @@
 package com.twoculture.twoculture.models;
 
+import java.io.Serializable;
+
 /**
  * Created by liangcaihong on 2016/12/14.
  */
 
-public class SingleProfile {
+public class SingleProfile implements Serializable {
 
-    private int age;
+    public String header_image_url;
 
-    private int have_children;
+    public int age;
 
-    private int my_children;
+    public int have_children;
 
-    private int religion_id;
+    public int my_children;
 
-    private String religion_str;
+    public int religion_id;
 
-    private int intention_id;
+    public String religion_str;
 
-    private String intention_str;
+    public int intention_id;
 
-    private LifeStyle life_style;
+    public String intention_str;
 
-    private Physical physical;
+    public LifeStyle life_style;
 
-    private Identity identity;
+    public Physical physical;
 
-    private CareerAndEducation career_and_education;
+    public Identity identity;
+
+    public CareerAndEducation career_and_education;
 
 
 }

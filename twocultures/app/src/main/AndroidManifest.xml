@@ -93,8 +93,11 @@
         <activity android:name=".ui.CountryListActivity" />
         <activity android:name=".ui.EventInvitationActivity" />
         <activity android:name=".ui.TopicCommentsActivity" />
-        <activity android:name=".ui.UserInfoDetailActivity" />
-        <activity android:name=".ui.FriendListActivity"></activity>
+        <activity
+            android:name=".ui.UserInfoDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.FriendListActivity" />
+        <activity android:name=".ui.SingleProfileActivity"></activity>
     </application>
 
 </manifest>
