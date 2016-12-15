@@ -69,7 +69,7 @@ public class SingleProfileActivity extends BaseActivity {
 
     private void initData() {
         singleProfile = (SingleProfile) getIntent().getExtras().get(EXTRA_SINGLE_KEY);
-        if(singleProfile == null) return;
+        if (singleProfile == null) return;
         Transformation transformation = new RoundedTransformationBuilder()
                 .borderColor(Color.WHITE)
                 .borderWidthDp(1)
@@ -83,6 +83,12 @@ public class SingleProfileActivity extends BaseActivity {
                 .placeholder(R.drawable.default_gravatar).fit().centerCrop().into(ivUserHead);
         picasso.load(singleProfile.header_image_url).fit().placeholder(R.mipmap.user_detail_bg).into(ivUserDetailBg);
         tvUserAge.setText(singleProfile.age);
+        tvUserHaveChildren.setText(singleProfile.have_children);
+        tvUserMyChildren.setText(singleProfile.my_children);
+        tvUserReligion.setText(singleProfile.religion_str);
+        tvUserIntention.setText(singleProfile.intention_str);
+
+
     }
 
     @Override
