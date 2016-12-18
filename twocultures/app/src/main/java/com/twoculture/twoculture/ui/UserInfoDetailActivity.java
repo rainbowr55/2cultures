@@ -1,17 +1,18 @@
 package com.twoculture.twoculture.ui;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
+import com.twoculture.base.blur.PicassoTransformation;
 import com.twoculture.base.widget.LoadingDialog;
 import com.twoculture.base.widget.RoundedImageView;
 import com.twoculture.base.widget.RoundedTransformationBuilder;
@@ -29,12 +30,14 @@ import butterknife.BindView;
 
 public class UserInfoDetailActivity extends BaseActivity implements View.OnClickListener, IUserDetail {
 
+
+    protected static final int BLUR_RADIUS = 25;
     private String userId;
 
     @BindView(R.id.iv_user_detail_bg)
     ImageView ivUserDetailBg;
-    @BindView(R.id.activity_user_info_detail)
-    LinearLayout activityUserInfoDetail;
+    //    @BindView(R.id.activity_user_info_detail)
+//    LinearLayout activityUserInfoDetail;
     @BindView(R.id.iv_user_head)
     RoundedImageView ivUserHead;
     @BindView(R.id.tv_user_name)
@@ -122,6 +125,9 @@ public class UserInfoDetailActivity extends BaseActivity implements View.OnClick
             return;
         }
         this.singleProfile = userDetail.single_profile;
+        if (this.singleProfile == null) {
+            this.singleProfile = new SingleProfile();
+        }
         this.singleProfile.header_image_url = userDetail.header_image_url;
         Transformation transformation = new RoundedTransformationBuilder()
                 .borderColor(Color.WHITE)
@@ -134,11 +140,19 @@ public class UserInfoDetailActivity extends BaseActivity implements View.OnClick
                 .fit()
                 .transform(transformation)
                 .placeholder(R.drawable.default_gravatar).fit().centerCrop().into(ivUserHead);
-        picasso.load(userDetail.header_image_url).fit().placeholder(R.mipmap.user_detail_bg).into(ivUserDetailBg);
-        tvUserRelationshipStatus.setText( userDetail.status);
+
+        picasso.load(userDetail.header_image_url)
+                .fit()
+                .noFade()
+                .config(Bitmap.Config.ARGB_8888)
+                .transform(new PicassoTransformation(this, BLUR_RADIUS))
+                .placeholder(R.mipmap.user_detail_bg)
+                .into(ivUserDetailBg);
+        tvUserRelationshipStatus.setText(userDetail.status);
         tvUserName.setText(userDetail.name);
         initUserProfile(userDetail.user_profile);
     }
+
 
     private void initUserProfile(UserProfile userProfile) {
 

@@ -15,6 +15,7 @@ import com.twoculture.base.widget.ToastUtil;
 import com.twoculture.twoculture.R;
 
 import butterknife.ButterKnife;
+import rx.subscriptions.CompositeSubscription;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -24,6 +25,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     RelativeLayout rlTopTitle;
     TextView tvTopMiddle;
     TextView tvTopRight;
+    protected CompositeSubscription subscription = new CompositeSubscription();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,5 +95,17 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(msg)) {
             ToastUtil.showMiddleToast(this, msg);
         }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        BaseActivity.this.unSubscribe();
+        super.onDestroy();
+        //GlobalApplication.get().getRefWatcher().watch(this);
+    }
+
+    private void unSubscribe() {
+        if (subscription != null && !subscription.isUnsubscribed()) subscription.clear();
     }
 }

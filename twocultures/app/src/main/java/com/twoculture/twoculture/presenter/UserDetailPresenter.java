@@ -51,4 +51,6 @@ public class UserDetailPresenter implements IUserDetailPresenter {
                     }
                 });
     }
+
+
 }

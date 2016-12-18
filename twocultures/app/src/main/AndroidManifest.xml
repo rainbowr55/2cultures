@@ -97,7 +97,9 @@
             android:name=".ui.UserInfoDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.FriendListActivity" />
-        <activity android:name=".ui.SingleProfileActivity"></activity>
+        <activity
+            android:name=".ui.SingleProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
