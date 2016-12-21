@@ -61,9 +61,13 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ItemViewHold
         holder.tv_like.setText(topicItem.topic.like_num+"");
         if(topicItem.topic.is_favorite){
             holder.iv_favourite.setSelected(true);
+        }else {
+            holder.iv_favourite.setSelected(false);
         }
         if(topicItem.topic.is_like){
             holder.iv_like.setSelected(true);
+        }else{
+            holder.iv_like.setSelected(false);
         }
         Picasso.with(mContext).load(topicItem.author.user_header_image).placeholder(R.drawable.default_gravatar).config(Bitmap.Config.RGB_565).into(holder.iv_author_icon);
         Picasso.with(mContext).load(topicItem.topic_photos.get(0).url).config(Bitmap.Config.RGB_565).placeholder(R.drawable.default_image).fit().centerCrop().into(holder.iv_topic_icon);

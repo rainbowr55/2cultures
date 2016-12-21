@@ -184,4 +184,10 @@ public class TopicDetailActivity extends BaseActivity implements View.OnClickLis
             mTopicItem.topic.is_favorite = false;
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        mTopicDetailPresenter.stopPresenter();
+        super.onDestroy();
+    }
 }

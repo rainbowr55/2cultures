@@ -2,7 +2,7 @@ package com.twoculture.twoculture.tools;
 
 public class MethodConst {
     //	public static final String URL = "http://120.24.231.203:9000";
-    public static final String URL = "http://2cultures.com:80/";
+    public static final String URL = "http://54.251.128.133:80/";
     //获取城市，国家，语言的json数据(接口:get_configure_json)
     public static final String GET_CONFIGURE_JSON = "/mobile/get_configure_json";
     //获取单人信息设置json接口

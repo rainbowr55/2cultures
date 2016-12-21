@@ -1,8 +1,10 @@
 package com.twoculture.twoculture.ui;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
@@ -188,6 +190,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void onLoadFailed() {
         //token过期需要重新登录
+        SharedPreferences sharedPreferences = GlobalApplication.applicationContext.getSharedPreferences(AppConstants.TOKEN_FILE_NAME, Context.MODE_PRIVATE);
+        sharedPreferences.edit().putString(AppConstants.TOKEN_FIELD_NAME,"").commit();
+
+
         Intent intent = new Intent(MainActivity.this, LaunchActivity.class);
         startActivity(intent);
         this.finish();
