@@ -74,8 +74,12 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.FriendRequestActivity" />
-        <activity android:name=".ui.NotificationActivity" />
+        <activity
+            android:name=".ui.FriendRequestActivity"
+            android:theme="@style/TwoCulture.Theme.GrayNoTitleBar" />
+        <activity
+            android:name=".ui.NotificationActivity"
+            android:theme="@style/TwoCulture.Theme.GrayNoTitleBar" />
         <activity
             android:name=".ui.SplashActivity"
             android:theme="@style/TwoCulture.Theme.WhiteNoTitleBar">
@@ -91,7 +95,9 @@
         <activity android:name=".ui.JoinedUserActivity" />
         <activity android:name=".ui.PostTopicActivity" />
         <activity android:name=".ui.CountryListActivity" />
-        <activity android:name=".ui.EventInvitationActivity" />
+        <activity
+            android:name=".ui.EventInvitationActivity"
+            android:theme="@style/TwoCulture.Theme.GrayNoTitleBar" />
         <activity android:name=".ui.TopicCommentsActivity" />
         <activity
             android:name=".ui.UserInfoDetailActivity"
@@ -100,6 +106,9 @@
         <activity
             android:name=".ui.SingleProfileActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.AtMessageActivity"
+            android:theme="@style/TwoCulture.Theme.GrayNoTitleBar" />
     </application>
 
 </manifest>

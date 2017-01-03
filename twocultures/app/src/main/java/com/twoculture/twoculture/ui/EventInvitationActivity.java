@@ -1,9 +1,11 @@
 package com.twoculture.twoculture.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.twoculture.twoculture.R;
 import com.twoculture.twoculture.adapter.EventInvitationAdapter;
 import com.twoculture.twoculture.models.EventInvite;
@@ -49,6 +51,11 @@ public class EventInvitationActivity extends BaseActivity implements IEventInvit
     }
 
     @Override
+    protected String getTitleName() {
+        return this.getString(R.string.message_events_invitation);
+    }
+
+    @Override
     public void onLoadSuccess(List<EventInvite> eventInvites) {
         if (eventInvites != null && eventInvites.size() > 0) {
             eventInvitationAdapter.addDatas(eventInvites);
@@ -79,7 +86,11 @@ public class EventInvitationActivity extends BaseActivity implements IEventInvit
     @Override
     public void onViewMoreClick(EventInvite eventInvite) {
 
-        //todo eventInvitation Detail
+        Intent intent = new Intent(this, EventDetailActivity.class);
+        Gson gson = new Gson();
+        String eventString = gson.toJson(eventInvite.event);
+        intent.putExtra(EventDetailActivity.EVENT_DATA, eventString);
+        this.startActivity(intent);
     }
 
     @Override

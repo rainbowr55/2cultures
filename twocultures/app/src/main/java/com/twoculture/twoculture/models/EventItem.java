@@ -7,6 +7,7 @@ import java.util.List;
  */
 
 public class EventItem {
+
     public int event_id;
     public String title;
     public String description;

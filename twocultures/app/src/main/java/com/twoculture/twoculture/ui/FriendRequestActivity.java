@@ -31,6 +31,12 @@ public class FriendRequestActivity extends BaseActivity implements IFriendReques
         initData();
     }
 
+
+    @Override
+    protected String getTitleName() {
+        return this.getString(R.string.message_friend_request);
+    }
+
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_friend_request;

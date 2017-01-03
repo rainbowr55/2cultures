@@ -36,6 +36,12 @@ public class NotificationActivity extends BaseActivity implements INotificationV
         return R.layout.activity_notification;
     }
 
+
+    @Override
+    protected String getTitleName() {
+        return this.getString(R.string.message_notification);
+    }
+
     private void loadData() {
         mNotificationPresenter = new NotificationPresenter(this);
         // 设置Layout管理器

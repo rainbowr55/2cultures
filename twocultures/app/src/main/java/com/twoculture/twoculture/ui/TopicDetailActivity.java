@@ -3,11 +3,11 @@ package com.twoculture.twoculture.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -21,6 +21,7 @@ import butterknife.BindView;
 
 public class TopicDetailActivity extends BaseActivity implements View.OnClickListener, ITopicDetailView {
     public static final String TOPIC_ITEM = "topicitem";
+    public static final String TOPIC_ID = "topic_id";
 
     @BindView(R.id.tv_details_user_name)
     TextView mTextUserName;
@@ -93,8 +94,18 @@ public class TopicDetailActivity extends BaseActivity implements View.OnClickLis
 
     private void initData() {
         String topicString = getIntent().getStringExtra(TOPIC_ITEM);
-        Gson gson = new Gson();
-        mTopicItem = gson.fromJson(topicString, TopicItem.class);
+        int topicId = getIntent().getIntExtra(TOPIC_ID, -1);
+        if (!TextUtils.isEmpty(topicString)) {
+            Gson gson = new Gson();
+            mTopicItem = gson.fromJson(topicString, TopicItem.class);
+            setTopicDetailData(mTopicItem);
+        } else if (topicId > 0) {
+            mTopicDetailPresenter.getDetailData(topicId);
+        }
+
+    }
+
+    private void setTopicDetailData(TopicItem mTopicItem) {
         mTopicId = mTopicItem.topic.topic_id;
         mTextUserName.setText(mTopicItem.author.name);
         mTextCreateDate.setText(mTopicItem.topic.create_at);
@@ -106,10 +117,10 @@ public class TopicDetailActivity extends BaseActivity implements View.OnClickLis
         tv_like.setText(mTopicItem.topic.like_num + "");
         PicturesViewpagerAdapter adapter = new PicturesViewpagerAdapter(this, mTopicItem.topic_photos);
         mViewPagerPictures.setAdapter(adapter);
-        if(mTopicItem.topic.is_favorite){
+        if (mTopicItem.topic.is_favorite) {
             iv_favourite.setSelected(true);
         }
-        if(mTopicItem.topic.is_like){
+        if (mTopicItem.topic.is_like) {
             iv_like.setSelected(true);
         }
     }
@@ -118,9 +129,9 @@ public class TopicDetailActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_favourite:
-                if(mTopicItem.topic.is_favorite){
+                if (mTopicItem.topic.is_favorite) {
                     mTopicDetailPresenter.favouriteTopic(mTopicId);
-                }else{
+                } else {
                     mTopicDetailPresenter.unfavouriteTopic(mTopicId);
                 }
                 break;
@@ -148,11 +159,11 @@ public class TopicDetailActivity extends BaseActivity implements View.OnClickLis
         if (bResult) {
             mTopicItem.topic.like_num = mTopicItem.topic.like_num + 1;
             tv_like.setText(mTopicItem.topic.like_num + "");
-           // Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             mTopicItem.topic.is_like = true;
             iv_like.setSelected(true);
         } else {
-           // Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -163,15 +174,15 @@ public class TopicDetailActivity extends BaseActivity implements View.OnClickLis
             tv_like.setText(mTopicItem.topic.like_num + "");
             mTopicItem.topic.is_like = false;
             iv_like.setSelected(false);
-           // Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         } else {
-           // Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void setFavouriteResult(boolean bResult, String msg) {
-        if(bResult){
+        if (bResult) {
             iv_favourite.setSelected(true);
             mTopicItem.topic.is_favorite = true;
         }
@@ -179,9 +190,18 @@ public class TopicDetailActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void setUnfavouriteResult(boolean bResult, String msg) {
-        if(bResult){
+        if (bResult) {
             iv_favourite.setSelected(false);
             mTopicItem.topic.is_favorite = false;
+        }
+    }
+
+    @Override
+    public void setTopicDetailResult(TopicItem topicItem) {
+        if (topicItem != null) {
+            setTopicDetailData(topicItem);
+        } else {
+            showToast(getString(R.string.no_data_hint));
         }
     }
 

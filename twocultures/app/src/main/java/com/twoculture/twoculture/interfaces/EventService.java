@@ -19,4 +19,9 @@ public interface EventService {
             @Query("page") int page,
             @Query("per_num") int pageNumber
     );
+    @GET("/mobile/we/events/events/show_event_detail")
+    Observable<EventItem> getEventDetail(
+            @Query("token") String toke,
+            @Query("event_id") int eventId
+    );
 }

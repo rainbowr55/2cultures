@@ -1,5 +1,6 @@
 package com.twoculture.twoculture.presenter;
 
+import com.twoculture.twoculture.models.TopicItem;
 import com.twoculture.twoculture.models.response.BaseResponse;
 import com.twoculture.twoculture.network.RxClient;
 import com.twoculture.twoculture.tools.AppConstants;
@@ -146,5 +147,27 @@ public class TopicDetailPresenter implements BasePresenter {
         mSubscriptions.add(subscription);
     }
 
+    public void getDetailData(int topicId){
+        Subscription subscription = RxClient.getInstance().getTopicService().getTopicDetail(topicId,AppConstants.TOKEN)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<TopicItem>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mView.setLikeResult(false, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(TopicItem topicItem) {
+                         mView.setTopicDetailResult(topicItem);
+                    }
+                });
+        mSubscriptions.add(subscription);
+    }
 
 }

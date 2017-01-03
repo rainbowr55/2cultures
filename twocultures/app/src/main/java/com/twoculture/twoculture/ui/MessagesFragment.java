@@ -157,7 +157,9 @@ public class MessagesFragment extends MessagesBaseFragment implements SwipeRefre
                 startActivity(eventInvitationIntent);
                 break;
             case R.id.tv_msg_at:
-
+                Intent atMessageIntent = new Intent();
+                atMessageIntent.setClass(mContext,AtMessageActivity.class);
+                startActivity(atMessageIntent);
                 break;
         }
     }
